@@ -2,47 +2,51 @@
 
 export default function CTA({ openLogin }) {
   return (
-    <section
-      id="cta"
-      className="py-14 sm:py-20 md:py-28 lg:py-32 relative overflow-hidden bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200"
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-500/10 to-pink-500/10" />
-      <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
+    <section className="min-h-[92vh] relative py-20 md:py-28 bg-gradient-to-br from-[#f8faf5] to-[#A4BE7B] overflow-hidden">
+    {/* halos */}
+    <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#088395]/20 blur-3xl" />
+    <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#088395]/20 blur-3xl" />
 
       <div className="container mx-auto max-w-4xl px-4 sm:px-6 relative z-10">
         <div className="text-center space-y-5 sm:space-y-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold !text-gray-900 px-2">
-            ¿Listo para digitalizar y automatizar tu empresa?
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0A4D68]! px-2">
+          Empieza a cuidarte hoy
           </h2>
 
-          <p className="text-base sm:text-lg !text-gray-600 max-w-2xl mx-auto px-2">
-            PsyClinic ha sido desarrollado por AltamiraSoftware. Es un proyecto dedicado a crear soluciones SaaS (Software como Servicio).
+          <p className="text-base sm:text-lg !text-[#0A4D68] max-w-2xl mx-auto px-2">
+            Utiliza nuestra aplicación web para reservar tu cita de psicología.
+            Solicita nuestro servicio de fisioterapia a domicilio.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center pt-4 sm:pt-8">
             <button
               onClick={openLogin}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-semibold min-h-[48px] bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-white rounded-xl shadow-lg hover:opacity-90 transition"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-semibold min-h-[48px] bg-[#0A4D68] text-white rounded-xl shadow-lg hover:opacity-90 transition"
             >
-              Prueba este software
+              Psicología
+            </button>
+            <button
+              onClick={openLogin}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-semibold min-h-[48px] bg-[#0A4D68] text-white rounded-xl shadow-lg hover:opacity-90 transition"
+            >
+              Fisioterapia
             </button>
           </div>
 
           {/* INFO BLOCKS - apilados en móvil */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-8 sm:pt-12 border-t border-gray-300/60">
             <div className="space-y-2 py-4 sm:py-0">
-              <TelephoneIcon className="w-7 h-7 sm:w-8 sm:h-8 text-blue-600 mx-auto mb-2" />
+              <TelephoneIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A4D68]! mx-auto mb-2" />
               <p className="font-semibold text-base sm:text-lg text-gray-900 text-center">Teléfono</p>
-              <p className="text-gray-600 text-center text-sm sm:text-base">+34 667810234</p>
+              <p className="text-gray-600 text-center text-sm sm:text-base">+34 </p>
             </div>
             <div className="space-y-2 py-4 sm:py-0 border-t sm:border-t-0 border-gray-200/80">
-              <MailIcon className="w-7 h-7 sm:w-8 sm:h-8 text-purple-600 mx-auto mb-2" />
+              <MailIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A4D68] mx-auto mb-2" />
               <p className="font-semibold text-base sm:text-lg text-gray-900 text-center">Email</p>
-              <p className="text-gray-600 text-center text-sm sm:text-base break-all">joaquiga@ucm.es</p>
+              <p className="text-gray-600 text-center text-sm sm:text-base break-all">clinicaBivakebte@gmail.com</p>
             </div>
             <div className="space-y-2 py-4 sm:py-0 border-t sm:border-t-0 border-gray-200/80">
-              <LocationIcon className="w-7 h-7 sm:w-8 sm:h-8 text-pink-500 mx-auto mb-2" />
+              <LocationIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A4D68] mx-auto mb-2" />
               <p className="font-semibold text-base sm:text-lg text-gray-900 text-center">Ubicación</p>
               <p className="text-gray-600 text-center text-sm sm:text-base">Madrid, España</p>
             </div>

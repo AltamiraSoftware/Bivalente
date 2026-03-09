@@ -1,46 +1,75 @@
 @import "tailwindcss";
 
 /* -------------------------------------------------------
-   1. PALETA GLOBAL — MARCA PRINCIPAL
+   1) PALETA GLOBAL — BIVALENTE (sin romper clases existentes)
    ------------------------------------------------------- */
 :root {
-  --brand-start: #2563eb; /* azul */
-  --brand-mid: #7c3aed;   /* violeta */
-  --brand-end: #ec4899;   /* rosa */
+  /* Bivalente core */
+  --bv-deep:  #0A4D68; /* azul */
+  --bv-teal:  #088395; /* transición */
+  --bv-olive: #A4BE7B; /* verde */
+  --bv-forest:#61764B; /* verde profundo */
 
-  --text-main: #1f2937;   /* gris oscuro accesible */
-  --text-muted: #6b7280;
+  /* ✅ Reasignamos “marca principal” a Bivalente
+     (NO cambies nombres: así no rompes nada) */
+  --brand-start: var(--bv-deep);
+  --brand-mid:   var(--bv-teal);
+  --brand-end:   var(--bv-forest);
+
+  /* Texto y superficies */
+  --text-main: #0f172a;   /* slate-900 */
+  --text-muted: #475569;  /* slate-600 */
 
   --card-bg: #ffffff;
-  --card-border: #e5e7eb;
+  --card-border: #e6efe8; /* borde suave con tinte bivalente */
 
   --input-bg: #ffffff;
-  --input-border: #d1d5db;
-  --input-text: #1f2937;
-  --input-placeholder: #9ca3af;
+  --input-border: #d9e6dd;
+  --input-text: #0f172a;
+  --input-placeholder: #94a3b8;
 
-  --focus-ring: #2563eb33; /* azul suave */
+  /* Focus ring accesible */
+  --focus-ring: #A4BE7B55;
+
+  /* Fondo global */
+  --app-bg: #f7faf9;
+
+  /* Gradiente bivalente “controlado” (no salta contraste) */
+  --bv-grad: linear-gradient(
+    135deg,
+    #0A4D68 0%,
+    #0C6B74 46%,
+    #2E6B57 100%
+  );
+
+  /* Gradiente suave para secciones claras */
+  --bv-soft: linear-gradient(135deg, #f1f7f3, #eef6f4, #f7faf9);
+
+  /* Sombras */
+  --shadow-sm: 0 6px 14px rgba(10, 77, 104, 0.08);
+  --shadow-md: 0 14px 30px rgba(10, 77, 104, 0.14);
 }
 
 /* =======================================================
-   2. RESET BASE
+   2) BASE / RESET
    ======================================================= */
+html, body { height: 100%; }
+
 body {
-  background: #f8fafc;
+  background: var(--app-bg);
   color: var(--text-main);
-  font-family:  sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-h1{
-  color:var(--text-main);
-}
-h2, h3, h4 {
-  color: white;
-  line-height: 1.2;
+/* ✅ Headings por defecto oscuros (no blanco global)
+   El blanco se aplica en hero con clases */
+h1, h2, h3, h4 {
+  color: var(--text-main);
+  line-height: 1.15;
 }
 
 /* =======================================================
-   3. GRADIENTS DE MARCA (utility classes)
+   3) GRADIENTS DE MARCA (utility classes existentes)
    ======================================================= */
 .brand-gradient {
   background: linear-gradient(90deg, var(--brand-start), var(--brand-mid), var(--brand-end));
@@ -54,29 +83,67 @@ h2, h3, h4 {
   font-weight: 800;
 }
 
+/* ✅ NUEVAS utilidades Bivalente */
+.bv-hero {
+  /* overlay oscuro para que el texto blanco SIEMPRE tenga contraste */
+  background:
+    linear-gradient(135deg, rgba(10,77,104,0.90) 0%, rgba(12,107,116,0.86) 45%, rgba(46,107,87,0.86) 100%),
+    radial-gradient(900px 420px at 10% 15%, rgba(164,190,123,0.22) 0%, rgba(164,190,123,0) 55%),
+    radial-gradient(900px 420px at 90% 15%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 55%);
+}
+
+.bv-soft {
+  background: var(--bv-soft);
+}
+
+.bv-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(10,77,104,0.18), rgba(164,190,123,0.30), rgba(10,77,104,0.18), transparent);
+}
+
+/* Chips/badges */
+.bv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(164,190,123,0.14);
+  border: 1px solid rgba(164,190,123,0.30);
+  color: rgba(255,255,255,0.92);
+}
+
 /* =======================================================
-   4. CARDS PREMIUM (SaaS modern)
+   4) CARDS PREMIUM (clase existente .card)
    ======================================================= */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
   padding: 22px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
-  transition: transform .20s ease, box-shadow .20s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform .20s ease, box-shadow .20s ease, border-color .20s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-}
-.card h3 {
-  color: white;
+  box-shadow: var(--shadow-md);
+  border-color: rgba(164,190,123,0.55);
 }
 
+/* ✅ NO forzamos h3 blanco dentro de .card (rompe secciones claras) */
+/* .card h3 { color: white; }  <-- eliminado */
+
+/* Nueva tarjeta “glass” para hero */
+.bv-glass {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.20);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+}
 
 /* =======================================================
-   5. INPUTS — ACCESIBLES
+   5) INPUTS — ACCESIBLES (se respetan)
    ======================================================= */
 input,
 textarea,
@@ -99,59 +166,75 @@ textarea::placeholder {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--brand-mid);
+  border-color: var(--bv-olive);
   box-shadow: 0 0 0 3px var(--focus-ring);
   outline: none;
 }
 
-/* SELECT mejorado */
+/* SELECT mejorado (mantengo idea, ahora bivalente) */
 select {
   background-color: white;
-  background-image: linear-gradient(to right, var(--brand-start), var(--brand-mid), var(--brand-end));
+  background-image: linear-gradient(to right, var(--brand-start), var(--brand-mid), var(--bv-olive));
   background-size: 100% 3px;
   background-position: bottom;
   background-repeat: no-repeat;
   padding-right: 35px;
 }
 
-select::-ms-expand {
-  display: none;
-}
+select::-ms-expand { display: none; }
 
 /* =======================================================
-   6. BOTONES
+   6) BOTONES (clases existentes, recolor bivalente)
    ======================================================= */
 .btn-primary {
-  background: linear-gradient(90deg, var(--brand-start), var(--brand-mid), var(--brand-end));
-  color: white !important;
+  background: linear-gradient(90deg, var(--bv-olive), #c4d8a7);
+  color: #073044 !important;
   padding: 12px 26px;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 10px 22px rgba(164,190,123,0.25);
   transition: .2s;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  opacity: .9;
+  opacity: .96;
 }
 
 .btn-secondary {
-  border: 2px solid var(--brand-mid);
-  color: var(--brand-mid);
+  border: 2px solid rgba(255,255,255,0.26);
+  color: white;
   padding: 12px 26px;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 12px;
-  background: white;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
   transition: .2s;
 }
 
 .btn-secondary:hover {
-  background: var(--brand-mid);
-  color: white;
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-2px);
+}
+
+/* Botón terciario (nuevo) */
+.btn-tertiary {
+  border: 1px solid rgba(10,77,104,0.22);
+  color: var(--text-main);
+  background: white;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 650;
+  transition: .2s;
+}
+
+.btn-tertiary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 /* =======================================================
-   7. MODALES PREMIUM
+   7) MODALES PREMIUM (se respetan)
    ======================================================= */
 .modal-backdrop {
   position: fixed;
@@ -172,92 +255,62 @@ select::-ms-expand {
 }
 
 /* =======================================================
-   8. ANIMACIONES
+   8) ANIMACIONES (se respetan)
    ======================================================= */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-out forwards;
 }
+
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 /* =======================================================
-   9. FULLCALENDAR (NO CAMBIAR POR AHORA)
+   9) FULLCALENDAR (NO CAMBIAR POR AHORA) — INTACTO
    ======================================================= */
-
-/* Fondo general */
-.fc-theme-standard .fc-scrollgrid {
-  border-color: #d0d7df !important;
-}
-
-/* Cabecera */
+.fc-theme-standard .fc-scrollgrid { border-color: #d0d7df !important; }
 .fc-col-header-cell {
   background-color: #e6eef3 !important;
   color: #2c3e50 !important;
   font-weight: 600 !important;
 }
-
-/* Números */
-.fc-daygrid-day-number {
-  color: #2c3e50 !important;
-  font-weight: 600;
-}
-
-/* Día actual */
+.fc-daygrid-day-number { color: #2c3e50 !important; font-weight: 600; }
 .fc-daygrid-day.fc-day-today {
   background: #dbeafe !important;
   color: #1e40af !important;
 }
-
-/* Botones */
 .fc .fc-button {
   background: #3B6E7F !important;
   color: white !important;
   border: none !important;
   font-weight: 600;
 }
-
-.fc .fc-button:hover {
-  background: #2e5664 !important;
-}
-
+.fc .fc-button:hover { background: #2e5664 !important; }
 .fc .fc-button.fc-button-active {
   background: #1f2937 !important;
   color: white !important;
 }
-
-/* Eventos */
 .fc-event {
   color: #fff !important;
   padding: 4px !important;
   border-radius: 6px !important;
   font-weight: 600;
 }
+.fc-event-confirmada { background: #15803d !important; }
+.fc-event-pendiente  { background: #ca8a04 !important; }
+.fc-event-cancelada  { background: #b91c1c !important; }
 
-/* Estados */
-.fc-event-confirmada {
-  background: #15803d !important;
-}
-.fc-event-pendiente {
-  background: #ca8a04 !important;
-}
-.fc-event-cancelada {
-  background: #b91c1c !important;
-}
+/* =======================================================
+   10) NAV LINKS (se respetan, recolor a bivalente)
+   ======================================================= */
 .nav-link {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-main);
   position: relative;
 }
@@ -265,56 +318,38 @@ select::-ms-expand {
 .nav-link::after {
   content: "";
   position: absolute;
-  bottom: -3px;
+  bottom: -6px;
   left: 0;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, var(--brand-start), var(--brand-mid), var(--brand-end));
-  transition: width .25s ease;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--bv-olive), var(--bv-teal), var(--bv-olive));
+  transition: width .22s ease;
 }
 
-.nav-link:hover::after {
-  width: 100%;
-}
+.nav-link:hover::after { width: 100%; }
 
 .mobile-link {
   display: block;
   padding: 10px 0;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-main);
 }
-body {
-  background: #f9fafb; /* o lo que estés usando */
-  color: var(--text-main);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-.card-header-gradient {
-  background: linear-gradient(90deg, var(--brand-start), var(--brand-mid), var(--brand-end));
-  padding: 18px 22px;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
 
-  display: flex;
-  align-items: center;
-  gap: 14px;
-
-  color: white !important;
-  font-weight: 700;
-  font-size: 1.15rem;
-}
-/* ------------------------------
-   📌 TARJETAS (Dashboard Cliente)
------------------------------- */
+/* =======================================================
+   11) TARJETAS DASHBOARD (se respetan + bivalente)
+   ======================================================= */
 .card-panel {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(10, 77, 104, 0.10);
   overflow: hidden;
+  border: 1px solid rgba(230,239,232,0.9);
 }
 
-/* Encabezado estilo premium */
+/* ÚNICA definición (quitamos duplicados) */
 .card-header-gradient {
-  background: linear-gradient(90deg, #2563eb, #7c3aed, #ec4899);
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-mid), var(--brand-end));
   padding: 18px 22px;
   display: flex;
   align-items: center;
@@ -322,7 +357,6 @@ body {
   border-radius: 16px 16px 0 0;
 }
 
-/* Icono dentro de un badge */
 .icon-badge {
   width: 38px;
   height: 38px;
@@ -336,27 +370,221 @@ body {
   color: white;
 }
 
-/* Título blanco */
 .card-header-gradient .title {
   font-size: 1.3rem;
-  font-weight: 700;
+  font-weight: 800;
   color: white;
 }
 
-/* Subtítulo accesible */
 .card-header-gradient .subtitle {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.92);
   margin-top: 2px;
 }
 
+/* Dashboard background: lo hacemos bivalente suave */
 .dashboard-section {
-  background: linear-gradient(
-    to bottom right, 
-    #eef2ff 0%, 
-    #f5e1ff 50%, 
-    #ffe4f2 100%
-  );
+  background: var(--bv-soft);
   min-height: 100vh;
   padding: 40px 0;
+}
+
+/* =======================================================
+   12) NUEVO: HEADER WRAPPER (para unificar estilos rápido)
+   ======================================================= */
+.bv-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(14px);
+  background: rgba(247, 250, 249, 0.80);
+  border-bottom: 1px solid rgba(230,239,232,0.9);
+}
+/* =======================================================
+   HEADER — BIVALENTE (nuevas utilidades)
+   ======================================================= */
+
+/* Estado base transparente */
+.bv-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  transition: all .25s ease;
+  background-color: transparent;
+}
+
+/* Estado cuando haces scroll: glass + contraste */
+.bv-header--scrolled {
+  background: rgba(10, 77, 104, 0.86); /* bv-deep con transparencia */
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.20);
+}
+
+/* Navegación desktop */
+.bv-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.bv-nav a {
+  color: rgba(255,255,255,0.92);
+}
+
+/* Reutiliza tu .nav-link, pero versión sobre fondo oscuro */
+.bv-nav .nav-link {
+  color: rgba(255,255,255,0.92);
+}
+.bv-nav .nav-link::after {
+  bottom: -8px;
+  background: linear-gradient(90deg, var(--bv-olive), rgba(255,255,255,0.55), var(--bv-olive));
+}
+
+/* Botones del header en modo oscuro */
+.btn-secondary--dark {
+  border: 1px solid rgba(255,255,255,0.22);
+  color: white;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary--dark:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-2px);
+}
+
+.btn-primary--olive {
+  background: linear-gradient(90deg, var(--bv-olive), #cfe0b9);
+  color: #073044 !important;
+  box-shadow: 0 10px 22px rgba(164,190,123,0.25);
+}
+
+.btn-primary--olive:hover {
+  transform: translateY(-2px);
+  opacity: .96;
+}
+
+/* Menú móvil panel */
+.bv-mobile-panel {
+  background: rgba(10, 77, 104, 0.84);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 50px rgba(2,6,23,0.35);
+}
+/* =======================================================
+   BOTONES ACCESIBLES — BIVALENTE
+   (reutilizables en header + landing + dashboard)
+======================================================= */
+
+:root{
+  --btn-radius: 14px;
+  --btn-min-h: 44px;
+
+  /* sombras suaves coherentes */
+  --btn-shadow: 0 10px 20px rgba(2, 6, 23, 0.18);
+  --btn-shadow-hover: 0 14px 28px rgba(2, 6, 23, 0.22);
+
+  /* focus visible accesible */
+  --focus-outer: 0 0 0 4px rgba(164, 190, 123, 0.35);
+  --focus-inner: 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+/* Base común */
+.bv-btn {
+  min-height: var(--btn-min-h);
+  border-radius: var(--btn-radius);
+  padding: 12px 18px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, opacity .18s ease;
+  transform: translateZ(0); /* evita blur raro en algunos navegadores */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* Focus accesible: sólo teclado */
+.bv-btn:focus { outline: none; }
+.bv-btn:focus-visible {
+  box-shadow: var(--focus-inner), var(--focus-outer);
+}
+
+/* Disabled */
+.bv-btn:disabled,
+.bv-btn[aria-disabled="true"] {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Active (click) */
+.bv-btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------------------------------------
+   PRIMARY (verde bivalente, texto azul)
+---------------------------------------- */
+.bv-btn-primary {
+  color: #073044;
+  background: linear-gradient(90deg, #A4BE7B 0%, #CFE0B9 100%);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 22px rgba(164,190,123,0.25);
+}
+
+.bv-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(164,190,123,0.30), var(--btn-shadow-hover);
+  filter: saturate(1.02);
+}
+
+/* ---------------------------------------
+   SECONDARY (glass sobre fondo oscuro)
+---------------------------------------- */
+.bv-btn-ghost {
+  color: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px);
+}
+
+.bv-btn-ghost:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.30);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+/* ---------------------------------------
+   OUTLINE (para fondos claros)
+---------------------------------------- */
+.bv-btn-outline {
+  color: var(--text-main);
+  background: #ffffff;
+  border: 1px solid rgba(10, 77, 104, 0.20);
+  box-shadow: 0 6px 14px rgba(10, 77, 104, 0.08);
+}
+
+.bv-btn-outline:hover {
+  transform: translateY(-2px);
+  border-color: rgba(10, 77, 104, 0.35);
+  box-shadow: 0 14px 30px rgba(10, 77, 104, 0.12);
+}
+
+/* ---------------------------------------
+   Tamaño grande opcional
+---------------------------------------- */
+.bv-btn-lg {
+  min-height: 48px;
+  padding: 14px 22px;
+  border-radius: 16px;
+  font-size: 1rem;
 }

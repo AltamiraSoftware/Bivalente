@@ -19,7 +19,7 @@ Aplicación web full-stack orientada a producción, diseñada con arquitectura m
 | **Comunicación** | Resend (emails), Supabase Realtime (chat), Daily.co (videollamadas) |
 | **DevOps** | Vercel (CI/CD, hosting) |
 
----
+
 ## Decisiones de arquitectura
 
 - Next.js App Router para separación clara cliente/servidor.

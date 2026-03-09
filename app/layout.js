@@ -1,41 +1,83 @@
-import "./globals.css"
+import "./globals.css";
+import { Inter } from "next/font/google";
 import { AuthModalProvider } from "@/hooks/useAuthModal";
 import AuthModal from "@/components/Modal/AuthModal";
-import { Inter } from "next/font/google";
 
 const inter = Inter({
-  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
-  display: "swap", // Mejora el rendimiento de fuentes
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata = {
-  title: "PsyManage — Gestión inteligente de clínicas de psicología",
-  description: "Sistema completo de gestión para clínicas de psicología. Gestiona citas, disponibilidad, pagos y comunicación con tus pacientes desde una única plataforma segura.",
-  keywords: "gestión clínica psicología, reserva citas online, software psicología, gestión pacientes",
-  openGraph: {
-    title: "PsyManage — Gestión inteligente de clínicas de psicología",
-    description: "Sistema completo de gestión para clínicas de psicología",
-    type: "website",
-    url: "https://altamirasoftware.eu",
+  metadataBase: new URL("https://clinicabivalente.com"),
+
+  title: {
+    default: "Clínica Bivalente | Psicología y Fisioterapia en Madrid",
+    template: "%s | Clínica Bivalente",
   },
+
+  description:
+    "Clínica Bivalente en Madrid. Especialistas en psicología y fisioterapia. Tratamientos personalizados basados en terapia manual y ejercicio terapéutico. Reserva tu cita online.",
+
+  keywords: [
+    "psicología Madrid",
+    "fisioterapia Madrid",
+    "clínica psicología Madrid",
+    "fisioterapia terapia manual Madrid",
+    "psicólogo Madrid cita",
+    "fisioterapeuta Madrid",
+    "Clínica Bivalente",
+  ],
+
+  openGraph: {
+    title: "Clínica Bivalente | Psicología y Fisioterapia en Madrid",
+    description:
+      "Centro especializado en psicología y fisioterapia en Madrid. Tratamientos personalizados para mejorar bienestar, salud y rendimiento.",
+    url: "https://clinicabivalente.com",
+    siteName: "Clínica Bivalente",
+    locale: "es_ES",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Clínica Bivalente | Psicología y Fisioterapia en Madrid",
+    description:
+      "Psicología y fisioterapia en Madrid con tratamientos personalizados y reserva de citas online.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0A4D68",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={inter.className}>
-      <head>
-      <meta name="description" content="Sistema completo de gestión para clínicas de psicología. Gestiona citas, disponibilidad, pagos y comunicación con tus pacientes desde una única plataforma segura." />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://kfdvyxvyhjfyjcvuglfn.supabase.co" />
-      </head>
-      <body>
+    <html lang="es" suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${inter.className} min-h-screen bg-white text-slate-900 antialiased`}
+      >
         <AuthModalProvider>
           {children}
           <AuthModal />
         </AuthModalProvider>
-        <div id="video-root"></div>
+
+        {/* contenedor para videollamadas */}
+        <div id="video-root" />
       </body>
     </html>
   );

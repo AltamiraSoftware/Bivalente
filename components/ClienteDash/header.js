@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import LogoutButton from "../LogoutButtom"; // ✔ Solo una importación correcta
+import LogoutButton from "../LogoutButtom";
 import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
@@ -27,10 +27,8 @@ export default function Header() {
   }, [user]);
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        
-        {/* LOGO + HOME */}
+    <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[linear-gradient(90deg,rgba(10,77,104,0.94)_0%,rgba(8,131,149,0.92)_48%,rgba(97,118,75,0.92)_100%)] shadow-[0_14px_30px_rgba(10,77,104,0.20)] backdrop-blur-lg">
+      <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/cliente" className="flex items-center gap-3">
           <Image
             src="/logo-psymanage.svg"
@@ -39,28 +37,21 @@ export default function Header() {
             height={40}
             priority
             className="h-10 w-auto"
-            
           />
         </Link>
 
-        {/* TITULO */}
-        <Link
-          href="/cliente"
-          className="hidden md:block text-2xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-        >
+        <Link href="/cliente" className="hidden text-2xl font-extrabold text-white md:block">
           Panel del usuario
         </Link>
 
-        {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center gap-4">
-          <LogoutButton className="btn-secondary" />
+          <LogoutButton />
         </div>
 
-        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setOpenMenu(!openMenu)}
-          aria-label="Abrir menú"
-          className="md:hidden text-gray-800 p-2 rounded-lg hover:bg-gray-100"
+          aria-label="Abrir menu"
+          className="rounded-lg p-2 text-white hover:bg-white/10 md:hidden"
         >
           <svg width="28" height="28" stroke="currentColor" fill="none">
             <path strokeWidth="2" d="M4 7h20M4 14h20M4 21h20" />
@@ -68,17 +59,15 @@ export default function Header() {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
       {openMenu && (
-        <div className="md:hidden px-4 pb-4 space-y-4 bg-white/95 backdrop-blur-md shadow-md animate-fadeIn">
-
-          <LogoutButton className="btn-primary w-full text-center" />
+        <div className="animate-fadeIn space-y-4 bg-[#0A4D68]/88 px-4 pb-4 backdrop-blur-md md:hidden">
+          <LogoutButton />
 
           <button
             onClick={() => setOpenMenu(false)}
-            className="w-full btn-secondary"
+            className="w-full bv-btn bv-btn-ghost"
           >
-            Cerrar menú
+            Cerrar menu
           </button>
         </div>
       )}

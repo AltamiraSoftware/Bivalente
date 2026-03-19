@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 import { resend } from "@/lib/resendClient";
 
@@ -6,9 +5,26 @@ const FROM = process.env.EMAIL_FROM || "onboarding@resend.dev";
 
 function templates(type, payload) {
   switch (type) {
+    case "lead_contacto":
+      return {
+        subject: `Nueva solicitud web: ${payload.servicio} - ${payload.nombre}`,
+        html: `
+          <h2>Nueva solicitud desde la web</h2>
+          <ul>
+            <li><strong>Servicio:</strong> ${payload.servicio}</li>
+            <li><strong>Profesional:</strong> ${payload.profesional}</li>
+            <li><strong>Nombre:</strong> ${payload.nombre}</li>
+            <li><strong>Email:</strong> ${payload.email}</li>
+            <li><strong>Telefono:</strong> ${payload.telefono || "No facilitado"}</li>
+          </ul>
+          <p><strong>Mensaje:</strong></p>
+          <p>${payload.mensaje}</p>
+        `,
+      };
+
     case "cliente_nueva_reserva":
       return {
-        subject: "Confirmación de tu cita",
+        subject: "Confirmacion de tu cita",
         html: `
           <h2>Tu cita ha sido reservada</h2>
           <p>Hola ${payload.nombreCliente},</p>
@@ -43,7 +59,7 @@ function templates(type, payload) {
         html: `
           <h2>Recordatorio de cita</h2>
           <p>Hola ${payload.nombreCliente},</p>
-          <p>Te recordamos que tienes una cita mañana.</p>
+          <p>Te recordamos que tienes una cita manana.</p>
           <ul>
             <li><strong>Fecha:</strong> ${payload.fecha}</li>
             <li><strong>Hora:</strong> ${payload.hora}</li>
@@ -53,7 +69,7 @@ function templates(type, payload) {
       };
 
     default:
-      throw new Error("Tipo de email no válido");
+      throw new Error("Tipo de email no valido");
   }
 }
 

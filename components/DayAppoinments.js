@@ -12,10 +12,10 @@ export default function DayAppointments({
   onVerDetalles,
 }) {
   return (
-    <section className="rounded-2xl shadow-xl overflow-hidden bg-white border border-gray-200">
+    <section className="overflow-hidden rounded-2xl border border-[#e6efe8] bg-white shadow-[0_20px_50px_rgba(10,77,104,0.10)]">
 
       {/* ================= ENCABEZADO ================= */}
-      <div className="w-full rounded-t-2xl bg-gradient-to-r from-[#2563EB] via-[#7C3AED] to-[#DB2777] p-4 flex items-center justify-between">
+      <div className="w-full rounded-t-2xl bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/20">
             <ClockIcon className="h-5 w-5 text-white" />
@@ -36,7 +36,7 @@ export default function DayAppointments({
 
         <button
           onClick={onOpenCreateModal}
-          className="bg-white text-blue-700 font-semibold px-4 py-2 rounded-lg shadow hover:bg-blue-50 transition"
+          className="bv-btn bv-btn-primary"
         >
           Añadir cita
         </button>
@@ -45,11 +45,11 @@ export default function DayAppointments({
       {/* ================= CONTENIDO ================= */}
       <div className="p-6 min-h-[220px] bg-white rounded-b-2xl">
         {loadingCitas ? (
-          <div className="flex flex-col items-center justify-center text-gray-400 py-10">
+          <div className="flex flex-col items-center justify-center text-[#245953]/60 py-10">
             Cargando...
           </div>
         ) : citasDelDia.length === 0 ? (
-          <div className="flex flex-col items-center justify-center text-gray-400 py-10">
+          <div className="flex flex-col items-center justify-center text-[#245953]/60 py-10">
             <CalendarIcon className="h-12 w-12 mb-2" />
             <span>No hay citas para esta fecha</span>
           </div>
@@ -61,20 +61,20 @@ export default function DayAppointments({
               return (
                 <li
                   key={c.id}
-                  className="p-4 rounded-xl border border-gray-200 bg-gray-50 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between transition hover:shadow-md"
+                  className="flex flex-col rounded-xl border border-[#dfe8e2] bg-[#f8fbfa] p-4 shadow-sm transition hover:shadow-md md:flex-row md:items-center md:justify-between"
                 >
                   <div className="flex items-start gap-3">
-                    <UserIcon className="w-6 h-6 text-blue-600 mt-1" />
+                    <UserIcon className="w-6 h-6 text-[#0A4D68] mt-1" />
 
                     <div>
-                      <p className="font-semibold text-gray-900 text-lg">
+                      <p className="font-semibold text-[#0A4D68] text-lg">
                         {new Date(c.hora_inicio).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
                       </p>
 
-                      <p className="text-gray-700 text-sm">
+                      <p className="text-[#245953] text-sm">
                         {cliente?.nombre_completo || "Paciente externo"}
                       </p>
 
@@ -92,7 +92,7 @@ export default function DayAppointments({
                             id_franja_disponibilidad: c.id_franja_disponibilidad,
                           })
                         }
-                        className="text-sm text-blue-600 hover:underline mt-1"
+                        className="mt-1 text-sm text-[#0A4D68] hover:underline"
                       >
                         Ver detalles
                       </button>

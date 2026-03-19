@@ -2,6 +2,9 @@
 
 import { CalendarDaysIcon } from "@heroicons/react/24/solid";
 
+const fieldClassName =
+  "w-full rounded-xl border border-[#c7dddb] bg-white px-4 py-3 text-sm text-[#0A4D68] shadow-[0_12px_30px_rgba(10,77,104,0.08)] outline-none transition placeholder:text-[#6b8b92] focus:border-[#088395] focus:ring-2 focus:ring-[#088395]/20";
+
 export default function CreateAppointmentModal({
   open,
   onClose,
@@ -22,211 +25,216 @@ export default function CreateAppointmentModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4 backdrop-blur-sm">
       <form
         onSubmit={onSubmit}
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fadeIn"
+        className="w-full max-w-2xl overflow-hidden rounded-[28px] border border-white/70 bg-white shadow-[0_28px_70px_rgba(10,77,104,0.22)] animate-fadeIn"
       >
-        {/* ======================= HEADER PREMIUM ======================= */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-6 flex items-center gap-3">
-          <CalendarDaysIcon className="w-8 h-8 text-white drop-shadow" />
-          <div>
-            <h2 className="text-2xl font-bold text-white">Nueva cita</h2>
-            <p className="text-white/80 text-sm">
-              Completa los datos para registrar la cita
-            </p>
+        <div className="bg-gradient-to-r from-[#0A4D68] via-[#088395] to-[#61764B] px-6 py-6 text-white">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-white/12 shadow-inner">
+              <CalendarDaysIcon className="h-7 w-7 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Nueva cita</h2>
+              <p className="text-sm text-white/82">
+                Registra la reserva con el mismo sistema visual de Bivalente.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* ======================= CONTENIDO ======================= */}
-        <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
-
-          {/* LOADING */}
+        <div className="max-h-[70vh] space-y-5 overflow-y-auto bg-[linear-gradient(180deg,rgba(247,251,250,0.96),rgba(239,247,245,0.96))] px-6 py-6">
           {loadingModal ? (
-            <div className="text-gray-700">Cargando datos…</div>
+            <div className="rounded-2xl border border-[#d4e5e2] bg-white/90 px-4 py-4 text-sm font-medium text-[#245953] shadow-sm">
+              Cargando datos...
+            </div>
           ) : (
             <>
-              {/* CLIENTE */}
-              <label className="block text-sm font-semibold text-gray-700">
-                Cliente
-              </label>
+              <section className="space-y-3 rounded-[24px] border border-[#d4e5e2] bg-white/92 p-5 shadow-[0_18px_40px_rgba(10,77,104,0.08)]">
+                <label className="block text-sm font-semibold text-[#245953]">
+                  Cliente
+                </label>
 
-              <div className="flex gap-2">
-                <select
-                  className="flex-1 border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                  value={formCita.cliente || ""}
-                  onChange={(e) =>
-                    setFormCita((f) => ({ ...f, cliente: e.target.value }))
-                  }
-                  required
-                >
-                  <option value="">Selecciona un cliente</option>
-                  {clientes.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.nombre_completo}
-                    </option>
-                  ))}
-                </select>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <select
+                    className={`flex-1 ${fieldClassName}`}
+                    value={formCita.cliente || ""}
+                    onChange={(e) =>
+                      setFormCita((f) => ({ ...f, cliente: e.target.value }))
+                    }
+                    required
+                  >
+                    <option value="">Selecciona un cliente</option>
+                    {clientes.map((cliente) => (
+                      <option key={cliente.id} value={cliente.id}>
+                        {cliente.nombre_completo}
+                      </option>
+                    ))}
+                  </select>
 
-                <button
-                  type="button"
-                  onClick={() => setShowNuevoPaciente(!showNuevoPaciente)}
-                  className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg font-semibold shadow transition"
-                >
-                  {showNuevoPaciente ? "Cancelar" : "Nuevo"}
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowNuevoPaciente(!showNuevoPaciente)}
+                    className="bv-btn bv-btn-ghost bv-btn-lg whitespace-nowrap"
+                  >
+                    {showNuevoPaciente ? "Cancelar nuevo paciente" : "Nuevo paciente"}
+                  </button>
+                </div>
+              </section>
 
-              {/* NUEVO PACIENTE */}
               {showNuevoPaciente && (
-                <div className="border rounded-xl p-4 bg-gray-50 shadow-inner space-y-3">
-                  <h3 className="font-semibold text-gray-800 mb-1">
-                    Crear nuevo paciente
-                  </h3>
-
-                  {/* NOMBRE */}
+                <section className="space-y-4 rounded-[24px] border border-[#cfe0da] bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,247,245,0.96))] p-5 shadow-[0_18px_40px_rgba(10,77,104,0.08)]">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Nombre completo
-                    </label>
-                    <input
-                      type="text"
-                      value={formNuevoPaciente.nombre_completo}
-                      onChange={(e) =>
-                        setFormNuevoPaciente((f) => ({
-                          ...f,
-                          nombre_completo: e.target.value,
-                        }))
-                      }
-                      className="w-full border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                      required
-                    />
+                    <h3 className="text-lg font-semibold text-[#0A4D68]">
+                      Crear nuevo paciente
+                    </h3>
+                    <p className="text-sm text-[#4c6d73]">
+                      Anade los datos basicos antes de registrar la cita.
+                    </p>
                   </div>
 
-                  {/* EMAIL */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      value={formNuevoPaciente.email}
-                      onChange={(e) =>
-                        setFormNuevoPaciente((f) => ({
-                          ...f,
-                          email: e.target.value,
-                        }))
-                      }
-                      className="w-full border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                      required
-                    />
-                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="md:col-span-2">
+                      <label className="mb-2 block text-sm font-medium text-[#245953]">
+                        Nombre completo
+                      </label>
+                      <input
+                        type="text"
+                        value={formNuevoPaciente.nombre_completo}
+                        onChange={(e) =>
+                          setFormNuevoPaciente((f) => ({
+                            ...f,
+                            nombre_completo: e.target.value,
+                          }))
+                        }
+                        className={fieldClassName}
+                        required
+                      />
+                    </div>
 
-                  {/* TELÉFONO */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Teléfono (opcional)
-                    </label>
-                    <input
-                      type="tel"
-                      value={formNuevoPaciente.telefono}
-                      onChange={(e) =>
-                        setFormNuevoPaciente((f) => ({
-                          ...f,
-                          telefono: e.target.value,
-                        }))
-                      }
-                      className="w-full border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                    />
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-[#245953]">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        value={formNuevoPaciente.email}
+                        onChange={(e) =>
+                          setFormNuevoPaciente((f) => ({
+                            ...f,
+                            email: e.target.value,
+                          }))
+                        }
+                        className={fieldClassName}
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-[#245953]">
+                        Telefono opcional
+                      </label>
+                      <input
+                        type="tel"
+                        value={formNuevoPaciente.telefono}
+                        onChange={(e) =>
+                          setFormNuevoPaciente((f) => ({
+                            ...f,
+                            telefono: e.target.value,
+                          }))
+                        }
+                        className={fieldClassName}
+                      />
+                    </div>
                   </div>
 
                   <button
                     type="button"
                     onClick={onCrearNuevoPaciente}
                     disabled={creandoPaciente}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold shadow transition"
+                    className="bv-btn bv-btn-primary bv-btn-lg w-full justify-center disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {creandoPaciente ? "Creando..." : "Crear paciente"}
+                    {creandoPaciente ? "Creando paciente..." : "Crear paciente"}
                   </button>
-                </div>
+                </section>
               )}
 
-              {/* SERVICIO */}
-              <label className="block text-sm font-semibold text-gray-700">
-                Servicio
-              </label>
-              <select
-                className="w-full border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                value={formCita.servicio || ""}
-                onChange={(e) =>
-                  setFormCita((f) => ({ ...f, servicio: e.target.value }))
-                }
-                required
-              >
-                <option value="">Selecciona un servicio</option>
-                {servicios.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.nombre}
-                  </option>
-                ))}
-              </select>
+              <section className="grid gap-5 rounded-[24px] border border-[#d4e5e2] bg-white/92 p-5 shadow-[0_18px_40px_rgba(10,77,104,0.08)] md:grid-cols-2">
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-[#245953]">
+                    Servicio
+                  </label>
+                  <select
+                    className={fieldClassName}
+                    value={formCita.servicio || ""}
+                    onChange={(e) =>
+                      setFormCita((f) => ({ ...f, servicio: e.target.value }))
+                    }
+                    required
+                  >
+                    <option value="">Selecciona un servicio</option>
+                    {servicios.map((servicio) => (
+                      <option key={servicio.id} value={servicio.id}>
+                        {servicio.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              {/* FRANJA */}
-              <label className="block text-sm font-semibold text-gray-700">
-                Franja disponible
-              </label>
-              <select
-                className="w-full border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                value={formCita.franja || ""}
-                onChange={(e) =>
-                  setFormCita((f) => ({ ...f, franja: e.target.value }))
-                }
-                required
-              >
-                <option value="">Selecciona una franja</option>
-                {franjasDisponibles.map((f) => (
-                  <option key={f.id} value={f.id}>
-                    {new Date(f.hora_inicio).toLocaleString("es-ES")}{" "}
-                    {" - "}
-                    {new Date(f.hora_fin).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </option>
-                ))}
-              </select>
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-[#245953]">
+                    Franja disponible
+                  </label>
+                  <select
+                    className={fieldClassName}
+                    value={formCita.franja || ""}
+                    onChange={(e) =>
+                      setFormCita((f) => ({ ...f, franja: e.target.value }))
+                    }
+                    required
+                  >
+                    <option value="">Selecciona una franja</option>
+                    {franjasDisponibles.map((franja) => (
+                      <option key={franja.id} value={franja.id}>
+                        {new Date(franja.hora_inicio).toLocaleString("es-ES")} -{" "}
+                        {new Date(franja.hora_fin).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              {/* NOTAS */}
-              <label className="block text-sm font-semibold text-gray-700">
-                Notas (opcional)
-              </label>
-              <textarea
-                className="w-full border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:ring-purple-300 outline-none"
-                rows={2}
-                value={formCita.notas}
-                onChange={(e) =>
-                  setFormCita((f) => ({ ...f, notas: e.target.value }))
-                }
-              />
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-[#245953]">
+                    Notas opcionales
+                  </label>
+                  <textarea
+                    rows={3}
+                    className={fieldClassName}
+                    value={formCita.notas}
+                    onChange={(e) =>
+                      setFormCita((f) => ({ ...f, notas: e.target.value }))
+                    }
+                  />
+                </div>
+              </section>
             </>
           )}
         </div>
 
-        {/* ======================= FOOTER PREMIUM ======================= */}
-        <div className="bg-gray-100 p-4 flex justify-end gap-3 border-t">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-900 font-semibold transition"
-          >
+        <div className="flex flex-col gap-3 border-t border-[#d8e7e5] bg-[#f5faf8] px-6 py-4 sm:flex-row sm:justify-end">
+          <button type="button" onClick={onClose} className="bv-btn bv-btn-ghost bv-btn-lg">
             Cancelar
           </button>
           <button
             type="submit"
             disabled={loadingModal}
-            className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow hover:opacity-90 transition"
+            className="bv-btn bv-btn-primary bv-btn-lg disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Guardar
+            Guardar cita
           </button>
         </div>
       </form>

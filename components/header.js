@@ -8,12 +8,13 @@ import Image from "next/image";
 export default function Header({ onOpenServicios }) {
   const [open, setOpen] = useState(false);
 
-  return (
-    <header className="w-full bg-white/80 backdrop-blur-lg shadow-md top-0 z-50 mb-5">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+  const linkClassName =
+    "bv-btn bv-btn-ghost min-h-[44px] px-4 text-sm font-semibold";
 
-        {/* LOGO + TITULO */}
-        <Link href="/dashboard" className="flex items-center gap-2">
+  return (
+    <header className="sticky top-0 z-50 mb-5 w-full border-b border-white/10 bg-[linear-gradient(90deg,rgba(10,77,104,0.94)_0%,rgba(8,131,149,0.92)_48%,rgba(97,118,75,0.92)_100%)] shadow-[0_14px_30px_rgba(10,77,104,0.20)] backdrop-blur-lg">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <Link href="/dashboard" className="flex items-center gap-3">
           <Image
             src="/logo-psymanage.svg"
             alt="PsyManage"
@@ -21,42 +22,30 @@ export default function Header({ onOpenServicios }) {
             height={32}
             className="h-8 w-auto"
           />
-          <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 leading-none">
+          <span className="text-xl font-black leading-none text-white">
             Panel del Profesional
           </span>
         </Link>
 
-        {/* NAV DESKTOP */}
         <div className="hidden md:flex items-center gap-3">
-          
-          <Link
-            href="/dashboard/chat"
-            className="px-4 py-2 rounded-lg font-semibold shadow bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90"
-          >
+          <Link href="/dashboard/chat" className={linkClassName}>
             Chat
           </Link>
 
-          <button
-            onClick={onOpenServicios}
-            className="px-4 py-2 rounded-lg font-semibold shadow bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90"
-          >
+          <button onClick={onOpenServicios} className={linkClassName}>
             Servicios
           </button>
 
-          <Link
-            href="/dashboard/disponibilidad"
-            className="px-4 py-2 rounded-lg font-semibold shadow bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90"
-          >
+          <Link href="/dashboard/disponibilidad" className={linkClassName}>
             Disponibilidad
           </Link>
 
           <LogoutButtom />
         </div>
 
-        {/* BOTÓN MENÚ MOBILE */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-gray-800 hover:text-black transition"
+          className="md:hidden rounded-lg p-2 text-white/95 hover:bg-white/10"
         >
           <svg width="28" height="28" stroke="currentColor" fill="none" strokeWidth="2">
             <path d="M4 7h20M4 14h20M4 21h20" />
@@ -64,27 +53,14 @@ export default function Header({ onOpenServicios }) {
         </button>
       </div>
 
-      {/* MENU MOBILE */}
       {open && (
-        <div className="md:hidden bg-white/95 backdrop-blur-lg shadow-md px-4 pb-4 space-y-4 animate-fadeIn">
-          
-          {/* ICONO EN MOBILE */}
-          <div className="flex items-center gap-2 pt-2">
-            <Image
-              src="/logo-psymanage.svg"
-              alt="PsyManage"
-              width={28}
-              height={28}
-              className="h-7 w-auto"
-            />
-            <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500">
-              Panel Profesional
-            </span>
-          </div>
-
+        <div className="md:hidden space-y-3 border-t border-white/10 bg-[#0A4D68]/88 px-4 pb-4 pt-3 backdrop-blur-lg animate-fadeIn">
           <button
-            onClick={() => { onOpenServicios(); setOpen(false); }}
-            className="block w-full px-4 py-3 rounded-lg font-semibold shadow bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90"
+            onClick={() => {
+              onOpenServicios();
+              setOpen(false);
+            }}
+            className="w-full bv-btn bv-btn-ghost"
           >
             Servicios
           </button>
@@ -92,7 +68,7 @@ export default function Header({ onOpenServicios }) {
           <Link
             href="/dashboard/disponibilidad"
             onClick={() => setOpen(false)}
-            className="block w-full px-4 py-3 rounded-lg font-semibold shadow bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90"
+            className="flex w-full items-center justify-center bv-btn bv-btn-ghost"
           >
             Disponibilidad
           </Link>

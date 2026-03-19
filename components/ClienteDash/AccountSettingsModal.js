@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function AccountSettingsModal({ open, onClose, user, profile }) {
-  // 🚀 Hooks SIEMPRE aquí, sin condiciones
   const [email, setEmail] = useState("");
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -12,7 +11,6 @@ export default function AccountSettingsModal({ open, onClose, user, profile }) {
   const [guardando, setGuardando] = useState(false);
   const [mensaje, setMensaje] = useState("");
 
-  // 🔄 Sincronizar cuando user o profile cambien
   useEffect(() => {
     if (user) setEmail(user.email || "");
     if (profile) {
@@ -21,29 +19,23 @@ export default function AccountSettingsModal({ open, onClose, user, profile }) {
     }
   }, [user, profile]);
 
-  // Si el modal está cerrado → no renderizar nada
   if (!open) return null;
 
-  // Si falta user o profile → mostrar pantalla de carga
   if (!user || !profile) {
     return (
-      <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-        <div className="bg-white p-6 rounded-xl shadow text-gray-700">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="rounded-xl bg-white p-6 text-[#245953] shadow">
           Cargando datos del usuario...
         </div>
       </div>
     );
   }
 
-  // ---------------------------------------------------------
-  // ACCIONES
-  // ---------------------------------------------------------
   async function actualizarPerfil() {
     setGuardando(true);
     setMensaje("");
 
     try {
-      // 1️⃣ Actualizar datos del perfil
       const { error: perfilError } = await supabase
         .from("perfiles_usuarios")
         .update({
@@ -54,104 +46,82 @@ export default function AccountSettingsModal({ open, onClose, user, profile }) {
 
       if (perfilError) throw perfilError;
 
-      // 2️⃣ Actualizar email si cambió
       if (email !== user.email) {
-        const { error: emailError } = await supabase.auth.updateUser({
-          email,
-        });
+        const { error: emailError } = await supabase.auth.updateUser({ email });
         if (emailError) throw emailError;
       }
 
-      // 3️⃣ Actualizar contraseña si se introdujo
       if (password.length > 0) {
-        const { error: passError } = await supabase.auth.updateUser({
-          password,
-        });
+        const { error: passError } = await supabase.auth.updateUser({ password });
         if (passError) throw passError;
       }
 
-      setMensaje("Cambios guardados correctamente ✔️");
+      setMensaje("Cambios guardados correctamente");
     } catch (err) {
       console.error(err);
-      setMensaje("❌ Error al guardar los cambios");
+      setMensaje("Error al guardar los cambios");
     }
 
     setGuardando(false);
   }
 
-  // ---------------------------------------------------------
-  // UI FINAL
-  // ---------------------------------------------------------
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 pt-4">
-      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-6 animate-fadeIn">
-
-        {/* ENCABEZADO CORPORATIVO */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-4 rounded-xl mb-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 pt-4">
+      <div className="w-full max-w-lg rounded-2xl border border-[#e6efe8] bg-white p-6 shadow-[0_24px_60px_rgba(10,77,104,0.16)] animate-fadeIn">
+        <div className="mb-6 rounded-xl bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] p-4">
           <h2 className="text-xl font-bold text-white">Ajustes de la cuenta</h2>
-          <p className="text-white/80 text-sm">Gestiona tus datos personales</p>
+          <p className="text-sm text-white/80">Gestiona tus datos personales</p>
         </div>
 
-        {/* CAMPOS */}
         <div className="space-y-4">
-
-          {/* EMAIL */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700">Email</label>
+            <label className="block text-sm font-semibold text-[#0A4D68]">Email</label>
             <input
               type="email"
-              className="w-full border rounded-lg px-3 py-2 mt-1"
+              className="mt-1 w-full rounded-lg border border-[#d9e6dd] px-3 py-2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
-          {/* NOMBRE */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700">Nombre completo</label>
+            <label className="block text-sm font-semibold text-[#0A4D68]">Nombre completo</label>
             <input
               type="text"
-              className="w-full border rounded-lg px-3 py-2 mt-1"
+              className="mt-1 w-full rounded-lg border border-[#d9e6dd] px-3 py-2"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
           </div>
 
-          {/* TELEFONO */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700">Teléfono</label>
+            <label className="block text-sm font-semibold text-[#0A4D68]">Telefono</label>
             <input
               type="tel"
-              className="w-full border rounded-lg px-3 py-2 mt-1"
+              className="mt-1 w-full rounded-lg border border-[#d9e6dd] px-3 py-2"
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
             />
           </div>
 
-          {/* PASSWORD */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700">Nueva contraseña</label>
+            <label className="block text-sm font-semibold text-[#0A4D68]">Nueva contrasena</label>
             <input
               type="password"
-              className="w-full border rounded-lg px-3 py-2 mt-1"
-              placeholder="•••••••"
+              className="mt-1 w-full rounded-lg border border-[#d9e6dd] px-3 py-2"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          {/* MENSAJE */}
-          {mensaje && (
-            <p className="text-center font-semibold text-blue-700 mt-2">{mensaje}</p>
-          )}
-
+          {mensaje && <p className="mt-2 text-center font-semibold text-[#0A4D68]">{mensaje}</p>}
         </div>
 
-        {/* BOTONES */}
         <div className="mt-6 flex justify-between gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-800"
+            className="rounded-lg bg-[#eef6f4] px-4 py-2 text-[#245953] hover:bg-[#e3efea]"
           >
             Cerrar
           </button>
@@ -159,12 +129,11 @@ export default function AccountSettingsModal({ open, onClose, user, profile }) {
           <button
             onClick={actualizarPerfil}
             disabled={guardando}
-            className="px-5 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg shadow disabled:opacity-50"
+            className="rounded-lg bg-[linear-gradient(90deg,#0A4D68_0%,#088395_58%,#61764B_100%)] px-5 py-2 text-white shadow disabled:opacity-50"
           >
             {guardando ? "Guardando..." : "Guardar cambios"}
           </button>
         </div>
-
       </div>
     </div>
   );

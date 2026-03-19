@@ -281,17 +281,17 @@ function ClienteDashboardContent() {
   ============================*/
   if (isLoading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(164,190,123,0.20),_transparent_24%),radial-gradient(circle_at_85%_18%,_rgba(8,131,149,0.18),_transparent_24%),linear-gradient(135deg,_#edf5f1_0%,_#f7faf9_55%,_#e2eee7_100%)]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0A4D68] mx-auto mb-4"></div>
+          <p className="text-[#245953]">Cargando...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(164,190,123,0.20),_transparent_24%),radial-gradient(circle_at_85%_18%,_rgba(8,131,149,0.18),_transparent_24%),linear-gradient(135deg,_#edf5f1_0%,_#f7faf9_55%,_#e2eee7_100%)]">
       {/* 🔥 DETECTOR DE SUCCESS EN SUSPENSE */}
       <Suspense fallback={null}>
         <SuccessDetector onSuccess={() => setShowSuccessModal(true)} />
@@ -304,8 +304,8 @@ function ClienteDashboardContent() {
 
           {/* CALENDARIO */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-6 text-white flex items-center gap-3">
+            <div className="overflow-hidden rounded-2xl border border-[#e6efe8] bg-white shadow-[0_20px_50px_rgba(10,77,104,0.10)]">
+              <div className="bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] p-6 text-white flex items-center gap-3">
                 <IconCalendar />
                 <div>
                   <h3 className="text-xl font-bold">Calendario</h3>
@@ -349,22 +349,22 @@ function ClienteDashboardContent() {
           {/* RESUMEN + CITAS + CHAT */}
           <div className="space-y-6">
             {/* RESUMEN */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-6 text-white flex items-center gap-3">
+            <div className="overflow-hidden rounded-2xl border border-[#e6efe8] bg-white shadow-[0_20px_50px_rgba(10,77,104,0.10)]">
+              <div className="bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] p-6 text-white flex items-center gap-3">
                 <IconClock />
                 <h3 className="text-xl font-bold">Resumen</h3>
               </div>
 
               <div className="p-6">
-                <p className="text-sm text-gray-600">Fecha</p>
+                <p className="text-sm text-[#245953]">Fecha</p>
                 <p className="font-semibold mb-4">
                   {selectedDate ? new Date(selectedDate).toLocaleDateString("es-ES") : "—"}
                 </p>
 
-                <p className="text-sm text-gray-600">Hora</p>
+                <p className="text-sm text-[#245953]">Hora</p>
                 <p className="font-semibold mb-6">{selectedTime || "—"}</p>
 
-                <p className="text-sm text-gray-600">Servicio</p>
+                <p className="text-sm text-[#245953]">Servicio</p>
                 <p className="font-semibold">
                   {selectedService
                     ? servicios.find((s) => s.id === selectedService)?.nombre
@@ -373,7 +373,7 @@ function ClienteDashboardContent() {
 
                 <button
                   onClick={handleReset}
-                  className="mt-4 text-sm text-blue-600 hover:underline"
+                  className="mt-4 text-sm text-[#0A4D68] hover:underline"
                 >
                   Reiniciar selección
                 </button>
@@ -381,8 +381,8 @@ function ClienteDashboardContent() {
             </div>
 
             {/* PRÓXIMAS CITAS */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden  top-24">
-              <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-6 text-white flex items-center gap-3">
+            <div className="top-24 overflow-hidden rounded-2xl border border-[#e6efe8] bg-white shadow-[0_20px_50px_rgba(10,77,104,0.10)]">
+              <div className="bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] p-6 text-white flex items-center gap-3">
                 <IconUser />
                 <h3 className="text-xl font-bold">Próximas citas</h3>
               </div>
@@ -391,10 +391,10 @@ function ClienteDashboardContent() {
             </div>
 
             {/* CHAT + AJUSTES */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="rounded-2xl border border-[#e6efe8] bg-white p-6 shadow-[0_20px_50px_rgba(10,77,104,0.10)]">
               <button
                 onClick={() => setChatOpen(true)}
-                className="w-full bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-white font-semibold py-3 rounded-xl shadow hover:opacity-90 transition"
+                className="w-full bv-btn bv-btn-primary bv-btn-lg"
               >
                 💬 Chat
               </button>
@@ -403,7 +403,7 @@ function ClienteDashboardContent() {
 
               <button
                 onClick={() => setShowAccountModal(true)}
-                className="w-full bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-white font-semibold py-3 rounded-xl shadow hover:opacity-90 transition"
+                className="w-full bv-btn bv-btn-primary bv-btn-lg"
               >
                 Parámetros de la cuenta
               </button>
@@ -431,16 +431,16 @@ function ClienteDashboardContent() {
             onClick={() => setShowSuccessModal(false)}
           />
 
-          <div className="relative bg-white rounded-2xl shadow-xl p-10 max-w-md w-[90%] animate-scaleIn">
+          <div className="relative w-[90%] max-w-md rounded-2xl border border-[#e6efe8] bg-white p-10 shadow-[0_24px_60px_rgba(10,77,104,0.16)] animate-scaleIn">
             <div className="mx-auto mb-6 w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner">
               <span className="text-5xl">✓</span>
             </div>
 
-            <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-4">
+            <h2 className="mb-4 text-center text-3xl font-extrabold text-[#0A4D68]">
               ¡Pago completado!
             </h2>
 
-            <p className="text-gray-600 text-center mb-8">
+            <p className="mb-8 text-center text-[#245953]">
               Tu cita ha sido confirmada correctamente.
             </p>
 
@@ -449,7 +449,7 @@ function ClienteDashboardContent() {
                 setShowSuccessModal(false);
                 window.location.href = "/cliente"; // limpiar URL
               }}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl shadow hover:opacity-90 transition"
+              className="w-full bv-btn bv-btn-primary bv-btn-lg"
             >
               Continuar
             </button>
@@ -475,10 +475,10 @@ export default function ClienteDashboard() {
   return (
     <Suspense 
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(164,190,123,0.20),_transparent_24%),radial-gradient(circle_at_85%_18%,_rgba(8,131,149,0.18),_transparent_24%),linear-gradient(135deg,_#edf5f1_0%,_#f7faf9_55%,_#e2eee7_100%)]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Cargando dashboard...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0A4D68] mx-auto mb-4"></div>
+            <p className="text-[#245953]">Cargando dashboard...</p>
           </div>
         </div>
       }

@@ -43,7 +43,7 @@ export default function AppointmentCalendar({ availabilityData, onDateSelect }) 
   };
 
   return (
-    <div className="bg-white rounded-lg p-6">
+    <div className="rounded-xl border border-[#e6efe8] bg-white p-6">
       
       {/* Controles de mes */}
       <div className="flex items-center justify-between mb-6">
@@ -53,12 +53,12 @@ export default function AppointmentCalendar({ availabilityData, onDateSelect }) 
               new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
             )
           }
-          className="p-2 hover:bg-gray-100 rounded-lg transition"
+          className="p-2 hover:bg-[#eef6f4] rounded-lg transition"
         >
-          <ChevronLeft className="w-5 h-5 text-gray-600" />
+          <ChevronLeft className="w-5 h-5 text-[#245953]" />
         </button>
 
-        <h3 className="text-xl font-semibold !text-gray-900 capitalize">
+        <h3 className="text-xl font-semibold !text-[#0A4D68] capitalize">
           {currentDate.toLocaleDateString("es-ES", {
             month: "long",
             year: "numeric",
@@ -71,21 +71,21 @@ export default function AppointmentCalendar({ availabilityData, onDateSelect }) 
               new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
             )
           }
-          className="p-2 hover:bg-gray-100 rounded-lg transition"
+          className="p-2 hover:bg-[#eef6f4] rounded-lg transition"
         >
-          <ChevronRight className="w-5 h-5 text-gray-600" />
+          <ChevronRight className="w-5 h-5 text-[#245953]" />
         </button>
       </div>
 
       {/* Calendario */}
-      <div className="bg-gray-50 rounded-lg p-4">
+      <div className="bg-[#f7faf9] rounded-lg p-4">
         
         {/* 🟦 Semana de lunes → domingo */}
         <div className="grid grid-cols-7 gap-2 mb-4">
           {weekDays.map((d) => (
             <div
               key={d}
-              className="text-center text-sm font-semibold text-gray-600"
+              className="text-center text-sm font-semibold text-[#245953]"
             >
               {d}
             </div>
@@ -109,7 +109,7 @@ export default function AppointmentCalendar({ availabilityData, onDateSelect }) 
                   disabled={!hasAvailability(day)}
                   className={`w-full aspect-square flex items-center justify-center rounded-lg font-semibold transition ${
                     hasAvailability(day)
-                      ? "bg-blue-400 hover:bg-purple-600 text-white border-2 border-transparent hover:border-blue-600"
+                      ? "bg-[linear-gradient(90deg,#0A4D68_0%,#088395_58%,#61764B_100%)] hover:opacity-95 text-white border-2 border-transparent"
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
                   }`}
                 >
@@ -125,11 +125,11 @@ export default function AppointmentCalendar({ availabilityData, onDateSelect }) 
 
       {/* Leyenda */}
       <div className="mt-6 pt-4 border-t border-gray-200">
-        <p className="text-sm text-gray-600">
-          <span className="inline-block w-4 h-4 bg-blue-400 border-2 border-blue-600 rounded mr-2"></span>
+        <p className="text-sm text-[#245953]">
+          <span className="inline-block w-4 h-4 bg-[linear-gradient(90deg,#0A4D68_0%,#088395_58%,#61764B_100%)] rounded mr-2"></span>
           Disponible
         </p>
-        <p className="text-sm text-gray-600 mt-2">
+        <p className="text-sm text-[#245953] mt-2">
           <span className="inline-block w-4 h-4 bg-gray-200 rounded mr-2"></span>
           No disponible
         </p>

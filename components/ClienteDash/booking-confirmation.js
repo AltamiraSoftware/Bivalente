@@ -25,7 +25,6 @@ export default function BookingConfirmation({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-
     onConfirm({ notes });
   };
 
@@ -37,94 +36,79 @@ export default function BookingConfirmation({
   });
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <button 
-          onClick={onBack} 
-          className="p-2 hover:bg-gray-100 rounded-lg transition"
-        >
-          <ChevronLeft className="w-5 h-5 text-gray-600" />
+    <div className="rounded-xl border border-[#e6efe8] bg-white p-6 shadow-[0_18px_40px_rgba(10,77,104,0.08)]">
+      <div className="mb-6 flex items-center gap-4">
+        <button onClick={onBack} className="rounded-lg p-2 transition hover:bg-[#eef6f4]">
+          <ChevronLeft className="h-5 w-5 text-[#245953]" />
         </button>
         <div>
-          <h2 className="text-2xl font-bold !text-gray-900">Confirma tu Cita</h2>
-          <p className="text-gray-600">Selecciona servicio y añade notas opcionales</p>
+          <h2 className="text-2xl font-bold text-[#0A4D68]">Confirma tu cita</h2>
+          <p className="text-[#245953]">Selecciona servicio y anade notas opcionales</p>
         </div>
       </div>
 
-      {/* Resumen */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-8 border-l-4 border-blue-600">
+      <div className="mb-8 rounded-lg border-l-4 border-[#088395] bg-gradient-to-r from-[#eef6f4] to-[#f3f7ef] p-4">
         <div className="flex items-start gap-4">
-          <CheckCircle className="w-6 h-6 text-blue-600 mt-1" />
+          <CheckCircle className="mt-1 h-6 w-6 text-[#088395]" />
           <div>
-            <h3 className="font-semibold text-gray-900 mb-2">Tu Cita</h3>
-
-            <p className="text-sm text-gray-600">Fecha</p>
-            <p className="font-semibold text-gray-900 capitalize mb-3">{dateFormatted}</p>
-
-            <p className="text-sm text-gray-600">Hora</p>
-            <p className="font-semibold text-gray-900">{time}</p>
+            <h3 className="mb-2 font-semibold text-[#0A4D68]">Tu cita</h3>
+            <p className="text-sm text-[#245953]">Fecha</p>
+            <p className="mb-3 font-semibold capitalize text-[#0A4D68]">{dateFormatted}</p>
+            <p className="text-sm text-[#245953]">Hora</p>
+            <p className="font-semibold text-[#0A4D68]">{time}</p>
           </div>
         </div>
       </div>
 
-      {/* Formulario */}
       <form onSubmit={handleSubmit} className="space-y-6">
-        
-        {/* Servicios */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Tipo de Sesión
+          <label className="mb-2 block text-sm font-semibold text-[#0A4D68]">
+            Tipo de sesion
           </label>
 
           <select
             value={selectedService}
             onChange={(e) => setSelectedService(e.target.value)}
-            className={`w-full px-4 py-2 border-2 rounded-lg  ${
-              errors.service ? "border-red-600" : "border-gray-300"
+            className={`w-full rounded-lg border-2 px-4 py-2 ${
+              errors.service ? "border-red-600" : "border-[#d9e6dd]"
             }`}
           >
             <option value="">Selecciona un servicio</option>
-
             {servicios.map((s) => (
               <option key={s.id} value={s.id}>
-                {s.nombre} — {s.precio}€
+                {s.nombre} - {s.precio} EUR
               </option>
             ))}
           </select>
 
-          {errors.service && (
-            <p className="text-red-600 text-sm mt-1">{errors.service}</p>
-          )}
+          {errors.service && <p className="mt-1 text-sm text-red-600">{errors.service}</p>}
         </div>
 
-        {/* Notas */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-semibold text-[#0A4D68]">
             Notas adicionales (opcional)
           </label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={4}
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg"
-            placeholder="Escribe aquí cualquier información relevante..."
+            className="w-full rounded-lg border-2 border-[#d9e6dd] px-4 py-2"
+            placeholder="Escribe aqui cualquier informacion relevante..."
           />
         </div>
 
-        {/* Botones */}
         <div className="flex gap-4 pt-6">
-          <button 
+          <button
             type="button"
             onClick={onBack}
-            className="flex-1 px-6 py-3 border-2 border-gray-300 rounded-lg font-semibold hover:bg-gray-50"
+            className="flex-1 rounded-lg border-2 border-[#d9e6dd] px-6 py-3 font-semibold text-[#245953] hover:bg-[#f7faf9]"
           >
-            Atrás
+            Atras
           </button>
 
-          <button 
+          <button
             type="submit"
-            className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg"
+            className="flex-1 rounded-lg bg-[linear-gradient(90deg,#0A4D68_0%,#088395_58%,#61764B_100%)] px-6 py-3 font-semibold text-white hover:shadow-lg"
           >
             Confirmar cita
           </button>

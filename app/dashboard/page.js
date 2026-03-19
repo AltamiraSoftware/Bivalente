@@ -358,7 +358,7 @@ export default function DashboardPage() {
   if (user.rol !== "profesional") return null;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-100 to-white ">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(164,190,123,0.20),_transparent_24%),radial-gradient(circle_at_85%_18%,_rgba(8,131,149,0.18),_transparent_24%),linear-gradient(180deg,_#edf5f1_0%,_#f7faf9_55%,_#e2eee7_100%)]">
      <Header onOpenServicios={() => setModalServicios(true)} />
 
 <ServiceManagerModal

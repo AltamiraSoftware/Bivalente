@@ -38,16 +38,14 @@ export default function ClienteNextAppointments({ userId }) {
   );
 
   return (
-    <div className="bg-white shadow-md p-6 rounded-2xl mt-2">
-      
-
+    <div className="mt-2 rounded-2xl border border-[#e6efe8] bg-white p-6 shadow-[0_18px_40px_rgba(10,77,104,0.08)]">
       {futuras.length === 0 ? (
-        <p className="text-gray-600">No tienes citas próximas.</p>
+        <p className="text-[#245953]">No tienes citas proximas.</p>
       ) : (
         futuras.map((c) => (
-          <div key={c.id} className="border-l-4 border-blue-600 pl-4 mb-4">
-            <p className="font-semibold text-gray-900">{c.servicios.nombre}</p>
-            <p className="text-gray-700">
+          <div key={c.id} className="mb-4 border-l-4 border-[#088395] pl-4">
+            <p className="font-semibold text-[#0A4D68]">{c.servicios.nombre}</p>
+            <p className="text-[#245953]">
               {new Date(c.hora_inicio).toLocaleDateString("es-ES")}
               {" • "}
               {new Date(c.hora_inicio).toLocaleTimeString("es-ES", {
@@ -55,13 +53,11 @@ export default function ClienteNextAppointments({ userId }) {
                 minute: "2-digit",
               })}
             </p>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="mt-1 text-sm text-[#245953]">
               Estado:{" "}
               <span
                 className={
-                  c.estado_cita === "confirmada"
-                    ? "text-green-600"
-                    : "text-yellow-600"
+                  c.estado_cita === "confirmada" ? "text-[#61764B]" : "text-[#088395]"
                 }
               >
                 {c.estado_cita}
@@ -73,59 +69,39 @@ export default function ClienteNextAppointments({ userId }) {
 
       <button
         onClick={() => setShowModal(true)}
-        className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+        className="mt-4 w-full bv-btn bv-btn-primary bv-btn-lg"
       >
         Ver historial
       </button>
 
-      {showModal && (
-        <HistorialModal citas={citas} onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <HistorialModal citas={citas} onClose={() => setShowModal(false)} />}
     </div>
   );
 }
 
-/* -------------------------------
-     MODAL DEL HISTORIAL
--------------------------------- */
-
 function HistorialModal({ citas, onClose }) {
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-white rounded-2xl shadow-xl w-[90%] max-w-xl animate-fadeInUp relative overflow-hidden">
-
-        {/* ENCABEZADO CORPORATIVO */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-6 text-white">
-          <h2 className="text-2xl font-bold text-center">Historial de Citas</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div className="relative w-[90%] max-w-xl overflow-hidden rounded-2xl border border-[#e6efe8] bg-white shadow-[0_24px_60px_rgba(10,77,104,0.16)] animate-fadeInUp">
+        <div className="bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] p-6 text-white">
+          <h2 className="text-center text-2xl font-bold">Historial de citas</h2>
         </div>
 
-        {/* BOTÓN CERRAR */}
         <button
-          className="absolute top-4 right-4 text-white/90 hover:text-white text-xl"
+          className="absolute right-4 top-4 text-xl text-white/90 hover:text-white"
           onClick={onClose}
         >
-          ✕
+          x
         </button>
 
-        {/* CONTENIDO */}
-        <div className="p-6 max-h-[400px] overflow-y-auto space-y-4">
-
-          {citas.length === 0 && (
-            <p className="text-gray-600 text-center">
-              No hay citas registradas.
-            </p>
-          )}
+        <div className="max-h-[400px] space-y-4 overflow-y-auto p-6">
+          {citas.length === 0 && <p className="text-center text-[#245953]">No hay citas registradas.</p>}
 
           {citas.map((cita) => (
-            <div
-              key={cita.id}
-              className="border rounded-xl p-4 bg-gray-50 shadow-sm"
-            >
-              <h3 className="font-semibold !text-gray-900">
-                {cita.servicios.nombre}
-              </h3>
+            <div key={cita.id} className="rounded-xl border border-[#dfe8e2] bg-[#f8fbfa] p-4 shadow-sm">
+              <h3 className="font-semibold text-[#0A4D68]">{cita.servicios.nombre}</h3>
 
-              <p className="!text-gray-700">
+              <p className="text-[#245953]">
                 {new Date(cita.hora_inicio).toLocaleDateString("es-ES")}
                 {" • "}
                 {new Date(cita.hora_inicio).toLocaleTimeString("es-ES", {
@@ -134,15 +110,15 @@ function HistorialModal({ citas, onClose }) {
                 })}
               </p>
 
-              <p className="text-sm mt-1">
+              <p className="mt-1 text-sm">
                 Estado cita:{" "}
                 <span
                   className={
                     cita.estado_cita === "confirmada"
-                      ? "text-green-600"
+                      ? "text-[#61764B]"
                       : cita.estado_cita === "cancelada"
-                      ? "text-red-600"
-                      : "text-yellow-600"
+                        ? "text-red-600"
+                        : "text-[#088395]"
                   }
                 >
                   {cita.estado_cita}
@@ -151,13 +127,7 @@ function HistorialModal({ citas, onClose }) {
 
               <p className="text-sm">
                 Pago:{" "}
-                <span
-                  className={
-                    cita.estado_pago === "pagado"
-                      ? "text-green-600"
-                      : "text-yellow-600"
-                  }
-                >
+                <span className={cita.estado_pago === "pagado" ? "text-[#61764B]" : "text-[#088395]"}>
                   {cita.estado_pago}
                 </span>
               </p>
@@ -165,18 +135,12 @@ function HistorialModal({ citas, onClose }) {
           ))}
         </div>
 
-        {/* BOTÓN CERRAR FOOTER */}
         <div className="p-6">
-          <button
-            onClick={onClose}
-            className="w-full bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-white py-3 rounded-xl hover:opacity-90 transition font-semibold"
-          >
+          <button onClick={onClose} className="w-full bv-btn bv-btn-primary bv-btn-lg">
             Cerrar
           </button>
         </div>
-
       </div>
     </div>
   );
 }
-

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useChat } from "@/hooks/useChat";
 import VideoCall from "@/components/VideoCall";
@@ -10,23 +10,13 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
 
   const [texto, setTexto] = useState("");
   const bottomRef = useRef(null);
-
   const [videoOpen, setVideoOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
   const [creandoVideo, setCreandoVideo] = useState(false);
-
-  // 🟦 Datos del paciente
   const [datosPaciente, setDatosPaciente] = useState(null);
-
-  // 🟦 Próxima cita futura
   const [proximaCita, setProximaCita] = useState(null);
-
-  // 🟦 Última sesión realizada
   const [ultimaSesion, setUltimaSesion] = useState(null);
 
-  /* ============================================================
-      CARGAR DATOS DEL PACIENTE
-  ============================================================ */
   useEffect(() => {
     if (!clienteId) return;
 
@@ -43,9 +33,6 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
     loadPerfil();
   }, [clienteId]);
 
-  /* ============================================================
-      CARGAR PRÓXIMA CITA FUTURA
-  ============================================================ */
   useEffect(() => {
     async function loadProximaCita() {
       const now = new Date().toISOString();
@@ -65,9 +52,6 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
     loadProximaCita();
   }, [clienteId]);
 
-  /* ============================================================
-      CARGAR ÚLTIMA SESIÓN REALIZADA
-  ============================================================ */
   useEffect(() => {
     async function loadUltimaSesion() {
       const now = new Date().toISOString();
@@ -87,18 +71,12 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
     loadUltimaSesion();
   }, [clienteId]);
 
-  /* ============================================================
-      AUTOSCROLL
-  ============================================================ */
   useEffect(() => {
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [mensajes]);
 
-  /* ============================================================
-      ENVIAR MENSAJE
-  ============================================================ */
   const handleSend = async (e) => {
     e.preventDefault();
     if (!texto.trim()) return;
@@ -107,9 +85,6 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
     setTexto("");
   };
 
-  /* ============================================================
-      CREAR VIDEOLLAMADA
-  ============================================================ */
   const handleStartVideo = async () => {
     try {
       setCreandoVideo(true);
@@ -124,8 +99,7 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
 
       setVideoUrl(data.url);
       setVideoOpen(true);
-
-      await enviarMensaje(`📹 Videollamada disponible: ${data.url}`);
+      await enviarMensaje(`Videollamada disponible: ${data.url}`);
     } catch {
       alert("Error inesperado creando videollamada.");
     } finally {
@@ -133,55 +107,45 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
     }
   };
 
-  /* ============================================================
-      DETECTAR LINKS DE VIDEOLLAMADA
-  ============================================================ */
-  const renderContenido = (texto) => {
-    if (!texto || typeof texto !== "string") return texto;
+  const renderContenido = (contenido) => {
+    if (!contenido || typeof contenido !== "string") return contenido;
 
     const urlRegex = /(https?:\/\/[^\s]+)/gi;
 
-    if (!urlRegex.test(texto)) return <p>{texto}</p>;
+    if (!urlRegex.test(contenido)) return <p>{contenido}</p>;
 
     return (
       <p>
-        {texto.split(urlRegex).map((part, i) =>
+        {contenido.split(urlRegex).map((part, index) =>
           urlRegex.test(part) ? (
             <a
-              key={i}
+              key={index}
               href={part}
               target="_blank"
               rel="noreferrer"
-              className="underline font-semibold text-white"
+              className="font-semibold text-[#0A4D68] underline decoration-[#A4BE7B] underline-offset-4"
             >
               Unirse a la videollamada
             </a>
           ) : (
-            <span key={i}>{part}</span>
+            <span key={index}>{part}</span>
           )
         )}
       </p>
     );
   };
 
-  /* ============================================================
-      UI PRINCIPAL
-  ============================================================ */
+  const infoCardClassName =
+    "rounded-2xl border border-white/20 bg-white/10 p-3 text-sm text-white/92 backdrop-blur-sm";
+
   return (
-    <div className="h-full flex flex-col bg-white rounded-xl overflow-hidden shadow">
-
-      {/* ============================================================
-          HEADER — DATOS DEL PACIENTE + CITAS
-      ============================================================ */}
-      <div className="px-5 py-4 bg-gradient-to-r from-blue-700 via-purple-700 to-pink-600 text-white shadow">
-
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#d4e5e2] bg-white shadow-[0_18px_40px_rgba(10,77,104,0.10)]">
+      <div className="bg-gradient-to-r from-[#0A4D68] via-[#088395] to-[#61764B] px-5 py-4 text-white shadow">
         <div className="flex flex-col gap-2">
-
-          {/* DATOS GENERALES */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shadow-inner">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/12 shadow-inner">
               <svg
-                className="w-7 h-7 text-white"
+                className="h-7 w-7 text-white"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -199,18 +163,16 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
               <p className="text-xl font-semibold leading-tight">
                 {datosPaciente?.nombre_completo || "Paciente"}
               </p>
-              <p className="text-sm opacity-90">{datosPaciente?.email}</p>
+              <p className="text-sm text-white/84">{datosPaciente?.email}</p>
               {datosPaciente?.telefono && (
-                <p className="text-sm opacity-80">📞 {datosPaciente.telefono}</p>
+                <p className="text-sm text-white/78">Telefono: {datosPaciente.telefono}</p>
               )}
             </div>
           </div>
 
-          {/* 🟢 PRÓXIMA CITA */}
           {proximaCita && (
-            <div className="mt-2 bg-white/10 rounded-lg p-3 text-sm backdrop-blur-sm border border-white/20">
-              <p className="font-semibold">🟢 Próxima cita</p>
-
+            <div className={infoCardClassName}>
+              <p className="font-semibold">Proxima cita</p>
               <p>
                 {new Date(proximaCita.hora_inicio).toLocaleDateString("es-ES", {
                   day: "2-digit",
@@ -218,26 +180,21 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
                   year: "numeric",
                 })}
               </p>
-
               <p className="capitalize">
-                Estado:{" "}
-                <span className="font-medium">{proximaCita.estado_cita}</span>
+                Estado: <span className="font-medium">{proximaCita.estado_cita}</span>
               </p>
-
               <p>
                 Servicio:{" "}
                 <span className="font-medium">
-                  {proximaCita.servicios?.nombre || "—"}
+                  {proximaCita.servicios?.nombre || "-"}
                 </span>
               </p>
             </div>
           )}
 
-          {/* 📘 ÚLTIMA SESIÓN */}
           {ultimaSesion && (
-            <div className="mt-2 bg-white/10 rounded-lg p-3 text-sm backdrop-blur-sm border border-white/20">
-              <p className="font-semibold">📘 Última sesión</p>
-
+            <div className={infoCardClassName}>
+              <p className="font-semibold">Ultima sesion</p>
               <p>
                 {new Date(ultimaSesion.hora_inicio).toLocaleDateString("es-ES", {
                   day: "2-digit",
@@ -245,55 +202,46 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
                   year: "numeric",
                 })}
               </p>
-
               <p className="capitalize">
-                Estado:{" "}
-                <span className="font-medium">{ultimaSesion.estado_cita}</span>
+                Estado: <span className="font-medium">{ultimaSesion.estado_cita}</span>
               </p>
-
               <p>
                 Servicio:{" "}
                 <span className="font-medium">
-                  {ultimaSesion.servicios?.nombre || "—"}
+                  {ultimaSesion.servicios?.nombre || "-"}
                 </span>
               </p>
             </div>
           )}
-
         </div>
 
-        {/* BOTÓN VIDEOLLAMADA */}
         <div className="mt-4 flex justify-end">
           <button
             onClick={handleStartVideo}
             disabled={creandoVideo}
-            className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-semibold border border-white/40 disabled:opacity-60"
+            className="rounded-2xl border border-white/25 bg-white/12 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/18 disabled:opacity-60"
           >
-            📹 {creandoVideo ? "Creando sala..." : "Videollamada"}
+            {creandoVideo ? "Creando sala..." : "Videollamada"}
           </button>
         </div>
       </div>
 
-      {/* ============================================================
-          MENSAJES
-      ============================================================ */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-3 bg-gray-50">
-        {mensajes.map((m) => {
-          const mio = m.id_remitente === userId;
+      <div className="flex-1 space-y-3 overflow-y-auto bg-[linear-gradient(180deg,rgba(247,251,250,0.96),rgba(239,247,245,0.96))] p-6">
+        {mensajes.map((mensaje) => {
+          const mio = mensaje.id_remitente === userId;
 
           return (
-            <div key={m.id} className={`flex ${mio ? "justify-end" : "justify-start"}`}>
+            <div key={mensaje.id} className={`flex ${mio ? "justify-end" : "justify-start"}`}>
               <div
-                className={`px-4 py-2 rounded-xl max-w-[70%] shadow text-sm ${
+                className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm shadow ${
                   mio
-                    ? "bg-blue-600 text-white"
-                    : "bg-white border border-gray-300"
+                    ? "border border-[#0A4D68]/10 bg-gradient-to-r from-[#0A4D68] to-[#088395] text-white"
+                    : "border border-[#d4e5e2] bg-white text-[#245953]"
                 }`}
               >
-                {renderContenido(m.contenido)}
-
-                <p className="text-[10px] opacity-50 mt-1">
-                  {new Date(m.creado_en).toLocaleTimeString("es-ES", {
+                {renderContenido(mensaje.contenido)}
+                <p className={`mt-2 text-[10px] ${mio ? "text-white/68" : "text-[#6b8b92]"}`}>
+                  {new Date(mensaje.creado_en).toLocaleTimeString("es-ES", {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
@@ -306,24 +254,18 @@ export default function ChatWindow({ clienteId, profesionalId, userId }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* ============================================================
-          INPUT
-      ============================================================ */}
-      <form onSubmit={handleSend} className="p-4 border-t flex gap-2 bg-white">
+      <form onSubmit={handleSend} className="flex gap-3 border-t border-[#d8e7e5] bg-white p-4">
         <input
-          className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
-          placeholder="Escribe un mensaje…"
+          className="flex-1 rounded-xl border border-[#c7dddb] bg-[#f8fbfa] px-4 py-3 text-sm text-[#0A4D68] outline-none transition placeholder:text-[#6b8b92] focus:border-[#088395] focus:ring-2 focus:ring-[#088395]/20"
+          placeholder="Escribe un mensaje..."
           value={texto}
           onChange={(e) => setTexto(e.target.value)}
         />
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
+        <button type="submit" className="bv-btn bv-btn-primary bv-btn-lg">
           Enviar
         </button>
       </form>
 
-      {/* ============================================================
-          MODAL VIDEOLLAMADA
-      ============================================================ */}
       {videoOpen && videoUrl && (
         <VideoCall roomUrl={videoUrl} onClose={() => setVideoOpen(false)} />
       )}

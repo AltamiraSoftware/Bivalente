@@ -1,18 +1,15 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addDays, startOfWeek, addWeeks, format } from "date-fns";
+import { addDays, addWeeks, format, startOfWeek } from "date-fns";
 import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@/hooks/useUser";
 import {
-  CheckCircleIcon,
   CalendarDaysIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/24/solid";
 
-/* ============================================================
-   1. FETCH — leer disponibilidad desde Supabase
-   ============================================================ */
 async function fetchFranjasDB(userId) {
   if (!userId) return [];
 
@@ -30,33 +27,20 @@ async function fetchFranjasDB(userId) {
   return data || [];
 }
 
-/* ============================================================
-   COMPONENTE PRINCIPAL
-   ============================================================ */
 export default function DisponibilidadPage() {
   const { user, isLoading } = useUser();
   const router = useRouter();
 
   const [franjas, setFranjas] = useState([]);
   const [loadingFranjas, setLoadingFranjas] = useState(true);
-
-  // Bloques marcados por el usuario en la UI (sin guardar aún)
   const [bloquesUsuario, setBloquesUsuario] = useState({});
-
   const [mesSeleccionado, setMesSeleccionado] = useState(() => {
     const hoy = new Date();
-    return `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}`;
+    return `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}`;
   });
-
-  // Semana base: siempre lunes
   const [semanaBase, setSemanaBase] = useState(
     startOfWeek(new Date(), { weekStartsOn: 1 })
   );
-
-  // Toasts de feedback
   const [feedbackGuardar, setFeedbackGuardar] = useState(false);
   const [feedbackRestablecer, setFeedbackRestablecer] = useState(false);
   const [feedbackBorrarSemana, setFeedbackBorrarSemana] = useState(false);
@@ -64,18 +48,14 @@ export default function DisponibilidadPage() {
   const diasSemana = [
     "Lunes",
     "Martes",
-    "Miércoles",
+    "Miercoles",
     "Jueves",
     "Viernes",
-    "Sábado",
+    "Sabado",
     "Domingo",
   ];
+  const horas = Array.from({ length: 13 }, (_, i) => 8 + i);
 
-  const horas = Array.from({ length: 13 }, (_, i) => 8 + i); // 8:00–20:00
-
-  /* ============================================================
-     2. CARGA INICIAL + PROTECCIÓN DE RUTA
-     ============================================================ */
   useEffect(() => {
     if (isLoading) return;
     if (!user) {
@@ -99,23 +79,15 @@ export default function DisponibilidadPage() {
     cargar();
   }, [isLoading, user, router]);
 
-  /* ============================================================
-     3. ESTADO DERIVADO — franjas reales → cuadrícula
-     ------------------------------------------------------------
-     Creamos un mapa de claves:
-       key = `${año}-${mes}-${día}-${dow}-${hora}`
-     donde dow = 0–6 (getDay()).
-     ============================================================ */
   const bloquesReales = useMemo(() => {
     const nuevos = {};
 
-    franjas.forEach((f) => {
-      const ini = new Date(f.hora_inicio);
-      const fin = new Date(f.hora_fin);
+    franjas.forEach((franja) => {
+      const ini = new Date(franja.hora_inicio);
+      const fin = new Date(franja.hora_fin);
 
-      // Solo franjas dentro de la semana visible
       if (ini >= semanaBase && ini < addDays(semanaBase, 7)) {
-        const dow = ini.getDay(); // 0–6
+        const dow = ini.getDay();
         for (let h = ini.getHours(); h < fin.getHours(); h++) {
           const key = `${ini.getFullYear()}-${ini.getMonth()}-${ini.getDate()}-${dow}-${h}`;
           nuevos[key] = true;
@@ -126,9 +98,6 @@ export default function DisponibilidadPage() {
     return nuevos;
   }, [franjas, semanaBase]);
 
-  /* ============================================================
-     4. BLOQUES FINALES → mezcla BD + selección del usuario
-     ============================================================ */
   const bloques = useMemo(() => {
     const resultado = {};
     const keys = new Set([
@@ -136,20 +105,17 @@ export default function DisponibilidadPage() {
       ...Object.keys(bloquesUsuario),
     ]);
 
-    keys.forEach((k) => {
-      resultado[k] =
-        bloquesUsuario[k] !== undefined ? bloquesUsuario[k] : bloquesReales[k];
+    keys.forEach((key) => {
+      resultado[key] =
+        bloquesUsuario[key] !== undefined ? bloquesUsuario[key] : bloquesReales[key];
     });
 
     return resultado;
   }, [bloquesReales, bloquesUsuario]);
 
-  /* ============================================================
-     5. TOGGLE CELDA
-     ============================================================ */
   function toggleBloque(indiceDia, hora) {
-    const fecha = addDays(semanaBase, indiceDia); // 0 = lunes, 6 = domingo
-    const dow = fecha.getDay(); // 0–6
+    const fecha = addDays(semanaBase, indiceDia);
+    const dow = fecha.getDay();
     const key = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}-${dow}-${hora}`;
 
     setBloquesUsuario((prev) => ({
@@ -158,11 +124,8 @@ export default function DisponibilidadPage() {
     }));
   }
 
-  /* ============================================================
-     6. CONTROLES SEMANALES
-     ============================================================ */
   function cambiarSemana(offset) {
-    setSemanaBase((p) => addWeeks(p, offset));
+    setSemanaBase((prev) => addWeeks(prev, offset));
     setBloquesUsuario({});
   }
 
@@ -171,23 +134,15 @@ export default function DisponibilidadPage() {
     setBloquesUsuario({});
   }
 
-  /* ============================================================
-     7. GUARDAR SEMANA — NO toca franjas con cita
-     ============================================================ */
   async function guardarBloques() {
     if (!user) return;
 
-    // 1) Borrar solo franjas SIN cita de esta semana
     const semanaIdsSinCita = franjas
-      .filter((f) => {
-        const ini = new Date(f.hora_inicio);
-        return (
-          ini >= semanaBase &&
-          ini < addDays(semanaBase, 7) &&
-          !f.tiene_cita
-        );
+      .filter((franja) => {
+        const ini = new Date(franja.hora_inicio);
+        return ini >= semanaBase && ini < addDays(semanaBase, 7) && !franja.tiene_cita;
       })
-      .map((f) => f.id);
+      .map((franja) => franja.id);
 
     if (semanaIdsSinCita.length) {
       const { error: delError } = await supabase
@@ -200,7 +155,6 @@ export default function DisponibilidadPage() {
       }
     }
 
-    // 2) Insertar nuevas franjas según bloques marcados
     const nuevas = [];
 
     for (let i = 0; i < 7; i++) {
@@ -211,15 +165,14 @@ export default function DisponibilidadPage() {
         const key = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}-${dow}-${h}`;
         if (!bloques[key]) continue;
 
-        // No crear franja donde exista una franja con cita (seguridad extra)
-        const existeConCita = franjas.some((f) => {
-          const ini = new Date(f.hora_inicio);
+        const existeConCita = franjas.some((franja) => {
+          const ini = new Date(franja.hora_inicio);
           return (
             ini.getFullYear() === fecha.getFullYear() &&
             ini.getMonth() === fecha.getMonth() &&
             ini.getDate() === fecha.getDate() &&
             ini.getHours() === h &&
-            f.tiene_cita
+            franja.tiene_cita
           );
         });
 
@@ -254,27 +207,19 @@ export default function DisponibilidadPage() {
     const data = await fetchFranjasDB(user.id);
     setFranjas(data);
     setBloquesUsuario({});
-
     setFeedbackGuardar(true);
     setTimeout(() => setFeedbackGuardar(false), 1500);
   }
 
-  /* ============================================================
-     8. BORRAR SEMANA — NO toca franjas con cita
-     ============================================================ */
   async function borrarSemanaCompleta() {
     if (!user) return;
 
     const semanaIdsSinCita = franjas
-      .filter((f) => {
-        const ini = new Date(f.hora_inicio);
-        return (
-          ini >= semanaBase &&
-          ini < addDays(semanaBase, 7) &&
-          !f.tiene_cita
-        );
+      .filter((franja) => {
+        const ini = new Date(franja.hora_inicio);
+        return ini >= semanaBase && ini < addDays(semanaBase, 7) && !franja.tiene_cita;
       })
-      .map((f) => f.id);
+      .map((franja) => franja.id);
 
     if (semanaIdsSinCita.length) {
       const { error: delError } = await supabase
@@ -290,29 +235,24 @@ export default function DisponibilidadPage() {
     setBloquesUsuario({});
     const data = await fetchFranjasDB(user.id);
     setFranjas(data);
-
     setFeedbackBorrarSemana(true);
     setTimeout(() => setFeedbackBorrarSemana(false), 1500);
   }
 
-  /* ============================================================
-     9. RESTABLECER MES — NO toca franjas con cita
-     ============================================================ */
   async function restablecerHorarioEstandar() {
     if (!user) return;
 
     const [anio, mes] = mesSeleccionado.split("-").map(Number);
-    const ultimoDia = new Date(anio, mes, 0); // último día del mes
+    const ultimoDia = new Date(anio, mes, 0);
 
-    // Borrar solo las franjas SIN cita del mes
     const borrarIds = franjas
-      .filter((f) => {
-        const ini = new Date(f.hora_inicio);
+      .filter((franja) => {
+        const ini = new Date(franja.hora_inicio);
         const sameMonth =
           ini.getFullYear() === anio && ini.getMonth() === mes - 1;
-        return sameMonth && !f.tiene_cita;
+        return sameMonth && !franja.tiene_cita;
       })
-      .map((f) => f.id);
+      .map((franja) => franja.id);
 
     if (borrarIds.length) {
       const { error: delError } = await supabase
@@ -327,21 +267,20 @@ export default function DisponibilidadPage() {
 
     const nuevas = [];
 
-    // Lunes–viernes, 10:00–18:00
     for (let d = 1; d <= ultimoDia.getDate(); d++) {
       const dia = new Date(anio, mes - 1, d);
-      const dow = dia.getDay(); // 0–6
+      const dow = dia.getDay();
 
       if (dow >= 1 && dow <= 5) {
         for (let h = 10; h < 18; h++) {
-          const existeConCita = franjas.some((f) => {
-            const ini = new Date(f.hora_inicio);
+          const existeConCita = franjas.some((franja) => {
+            const ini = new Date(franja.hora_inicio);
             return (
               ini.getFullYear() === dia.getFullYear() &&
               ini.getMonth() === dia.getMonth() &&
               ini.getDate() === dia.getDate() &&
               ini.getHours() === h &&
-              f.tiene_cita
+              franja.tiene_cita
             );
           });
 
@@ -370,20 +309,16 @@ export default function DisponibilidadPage() {
         .insert(nuevas);
 
       if (insError) {
-        console.error("Error insertando horario estándar:", insError);
+        console.error("Error insertando horario estandar:", insError);
       }
     }
 
     const data = await fetchFranjasDB(user.id);
     setFranjas(data);
-
     setFeedbackRestablecer(true);
     setTimeout(() => setFeedbackRestablecer(false), 1500);
   }
 
-  /* ============================================================
-     10. REALTIME
-     ============================================================ */
   useEffect(() => {
     if (!user) return;
 
@@ -404,211 +339,175 @@ export default function DisponibilidadPage() {
     };
   }, [user]);
 
-  /* ============================================================
-     11. UI FINAL
-     ============================================================ */
   if (isLoading || !user || loadingFranjas) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-        <p className="text-gray-600">Cargando disponibilidad…</p>
+      <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(164,190,123,0.18),_transparent_28%),linear-gradient(180deg,_#f6faf8_0%,_#edf5f3_100%)]">
+        <p className="text-sm font-medium text-[#245953]">Cargando disponibilidad...</p>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-6 flex flex-col items-center">
-      {/* TOASTS */}
+    <main className="flex min-h-screen flex-col items-center bg-[radial-gradient(circle_at_top_left,_rgba(164,190,123,0.18),_transparent_28%),radial-gradient(circle_at_85%_18%,_rgba(8,131,149,0.14),_transparent_24%),linear-gradient(180deg,_#f6faf8_0%,_#edf5f3_100%)] p-6">
       {feedbackGuardar && (
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 bg-white border border-green-200 shadow-md px-6 py-3 rounded-xl z-50 flex items-center gap-2">
-          <CheckCircleIcon className="w-6 h-6 text-green-500" />
-          <span className="text-green-700 font-semibold">
-            ¡Disponibilidad guardada!
-          </span>
+        <div className="fixed left-1/2 top-6 z-50 flex -translate-x-1/2 items-center gap-2 rounded-2xl border border-[#bfd9c7] bg-white px-6 py-3 shadow-[0_18px_40px_rgba(10,77,104,0.10)]">
+          <CheckCircleIcon className="h-6 w-6 text-[#256948]" />
+          <span className="font-semibold text-[#256948]">Disponibilidad guardada.</span>
         </div>
       )}
 
       {feedbackRestablecer && (
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 bg-white border border-blue-200 shadow-md px-6 py-3 rounded-xl z-50 flex items-center gap-2">
-          <CheckCircleIcon className="w-6 h-6 text-blue-500" />
-          <span className="text-blue-700 font-semibold">
-            ¡Horario estándar aplicado al mes!
-          </span>
+        <div className="fixed left-1/2 top-6 z-50 flex -translate-x-1/2 items-center gap-2 rounded-2xl border border-[#b9d6d2] bg-white px-6 py-3 shadow-[0_18px_40px_rgba(10,77,104,0.10)]">
+          <CheckCircleIcon className="h-6 w-6 text-[#0A4D68]" />
+          <span className="font-semibold text-[#0A4D68]">Horario estandar aplicado al mes.</span>
         </div>
       )}
 
       {feedbackBorrarSemana && (
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 bg-white border border-red-200 shadow-md px-6 py-3 rounded-xl z-50 flex items-center gap-2">
-          <CheckCircleIcon className="w-6 h-6 text-red-500" />
-          <span className="text-red-700 font-semibold">
-            Semana borrada correctamente (solo franjas sin cita).
+        <div className="fixed left-1/2 top-6 z-50 flex -translate-x-1/2 items-center gap-2 rounded-2xl border border-[#f2c3bf] bg-white px-6 py-3 shadow-[0_18px_40px_rgba(10,77,104,0.10)]">
+          <CheckCircleIcon className="h-6 w-6 text-[#9b2c2c]" />
+          <span className="font-semibold text-[#9b2c2c]">
+            Semana borrada correctamente. Solo se eliminaron franjas sin cita.
           </span>
         </div>
       )}
 
-      {/* TARJETA PRINCIPAL */}
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden mb-10">
-        {/* ENCABEZADO CORPORATIVO */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 p-8">
-          <h2 className="text-3xl font-extrabold text-white flex items-center gap-3">
-            <CalendarDaysIcon className="w-8 h-8 !text-white drop-shadow" />
+      <div className="mb-10 w-full max-w-5xl overflow-hidden rounded-[30px] border border-white/70 bg-white shadow-[0_28px_70px_rgba(10,77,104,0.14)]">
+        <div className="bg-gradient-to-r from-[#0A4D68] via-[#088395] to-[#61764B] p-8 text-white">
+          <h2 className="flex items-center gap-3 text-3xl font-extrabold">
+            <CalendarDaysIcon className="h-8 w-8 text-white" />
             Disponibilidad semanal
           </h2>
-          <p className="text-white/80 text-sm mt-1">
-            Marca las horas en las que estás disponible para tus pacientes. Las
-            franjas con cita aparecen en rojo y no se pueden modificar.
+          <p className="mt-2 max-w-3xl text-sm text-white/82">
+            Marca las horas disponibles para tus pacientes. Las franjas con cita se mantienen protegidas y no pueden modificarse.
           </p>
         </div>
 
-        {/* INPUT MES + BOTÓN RESTABLECER */}
-        <div className="px-8 pb-4 pt-6 flex items-center justify-center flex-wrap gap-4">
-          <input
-            type="month"
-            value={mesSeleccionado}
-            onChange={(e) => setMesSeleccionado(e.target.value)}
-            className="px-4 py-2 rounded-md shadow border border-purple-300 bg-white text-purple-700 font-semibold"
-          />
+        <div className="space-y-6 bg-[linear-gradient(180deg,rgba(247,251,250,0.96),rgba(239,247,245,0.96))] px-8 py-6">
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <input
+              type="month"
+              value={mesSeleccionado}
+              onChange={(e) => setMesSeleccionado(e.target.value)}
+              className="rounded-xl border border-[#c7dddb] bg-white px-4 py-3 text-sm font-semibold text-[#0A4D68] shadow-[0_12px_30px_rgba(10,77,104,0.08)] outline-none focus:border-[#088395] focus:ring-2 focus:ring-[#088395]/20"
+            />
 
-          <button
-            onClick={restablecerHorarioEstandar}
-            className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow hover:opacity-90 transition"
-          >
-            Restablecer mes estándar
-          </button>
-        </div>
-
-        {/* NAVEGACIÓN DE SEMANA */}
-        <div className="px-8 py-4 flex items-center justify-center gap-4">
-          <button
-            onClick={() => cambiarSemana(-1)}
-            className="px-4 py-2 rounded-lg bg-white border shadow text-purple-600 hover:bg-purple-50 transition"
-          >
-            ← Semana anterior
-          </button>
-
-          <button
-            onClick={irHoy}
-            className="px-4 py-2 rounded-lg bg-purple-600 text-white shadow hover:bg-purple-700 transition"
-          >
-            Hoy
-          </button>
-
-          <button
-            onClick={() => cambiarSemana(1)}
-            className="px-4 py-2 rounded-lg bg-white border shadow text-purple-600 hover:bg-purple-50 transition"
-          >
-            Semana siguiente →
-          </button>
-        </div>
-
-        {/* RANGO DE FECHAS */}
-        <p className="text-center text-gray-600 font-semibold mb-2">
-          {format(semanaBase, "d MMM yyyy")} –{" "}
-          {format(addDays(semanaBase, 6), "d MMM yyyy")}
-        </p>
-
-        {/* LEYENDA */}
-        <div className="flex items-center justify-center gap-6 mb-4 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-            <span>Disponible</span>
+            <button onClick={restablecerHorarioEstandar} className="bv-btn bv-btn-primary bv-btn-lg">
+              Restablecer mes estandar
+            </button>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded bg-gray-200" />
-            <span>No disponible</span>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button onClick={() => cambiarSemana(-1)} className="bv-btn bv-btn-ghost bv-btn-lg">
+              Semana anterior
+            </button>
+
+            <button
+              onClick={irHoy}
+              className="rounded-2xl border border-[#b9d6d2] bg-[#e5f4f2] px-5 py-3 text-sm font-semibold text-[#0A4D68] shadow-sm transition hover:bg-[#d8edeb]"
+            >
+              Hoy
+            </button>
+
+            <button onClick={() => cambiarSemana(1)} className="bv-btn bv-btn-ghost bv-btn-lg">
+              Semana siguiente
+            </button>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded bg-red-300" />
-            <span>Franja con cita (no modificable)</span>
+
+          <p className="text-center text-sm font-semibold text-[#245953]">
+            {format(semanaBase, "d MMM yyyy")} - {format(addDays(semanaBase, 6), "d MMM yyyy")}
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#245953]">
+            <div className="flex items-center gap-2">
+              <span className="h-4 w-4 rounded bg-gradient-to-r from-[#0A4D68] to-[#088395]" />
+              <span>Disponible</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-4 w-4 rounded bg-[#e5efee]" />
+              <span>No disponible</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-4 w-4 rounded bg-[#f0b7b1]" />
+              <span>Franja con cita</span>
+            </div>
           </div>
-        </div>
 
-        {/* TABLA */}
-        <div className="px-8 pb-8 flex flex-col items-center">
-          <div className="overflow-x-auto">
-            <table className="border-separate border-spacing-1 mx-auto">
-              <thead>
-                <tr>
-                  <th />
-                  {diasSemana.map((label, index) => (
-                    <th
-                      key={index}
-                      className="text-center text-purple-700 font-semibold w-16 py-2"
-                    >
-                      {label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {horas.map((h) => (
-                  <tr key={h}>
-                    <td className="text-right pr-3 text-purple-600 font-semibold">
-                      {h}:00
-                    </td>
-
-                    {diasSemana.map((_, indexDia) => {
-                      const fecha = addDays(semanaBase, indexDia);
-                      const dow = fecha.getDay();
-                      const key = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}-${dow}-${h}`;
-
-                      const franja = franjas.find((f) => {
-                        const ini = new Date(f.hora_inicio);
-                        return (
-                          ini.getFullYear() === fecha.getFullYear() &&
-                          ini.getMonth() === fecha.getMonth() &&
-                          ini.getDate() === fecha.getDate() &&
-                          ini.getHours() === h
-                        );
-                      });
-
-                      const activo = !!bloques[key];
-                      const tieneCita = franja?.tiene_cita === true;
-
-                      return (
-                        <td
-                          key={key}
-                          onClick={() =>
-                            !tieneCita && toggleBloque(indexDia, h)
-                          }
-                          className={`w-16 h-10 rounded-lg cursor-pointer transition
-                            ${
-                              tieneCita
-                                ? "bg-red-300 text-white cursor-not-allowed opacity-80"
-                                : activo
-                                ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-md"
-                                : "bg-gray-100 hover:bg-gray-200"
-                            }
-                          `}
-                          title={
-                            tieneCita
-                              ? "Franja con cita — no se puede modificar"
-                              : ""
-                          }
-                        />
-                      );
-                    })}
+          <div className="flex flex-col items-center pb-2">
+            <div className="overflow-x-auto rounded-[26px] border border-[#d4e5e2] bg-white/92 p-4 shadow-[0_18px_40px_rgba(10,77,104,0.08)]">
+              <table className="mx-auto border-separate border-spacing-1.5">
+                <thead>
+                  <tr>
+                    <th />
+                    {diasSemana.map((label, index) => (
+                      <th
+                        key={index}
+                        className="w-20 py-2 text-center text-sm font-semibold text-[#0A4D68]"
+                      >
+                        {label}
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
 
-          {/* BOTONES */}
-          <div className="mt-8 flex justify-center gap-6">
-            <button
-              onClick={borrarSemanaCompleta}
-              className="px-6 py-2 rounded-lg bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition"
-            >
-              Borrar semana (sin citas)
-            </button>
+                <tbody>
+                  {horas.map((h) => (
+                    <tr key={h}>
+                      <td className="pr-3 text-right text-sm font-semibold text-[#245953]">
+                        {h}:00
+                      </td>
 
-            <button
-              onClick={guardarBloques}
-              className="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition"
-            >
-              Guardar disponibilidad
-            </button>
+                      {diasSemana.map((_, indexDia) => {
+                        const fecha = addDays(semanaBase, indexDia);
+                        const dow = fecha.getDay();
+                        const key = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}-${dow}-${h}`;
+
+                        const franja = franjas.find((item) => {
+                          const ini = new Date(item.hora_inicio);
+                          return (
+                            ini.getFullYear() === fecha.getFullYear() &&
+                            ini.getMonth() === fecha.getMonth() &&
+                            ini.getDate() === fecha.getDate() &&
+                            ini.getHours() === h
+                          );
+                        });
+
+                        const activo = !!bloques[key];
+                        const tieneCita = franja?.tiene_cita === true;
+
+                        return (
+                          <td
+                            key={key}
+                            onClick={() => !tieneCita && toggleBloque(indexDia, h)}
+                            className={`h-10 w-20 rounded-xl transition ${
+                              tieneCita
+                                ? "cursor-not-allowed bg-[#f0b7b1] opacity-90"
+                                : activo
+                                ? "cursor-pointer bg-gradient-to-r from-[#0A4D68] to-[#088395] shadow-md"
+                                : "cursor-pointer bg-[#eef4f3] hover:bg-[#dde8e6]"
+                            }`}
+                            title={tieneCita ? "Franja con cita, no se puede modificar" : ""}
+                          />
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <button
+                onClick={borrarSemanaCompleta}
+                className="rounded-2xl border border-[#f2c3bf] bg-[#fdeceb] px-6 py-3 text-sm font-semibold text-[#9b2c2c] shadow-sm transition hover:bg-[#f9ddda]"
+              >
+                Borrar semana sin citas
+              </button>
+
+              <button onClick={guardarBloques} className="bv-btn bv-btn-primary bv-btn-lg">
+                Guardar disponibilidad
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -8,6 +8,11 @@ export default function Header({ openLogin, openRegister }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const authPrimaryClassName =
+    "rounded-xl border border-[#e4efc7] bg-[#c6db8f] px-4 py-2.5 font-semibold text-[#062f40] shadow-[0_14px_30px_rgba(10,77,104,0.22)] transition hover:bg-[#d3e4a6]";
+  const authSecondaryClassName =
+    "rounded-xl border border-white/24 bg-white/14 px-4 py-2.5 font-semibold text-white shadow-sm transition hover:bg-white/20";
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -15,7 +20,6 @@ export default function Header({ openLogin, openRegister }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Cierra menú móvil si cambias a desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768) setOpen(false);
@@ -27,99 +31,72 @@ export default function Header({ openLogin, openRegister }) {
   return (
     <header
       className={[
-        "fixed top-0 w-full z-50 safe-area-inset-top transition-all duration-300",
+        "fixed top-0 z-50 w-full safe-area-inset-top transition-all duration-300",
         scrolled
-          ? "bg-[#0A4D68]/75 backdrop-blur-lg shadow-sm border-b border-white/10"
+          ? "border-b border-white/10 bg-[#0A4D68]/82 shadow-sm backdrop-blur-lg"
           : "bg-transparent",
       ].join(" ")}
     >
-      {/* DESKTOP + MOBILE TOP BAR */}
-      <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between min-h-[56px] sm:min-h-0">
-        {/* LOGO + BRAND */}
+      <div className="container mx-auto flex min-h-[56px] items-center justify-between px-4 py-3 sm:min-h-0 sm:px-6 sm:py-4">
         <Link
           href="/"
-          className="flex items-center gap-1 sm:gap-2 shrink-0"
+          className="flex shrink-0 items-center gap-1 sm:gap-2"
           onClick={() => setOpen(false)}
         >
           <Image
             src="/ChatGPT6.png"
-            alt="Bivalente-header"
+            alt="Bivalente header"
             width={850}
             height={77}
             priority
-            className="w-[102px] sm:w-[116px] h-auto"
+            className="h-auto w-[102px] sm:w-[116px]"
           />
 
-<span
-  className={[
-    "text-xl sm:text-2xl font-extrabold hidden sm:block transition-colors -ml-5 -mt-2",
-    "text-[#fff]",
-  ].join(" ")}
->
-  Clínica Bivalente
-</span>
-
-
+          <span className="hidden -ml-5 -mt-2 text-xl font-extrabold text-white transition-colors sm:block sm:text-2xl">
+            Clinica Bivalente
+          </span>
         </Link>
 
-        {/* NAV DESKTOP */}
         <nav
           className={[
-            "hidden md:flex items-center gap-8 transition-colors",
+            "hidden items-center gap-8 transition-colors md:flex",
             scrolled ? "text-white/90" : "text-white",
           ].join(" ")}
         >
-          <Link
-            href="/psicologia"
-            className="font-medium hover:opacity-90 transition"
-          >
-            Psicología
+          <Link href="/psicologia" className="font-medium transition hover:opacity-90">
+            Psicologia
           </Link>
 
-          <Link
-            href="/fisioterapia"
-            className="font-medium hover:opacity-90 transition"
-          >
+          <Link href="/fisioterapia" className="font-medium transition hover:opacity-90">
             Fisioterapia
           </Link>
-          <Link
-            href="#contacto"
-            className="font-medium hover:opacity-90 transition"
-          >
+
+          <Link href="#contacto" className="font-medium transition hover:opacity-90">
             Contacto
           </Link>
-          <button
-            onClick={openLogin}
-            className={[
-              "rounded-xl px-4 py-2.5 font-semibold transition shadow-sm",
-              "bg-white/10 border border-white/20 text-white hover:bg-white/15",
-            ].join(" ")}
-          >
-            Iniciar sesión
+
+          <button onClick={openLogin} className={authSecondaryClassName}>
+            Iniciar sesion
           </button>
 
-          <button
-            onClick={openRegister}
-            className="rounded-xl px-4 py-2.5 font-semibold transition shadow-md bg-[#A4BE7B] text-[#0A4D68] hover:opacity-95 border border-white/10"
-          >
+          <button onClick={openRegister} className={authPrimaryClassName}>
             Reservar / Registrarse
           </button>
         </nav>
 
-        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setOpen(!open)}
           className={[
-            "md:hidden p-3 -m-2 rounded-xl transition touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center",
+            "flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl p-3 transition touch-manipulation md:hidden",
             scrolled
               ? "text-white/90 hover:bg-white/10 active:bg-white/15"
               : "text-white hover:bg-white/10 active:bg-white/15",
           ].join(" ")}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? "Cerrar menu" : "Abrir menu"}
           aria-expanded={open}
         >
           <svg
-            className="w-6 h-6"
+            className="h-6 w-6"
             stroke="currentColor"
             fill="none"
             strokeWidth="2"
@@ -133,40 +110,41 @@ export default function Header({ openLogin, openRegister }) {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
       {open && (
-        <div className="md:hidden px-4 sm:px-6 pb-6 pt-2 space-y-1 bg-[#0A4D68]/80 backdrop-blur-lg shadow-lg border-t border-white/10">
+        <div className="space-y-1 border-t border-white/10 bg-[#0A4D68]/80 px-4 pb-6 pt-2 shadow-lg backdrop-blur-lg md:hidden sm:px-6">
           <Link
-            href="#servicios"
-            className="block py-4 text-base font-medium text-white/95 border-b border-white/10"
+            href="/psicologia"
+            className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
             onClick={() => setOpen(false)}
           >
-            Psicología
+            Psicologia
           </Link>
 
           <Link
-            href="#contacto"
-            className="block py-4 text-base font-medium text-white/95 border-b border-white/10"
+            href="/fisioterapia"
+            className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
             onClick={() => setOpen(false)}
           >
             Fisioterapia
           </Link>
+
           <Link
             href="#contacto"
-            className="block py-4 text-base font-medium text-white/95 border-b border-white/10"
+            className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
             onClick={() => setOpen(false)}
           >
             Contacto
           </Link>
-          <div className="pt-4 flex flex-col gap-3">
+
+          <div className="flex flex-col gap-3 pt-4">
             <button
               onClick={() => {
                 openLogin();
                 setOpen(false);
               }}
-              className="w-full rounded-xl px-4 py-3.5 text-base min-h-[48px] font-semibold border border-white/20 text-white bg-white/10 hover:bg-white/15"
+              className={`min-h-[48px] w-full px-4 py-3.5 text-base ${authSecondaryClassName}`}
             >
-              Iniciar sesión
+              Iniciar sesion
             </button>
 
             <button
@@ -174,7 +152,7 @@ export default function Header({ openLogin, openRegister }) {
                 openRegister();
                 setOpen(false);
               }}
-              className="w-full rounded-xl px-4 py-3.5 text-base min-h-[48px] font-semibold bg-[#A4BE7B] text-[#0A4D68] hover:opacity-95 border border-white/10"
+              className={`min-h-[48px] w-full px-4 py-3.5 text-base ${authPrimaryClassName}`}
             >
               Reservar / Registrarse
             </button>

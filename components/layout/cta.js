@@ -2,53 +2,46 @@
 
 export default function CTA({ openLogin }) {
   return (
-    <section className="min-h-[92vh] relative py-20 md:py-28 bg-gradient-to-br from-[#f8faf5] to-[#A4BE7B] overflow-hidden">
-    {/* halos */}
-    <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#088395]/20 blur-3xl" />
-    <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#088395]/20 blur-3xl" />
+    <section className="relative min-h-[92vh] overflow-hidden bg-gradient-to-br from-[#f8faf5] to-[#A4BE7B] py-20 md:py-28">
+      <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#088395]/20 blur-3xl" />
+      <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#088395]/20 blur-3xl" />
 
-      <div className="container mx-auto max-w-4xl px-4 sm:px-6 relative z-10">
-        <div className="text-center space-y-5 sm:space-y-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0A4D68]! px-2">
-          Empieza a cuidarte hoy
+      <div className="relative z-10 container mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="space-y-5 text-center sm:space-y-8">
+          <h2 className="px-2 text-2xl font-extrabold text-[#0A4D68] sm:text-3xl md:text-4xl lg:text-5xl">
+            Empieza a cuidarte hoy
           </h2>
 
-          <p className="text-base sm:text-lg !text-[#0A4D68] max-w-2xl mx-auto px-2">
-            Utiliza nuestra aplicación web para reservar tu cita de psicología.
-            Solicita nuestro servicio de fisioterapia a domicilio.
+          <p className="mx-auto max-w-2xl px-2 text-base text-[#0A4D68] sm:text-lg">
+            Utiliza nuestra aplicacion web para reservar tu cita de psicologia. Solicita tambien nuestro servicio de fisioterapia a domicilio.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center pt-4 sm:pt-8">
-            <button
-              onClick={openLogin}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-semibold min-h-[48px] bg-[#0A4D68] text-white rounded-xl shadow-lg hover:opacity-90 transition"
-            >
-              Psicología
+          <div className="flex flex-col justify-center gap-3 pt-4 sm:flex-row sm:gap-5 sm:pt-8">
+            <button onClick={openLogin} className="bv-btn bv-btn-primary bv-btn-lg w-full sm:w-auto">
+              Psicologia
             </button>
-            <button
-              onClick={openLogin}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-semibold min-h-[48px] bg-[#0A4D68] text-white rounded-xl shadow-lg hover:opacity-90 transition"
-            >
+            <button onClick={openLogin} className="bv-btn bv-btn-ghost bv-btn-lg w-full sm:w-auto">
               Fisioterapia
             </button>
           </div>
 
-          {/* INFO BLOCKS - apilados en móvil */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-8 sm:pt-12 border-t border-gray-300/60">
+          <div className="grid grid-cols-1 gap-6 border-t border-gray-300/60 pt-8 sm:grid-cols-3 sm:gap-8 sm:pt-12">
             <div className="space-y-2 py-4 sm:py-0">
-              <TelephoneIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A4D68]! mx-auto mb-2" />
-              <p className="font-semibold text-base sm:text-lg text-gray-900 text-center">Teléfono</p>
-              <p className="text-gray-600 text-center text-sm sm:text-base">+34 </p>
+              <TelephoneIcon className="mx-auto mb-2 h-7 w-7 text-[#0A4D68] sm:h-8 sm:w-8" />
+              <p className="text-center text-base font-semibold text-gray-900 sm:text-lg">Telefono</p>
+              <p className="text-center text-sm text-gray-600 sm:text-base">+34</p>
             </div>
-            <div className="space-y-2 py-4 sm:py-0 border-t sm:border-t-0 border-gray-200/80">
-              <MailIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A4D68] mx-auto mb-2" />
-              <p className="font-semibold text-base sm:text-lg text-gray-900 text-center">Email</p>
-              <p className="text-gray-600 text-center text-sm sm:text-base break-all">clinicaBivakebte@gmail.com</p>
+            <div className="space-y-2 border-t border-gray-200/80 py-4 sm:border-t-0 sm:py-0">
+              <MailIcon className="mx-auto mb-2 h-7 w-7 text-[#0A4D68] sm:h-8 sm:w-8" />
+              <p className="text-center text-base font-semibold text-gray-900 sm:text-lg">Email</p>
+              <p className="break-all text-center text-sm text-gray-600 sm:text-base">
+                clinicabivalente@gmail.com
+              </p>
             </div>
-            <div className="space-y-2 py-4 sm:py-0 border-t sm:border-t-0 border-gray-200/80">
-              <LocationIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A4D68] mx-auto mb-2" />
-              <p className="font-semibold text-base sm:text-lg text-gray-900 text-center">Ubicación</p>
-              <p className="text-gray-600 text-center text-sm sm:text-base">Madrid, España</p>
+            <div className="space-y-2 border-t border-gray-200/80 py-4 sm:border-t-0 sm:py-0">
+              <LocationIcon className="mx-auto mb-2 h-7 w-7 text-[#0A4D68] sm:h-8 sm:w-8" />
+              <p className="text-center text-base font-semibold text-gray-900 sm:text-lg">Ubicacion</p>
+              <p className="text-center text-sm text-gray-600 sm:text-base">Madrid, Espana</p>
             </div>
           </div>
         </div>
@@ -56,10 +49,6 @@ export default function CTA({ openLogin }) {
     </section>
   );
 }
-
-/* =============================
-   ICONOS SVG LIGEROS & MODERNOS
-   ============================= */
 
 function TelephoneIcon({ className }) {
   return (

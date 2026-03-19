@@ -64,7 +64,7 @@ body {
 /* ✅ Headings por defecto oscuros (no blanco global)
    El blanco se aplica en hero con clases */
 h1, h2, h3, h4 {
-  color: var(--text-main);
+  color: white;
   line-height: 1.15;
 }
 

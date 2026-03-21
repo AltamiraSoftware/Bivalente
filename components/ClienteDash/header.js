@@ -30,13 +30,13 @@ export default function Header() {
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[linear-gradient(90deg,rgba(10,77,104,0.94)_0%,rgba(8,131,149,0.92)_48%,rgba(97,118,75,0.92)_100%)] shadow-[0_14px_30px_rgba(10,77,104,0.20)] backdrop-blur-lg">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/cliente" className="flex items-center gap-3">
-          <Image
-            src="/logo-psymanage.svg"
-            alt="PsyManage"
-            width={160}
-            height={40}
+        <Image
+            src="/ChatGPT6.png"
+            alt="Bivalente header"
+            width={850}
+            height={77}
             priority
-            className="h-10 w-auto"
+            className="h-auto w-[102px] sm:w-[116px]"
           />
         </Link>
 

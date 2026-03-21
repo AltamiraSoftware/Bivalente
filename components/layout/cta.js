@@ -8,7 +8,7 @@ export default function CTA({ openLogin }) {
 
       <div className="relative z-10 container mx-auto max-w-4xl px-4 sm:px-6">
         <div className="space-y-5 text-center sm:space-y-8">
-          <h2 className="px-2 text-2xl font-extrabold text-[#0A4D68] sm:text-3xl md:text-4xl lg:text-5xl">
+          <h2 className="px-2 text-2xl font-extrabold !text-[#0A4D68] sm:text-3xl md:text-4xl lg:text-5xl">
             Empieza a cuidarte hoy
           </h2>
 

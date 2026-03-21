@@ -17,7 +17,7 @@ export default function Footer() {
             priority
             className="w-[42px] sm:w-[56px] h-auto"
           />
-              <span className="text-xl font-bold text-[#A4BE7B]">Bivalente</span>
+              <span className="text-xl font-bold text-[#A4BE7B] pl-2">Bivalente Salud</span>
             </div>
             <p className="text-sm text-white">Fisioterapia y psicología para tu bienestar integral</p>
           </div>

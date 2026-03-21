@@ -53,7 +53,7 @@ export default function Header({ openLogin, openRegister }) {
           />
 
           <span className="hidden -ml-5 -mt-2 text-xl font-extrabold text-white transition-colors sm:block sm:text-2xl">
-            Clinica Bivalente
+            Bivalente Salud
           </span>
         </Link>
 
@@ -117,7 +117,7 @@ export default function Header({ openLogin, openRegister }) {
             className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
             onClick={() => setOpen(false)}
           >
-            Psicologia
+            Psicología
           </Link>
 
           <Link
@@ -144,7 +144,7 @@ export default function Header({ openLogin, openRegister }) {
               }}
               className={`min-h-[48px] w-full px-4 py-3.5 text-base ${authSecondaryClassName}`}
             >
-              Iniciar sesion
+              Iniciar sesión
             </button>
 
             <button

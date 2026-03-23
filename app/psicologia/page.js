@@ -27,23 +27,51 @@ export const metadata = {
 const tratamientos = [
   {
     icon: Heart,
-    title: "Ansiedad y estrés",
-    description: "Técnicas para gestionar la ansiedad, ataques de pánico y estrés crónico.",
+    title: "Autoestima y autoconcepto",
+    description: "Trabajo terapéutico para fortalecer la imagen personal, la seguridad interna y la relación contigo misma o contigo mismo.",
+    href: "/psicologia/autoestima",
   },
   {
     icon: Brain,
-    title: "Bienestar emocional",
-    description: "Trabajo en autoestima, regulación emocional y desarrollo personal.",
-  },
-  {
-    icon: Users,
-    title: "Terapia infanto-juvenil",
-    description: "Atención especializada para niños y adolescentes con dificultades emocionales.",
+    title: "Ansiedad y regulación emocional",
+    description: "Acompañamiento para entender la ansiedad, regular las emociones y recuperar sensación de calma y control.",
+    href: "/psicologia/ansiedad",
   },
   {
     icon: Sparkles,
+    title: "Trastornos del estado de ánimo",
+    description: "Intervención en depresión, desmotivación, apatía y vacío emocional desde un enfoque cercano y estructurado.",
+    href: "/psicologia/depresion",
+  },
+  {
+    icon: FileText,
+    title: "Trauma psicológico",
+    description: "Espacio seguro para trabajar experiencias dolorosas, comprender su impacto y avanzar con mayor estabilidad emocional.",
+    href: "/psicologia/trauma",
+  },
+  {
+    icon: Users,
+    title: "Terapia de pareja",
+    description: "Espacio terapéutico para trabajar la comunicación, los conflictos recurrentes y la seguridad relacional.",
+    href: "/psicologia/terapia-pareja",
+  },
+  {
+    icon: MessageSquareHeart,
+    title: "Procesos de duelo",
+    description: "Acompañamiento psicológico para transitar pérdidas, despedidas y cambios vitales con sostén emocional.",
+    href: "/psicologia/duelo",
+  },
+  {
+    icon: ClipboardList,
     title: "Intervención en crisis",
-    description: "Apoyo psicológico en situaciones de crisis y momentos difíciles.",
+    description: "Atención en momentos de desbordamiento emocional, urgencia psicológica o situaciones vitales especialmente difíciles.",
+    href: "/psicologia/crisis-emocional",
+  },
+  {
+    icon: CalendarDays,
+    title: "Atención infanto-juvenil",
+    description: "Trabajo con niños, adolescentes y familias, ofreciendo orientación y pautas adaptadas a cada etapa evolutiva.",
+    href: "/psicologia/psicologia-infanto-juvenil",
   },
 ];
 
@@ -275,6 +303,11 @@ export default function PsicologiaPage() {
                 </div>
                 <h3 className="font-semibold text-[#0A4D68]! mb-2">{tratamiento.title}</h3>
                 <p className="text-sm leading-relaxed text-[#245953]">{tratamiento.description}</p>
+                <div className="mt-5">
+                  <Link href={tratamiento.href} className="bv-btn bv-btn-primary-dark bv-btn-lg w-full justify-center">
+                    Ver tratamiento
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

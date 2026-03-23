@@ -1,12 +1,24 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+
+const psychologyTreatments = [
+  { label: "Ansiedad", href: "/psicologia/ansiedad" },
+  { label: "Autoestima", href: "/psicologia/autoestima" },
+  { label: "Depresión", href: "/psicologia/depresion" },
+  { label: "Trauma", href: "/psicologia/trauma" },
+  { label: "Duelo", href: "/psicologia/duelo" },
+  { label: "Terapia de pareja", href: "/psicologia/terapia-pareja" },
+  { label: "Crisis emocional", href: "/psicologia/crisis-emocional" },
+  { label: "Psicología infanto-juvenil", href: "/psicologia/psicologia-infanto-juvenil" },
+];
 
 export default function Header({ openLogin, openRegister }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobilePsychOpen, setMobilePsychOpen] = useState(false);
 
   const authPrimaryClassName =
     "rounded-xl border border-[#eef4d8] bg-[#d6e6ab] px-4 py-2.5 font-semibold text-[#052b37] shadow-[0_14px_30px_rgba(10,77,104,0.22)] transition hover:bg-[#e0ecbc]";
@@ -22,7 +34,10 @@ export default function Header({ openLogin, openRegister }) {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 768) setOpen(false);
+      if (window.innerWidth >= 768) {
+        setOpen(false);
+        setMobilePsychOpen(false);
+      }
     };
     window.addEventListener("resize", onResize, { passive: true });
     return () => window.removeEventListener("resize", onResize);
@@ -63,9 +78,44 @@ export default function Header({ openLogin, openRegister }) {
             scrolled ? "text-white/90" : "text-white",
           ].join(" ")}
         >
-          <Link href="/psicologia" className="font-medium transition hover:opacity-90">
-            Psicología
-          </Link>
+          <div className="group relative">
+            <Link
+              href="/psicologia"
+              className="inline-flex items-center gap-2 font-medium transition hover:opacity-90"
+            >
+              Psicología
+              <svg
+                className="h-4 w-4 transition-transform group-hover:rotate-180"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.512a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+
+            <div className="pointer-events-none absolute left-0 top-full h-4 w-56" />
+            <div className="invisible absolute left-0 top-[calc(100%+12px)] w-72 translate-y-2 rounded-2xl border border-white/15 bg-[#0A4D68]/94 p-3 opacity-0 shadow-[0_24px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-all duration-200 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="mb-2 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                Tratamientos
+              </div>
+              <div className="space-y-1">
+                {psychologyTreatments.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block rounded-xl px-3 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <Link href="/fisioterapia" className="font-medium transition hover:opacity-90">
             Fisioterapia
@@ -92,15 +142,10 @@ export default function Header({ openLogin, openRegister }) {
               ? "text-white/90 hover:bg-white/10 active:bg-white/15"
               : "text-white hover:bg-white/10 active:bg-white/15",
           ].join(" ")}
-          aria-label={open ? "Cerrar menu" : "Abrir menu"}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
         >
-          <svg
-            className="h-6 w-6"
-            stroke="currentColor"
-            fill="none"
-            strokeWidth="2"
-          >
+          <svg className="h-6 w-6" stroke="currentColor" fill="none" strokeWidth="2">
             {open ? (
               <path d="M6 6l12 12M18 6L6 18" />
             ) : (
@@ -112,13 +157,55 @@ export default function Header({ openLogin, openRegister }) {
 
       {open && (
         <div className="space-y-1 border-t border-white/10 bg-[#0A4D68]/80 px-4 pb-6 pt-2 shadow-lg backdrop-blur-lg md:hidden sm:px-6">
-          <Link
-            href="/psicologia"
-            className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
-            onClick={() => setOpen(false)}
-          >
-            Psicología
-          </Link>
+          <div className="border-b border-white/10 py-4">
+            <button
+              type="button"
+              onClick={() => setMobilePsychOpen((current) => !current)}
+              className="flex w-full items-center justify-between text-base font-medium text-white/95"
+            >
+              <span>Psicología</span>
+              <svg
+                className={["h-4 w-4 transition-transform", mobilePsychOpen ? "rotate-180" : ""].join(" ")}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.512a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+
+            {mobilePsychOpen && (
+              <div className="mt-3 space-y-1 rounded-2xl border border-white/10 bg-white/5 p-2">
+                <Link
+                  href="/psicologia"
+                  className="block rounded-xl px-3 py-2.5 text-sm font-medium text-white/95 transition hover:bg-white/10"
+                  onClick={() => {
+                    setOpen(false);
+                    setMobilePsychOpen(false);
+                  }}
+                >
+                  Ver psicología
+                </Link>
+                {psychologyTreatments.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block rounded-xl px-3 py-2.5 text-sm font-medium text-white/85 transition hover:bg-white/10 hover:text-white"
+                    onClick={() => {
+                      setOpen(false);
+                      setMobilePsychOpen(false);
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
 
           <Link
             href="/fisioterapia"

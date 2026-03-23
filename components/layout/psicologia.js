@@ -5,15 +5,18 @@ import Link from "next/link";
 import { Brain, CheckCircle } from "lucide-react";
 
 const tratamientos = [
-  "Ansiedad y ataques de pánico",
-  "Depresión y estado de ánimo",
-  "Gestión del estrés",
-  "Autoestima y crecimiento personal",
+  "Autoestima y autoconcepto",
+  "Ansiedad y regulación emocional",
+  "Trastornos del estado de ánimo",
+  "Trauma psicológico",
+  "Rupturas de pareja y dificultades relacionales",
+  "Procesos de duelo",
+  "Intervención en crisis",
+  "Atención infanto-juvenil",
   "Terapia de pareja",
-  "Duelo y pérdidas",
 ];
 
-export default function Psicologia({ openRegister }) {
+export default function Psicologia() {
   return (
     <section className="relative min-h-[92vh] overflow-hidden bg-gradient-to-br from-[#f8faf5] to-[#A4BE7B] py-20 md:py-28">
       <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#A4BE7B]/30 blur-3xl" />
@@ -27,7 +30,7 @@ export default function Psicologia({ openRegister }) {
                 <Brain className="h-6 w-6 text-emerald-600" />
               </div>
               <h2 className="text-3xl font-bold !text-[#0A4D68] md:text-4xl">
-                Psicología Sanitaria en Madrid - Bivalente
+                Psicología sanitaria en Madrid - Bivalente
               </h2>
             </div>
 
@@ -36,7 +39,7 @@ export default function Psicologia({ openRegister }) {
             </p>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold !  text-[#0A4D68]">Tratamientos</h3>
+              <h3 className="text-lg font-semibold text-[#0A4D68]">Tratamientos</h3>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {tratamientos.map((tratamiento) => (
                   <div key={tratamiento} className="flex items-center gap-2 text-[#245953]">
@@ -48,7 +51,6 @@ export default function Psicologia({ openRegister }) {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-            
               <Link href="/psicologia" className="bv-btn bv-btn-ghost bv-btn-lg text-center">
                 Ver más sobre Psicología
               </Link>
@@ -58,13 +60,13 @@ export default function Psicologia({ openRegister }) {
           <div className="rounded-2xl border border-[#A4BE7B]/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] sm:rounded-3xl sm:p-7 md:p-8">
             <div className="flex flex-col items-center space-y-6 text-center">
               <div className="relative h-36 w-36 overflow-hidden rounded-full border-4 border-[#0A4D68]/60 shadow-lg">
-              <Image
-  src="/Daniela.webp"
-  alt="Daniela, psicóloga en Bivalente"
-  width={600}
-  height={800}
-  className="object-cover rounded-xl"
-/>
+                <Image
+                  src="/Daniela.webp"
+                  alt="Daniela, psicóloga en Bivalente"
+                  width={600}
+                  height={800}
+                  className="object-cover rounded-xl"
+                />
               </div>
 
               <div className="space-y-2">
@@ -74,11 +76,11 @@ export default function Psicologia({ openRegister }) {
               </div>
 
               <p className="leading-relaxed text-[#0A4D68]">
-                Terapia para adultos, adolescentes, niños y parejas desde un enfoque integrador, cercano y basado en la evidencia científica. Especializada en ansiedad, trauma, duelo y dificultades relacionales.
+                Soy psicóloga general sanitaria comprometida con el acompañamiento a personas que buscan comprenderse mejor, sanar sus heridas emocionales y construir relaciones más seguras consigo mismas y con los demás.
               </p>
 
               <div className="flex flex-wrap justify-center gap-2">
-                {["Ansiedad", "Depresión", "EMDR", "Parejas"].map((tag) => (
+                {["Ansiedad", "Autoestima", "Crisis", "Parejas"].map((tag) => (
                   <span key={tag} className="rounded-full bg-[#A4BE7B]/20 px-3 py-1 text-sm text-[#0A4D68]">
                     {tag}
                   </span>

@@ -178,6 +178,10 @@ export default function Header({ openLogin, openRegister }) {
             Contacto
           </Link>
 
+          <Link href="/blog" className="font-medium transition hover:opacity-90">
+            Blog
+          </Link>
+
           <button onClick={openLogin} className={authSecondaryClassName}>
             Iniciar sesión
           </button>
@@ -316,6 +320,14 @@ export default function Header({ openLogin, openRegister }) {
             onClick={() => setOpen(false)}
           >
             Contacto
+          </Link>
+
+          <Link
+            href="/blog"
+            className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
+            onClick={() => setOpen(false)}
+          >
+            Blog
           </Link>
 
           <div className="flex flex-col gap-3 pt-4">

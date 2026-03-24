@@ -5,7 +5,7 @@ import Link from "next/link";
 import LogoutButtom from "@/components/LogoutButtom";
 import Image from "next/image";
 
-export default function Header({ onOpenServicios }) {
+export default function Header({ onOpenServicios = () => {} }) {
   const [open, setOpen] = useState(false);
 
   const linkClassName =
@@ -41,6 +41,10 @@ export default function Header({ onOpenServicios }) {
             Disponibilidad
           </Link>
 
+          <Link href="/dashboard/blog" className={linkClassName}>
+            Blog
+          </Link>
+
           <LogoutButtom />
         </div>
 
@@ -72,6 +76,14 @@ export default function Header({ onOpenServicios }) {
             className="flex w-full items-center justify-center bv-btn bv-btn-ghost"
           >
             Disponibilidad
+          </Link>
+
+          <Link
+            href="/dashboard/blog"
+            onClick={() => setOpen(false)}
+            className="flex w-full items-center justify-center bv-btn bv-btn-ghost"
+          >
+            Blog
           </Link>
 
           <LogoutButtom />

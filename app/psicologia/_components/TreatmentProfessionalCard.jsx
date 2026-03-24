@@ -1,14 +1,14 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { CheckCircle, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 
 const defaultServiceConfig = {
   professionalEyebrow: "Profesional",
-  professionalTitlePrefix: "Acompañamiento con",
-  professionalPerspectiveEyebrow: "Enfoque clínico",
-  professionalPerspectiveTitle: "Un espacio terapéutico cercano y estructurado",
+  professionalTitlePrefix: "AcompaÃ±amiento con",
+  professionalPerspectiveEyebrow: "Enfoque clÃ­nico",
+  professionalPerspectiveTitle: "Un espacio terapÃ©utico cercano y estructurado",
   professionalHighlights: [
-    "Daniela trabaja desde una mirada integradora, adaptando las herramientas clínicas a la historia, las necesidades y el momento vital de cada persona.",
-    "El proceso busca ofrecer un espacio seguro, respetuoso y útil para comprender lo que ocurre y construir nuevas formas de relación contigo y con los demás.",
+    "Daniela trabaja desde una mirada integradora, adaptando las herramientas clÃ­nicas a la historia, las necesidades y el momento vital de cada persona.",
+    "El proceso busca ofrecer un espacio seguro, respetuoso y Ãºtil para comprender lo que ocurre y construir nuevas formas de relaciÃ³n contigo y con los demÃ¡s.",
   ],
 };
 
@@ -17,7 +17,12 @@ export default function TreatmentProfessionalCard({
   professional,
   serviceConfig = defaultServiceConfig,
 }) {
-  const highlights = treatment.professionalHighlights || serviceConfig.professionalHighlights;
+  const mergedServiceConfig = {
+    ...defaultServiceConfig,
+    ...(serviceConfig || {}),
+  };
+  const highlights =
+    treatment.professionalHighlights || mergedServiceConfig.professionalHighlights || [];
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#f8faf5] to-[#A4BE7B] py-20 md:py-28">
@@ -27,10 +32,10 @@ export default function TreatmentProfessionalCard({
       <div className="container relative mx-auto max-w-6xl px-6">
         <div className="mb-12 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#61764B]">
-            {serviceConfig.professionalEyebrow}
+            {mergedServiceConfig.professionalEyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold !text-[#0A4D68] md:text-4xl">
-            {serviceConfig.professionalTitlePrefix} {professional.name}
+            {mergedServiceConfig.professionalTitlePrefix} {professional.name}
           </h2>
         </div>
 
@@ -106,13 +111,13 @@ export default function TreatmentProfessionalCard({
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#61764B]">
-                  {serviceConfig.professionalPerspectiveEyebrow}
+                  {mergedServiceConfig.professionalPerspectiveEyebrow}
                 </p>
                 <h3
                   className="text-2xl font-bold !text-[#0A4D68]"
                   style={{ fontFamily: "\"Apple Garamond\", Baskerville, serif" }}
                 >
-                  {serviceConfig.professionalPerspectiveTitle}
+                  {mergedServiceConfig.professionalPerspectiveTitle}
                 </h3>
               </div>
             </div>
@@ -137,3 +142,4 @@ export default function TreatmentProfessionalCard({
     </section>
   );
 }
+

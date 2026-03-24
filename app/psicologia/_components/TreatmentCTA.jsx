@@ -1,17 +1,17 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ClipboardList, CalendarDays, MessageSquareHeart } from "lucide-react";
 import ServiceContactForm from "@/components/forms/ServiceContactForm";
 
 const defaultProcess = [
   {
     icon: ClipboardList,
-    title: "Valoración inicial",
+    title: "ValoraciÃ³n inicial",
     description:
       "Escuchamos tu motivo de consulta y revisamos el contexto para orientar bien el primer paso.",
   },
   {
     icon: CalendarDays,
-    title: "Plan terapéutico",
+    title: "Plan terapÃ©utico",
     description:
       "Definimos un enfoque de trabajo adaptado a tu momento vital, objetivos y ritmo.",
   },
@@ -19,23 +19,23 @@ const defaultProcess = [
     icon: MessageSquareHeart,
     title: "Seguimiento cercano",
     description:
-      "Ajustamos el proceso de forma progresiva para que la terapia sea útil, clara y sostenible.",
+      "Ajustamos el proceso de forma progresiva para que la terapia sea Ãºtil, clara y sostenible.",
   },
 ];
 
 const defaultServiceConfig = {
   contactEyebrow: "Contacto",
-  contactTitle: "Solicita información o reserva tu primera sesión",
+  contactTitle: "Solicita informaciÃ³n o reserva tu primera sesiÃ³n",
   contactDescription:
-    "Cuéntanos tu situación y te orientamos sobre si este proceso puede encajar contigo.",
-  formServiceLabel: "Psicología",
+    "CuÃ©ntanos tu situaciÃ³n y te orientamos sobre si este proceso puede encajar contigo.",
+  formServiceLabel: "PsicologÃ­a",
   sideEyebrow: "Primer paso",
   sideTitlePrefix: "Empieza a trabajar",
-  sideTitleSuffix: "con acompañamiento profesional",
+  sideTitleSuffix: "con acompaÃ±amiento profesional",
   sideDescription:
-    "Este formulario está pensado para que puedas explicar tu situación con calma y recibir una orientación inicial antes de reservar.",
+    "Este formulario estÃ¡ pensado para que puedas explicar tu situaciÃ³n con calma y recibir una orientaciÃ³n inicial antes de reservar.",
   backLinkHref: "/psicologia",
-  backLinkLabel: "Volver a psicología",
+  backLinkLabel: "Volver a psicologÃ­a",
   process: defaultProcess,
   relatedEyebrow: "Tratamientos relacionados",
 };
@@ -45,7 +45,11 @@ export default function TreatmentCTA({
   professional,
   serviceConfig = defaultServiceConfig,
 }) {
-  const process = serviceConfig.process || defaultProcess;
+  const mergedServiceConfig = {
+    ...defaultServiceConfig,
+    ...(serviceConfig || {}),
+  };
+  const process = mergedServiceConfig.process || defaultProcess;
   const relatedLinks = treatment.relatedTreatments || [];
 
   return (
@@ -56,33 +60,33 @@ export default function TreatmentCTA({
       <div className="container relative mx-auto max-w-6xl px-6">
         <div className="mb-12 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#A4BE7B]">
-            {serviceConfig.contactEyebrow}
+            {mergedServiceConfig.contactEyebrow}
           </p>
           <h2 className="mt-3 mb-4 text-3xl font-bold text-white! md:text-4xl">
-            {serviceConfig.contactTitle}
+            {mergedServiceConfig.contactTitle}
           </h2>
           <p className="mx-auto max-w-2xl text-white/80">
-            {serviceConfig.contactDescription}
+            {mergedServiceConfig.contactDescription}
           </p>
         </div>
 
         <div className="grid items-start gap-8 lg:grid-cols-2">
           <ServiceContactForm
-            service={`${serviceConfig.formServiceLabel} - ${treatment.navLabel}`}
+            service={`${mergedServiceConfig.formServiceLabel} - ${treatment.navLabel}`}
             professionalName={professional.name}
             recipientEmail={professional.recipientEmail}
           />
 
           <div className="rounded-[30px] border border-white/18 bg-white/8 p-8 text-white shadow-[0_24px_70px_rgba(0,0,0,0.14)] backdrop-blur-md">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
-              {serviceConfig.sideEyebrow}
+              {mergedServiceConfig.sideEyebrow}
             </p>
             <h2 className="mt-3 text-3xl font-bold text-white!">
-              {serviceConfig.sideTitlePrefix} {treatment.navLabel.toLowerCase()}{" "}
-              {serviceConfig.sideTitleSuffix}
+              {mergedServiceConfig.sideTitlePrefix} {treatment.navLabel.toLowerCase()} {" "}
+              {mergedServiceConfig.sideTitleSuffix}
             </h2>
             <p className="mt-4 leading-relaxed text-white/80">
-              {serviceConfig.sideDescription}
+              {mergedServiceConfig.sideDescription}
             </p>
 
             <div className="mt-8 space-y-4">
@@ -104,7 +108,7 @@ export default function TreatmentCTA({
             {relatedLinks.length > 0 && (
               <div className="mt-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-                  {serviceConfig.relatedEyebrow}
+                  {mergedServiceConfig.relatedEyebrow}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   {relatedLinks.map((item) => (
@@ -124,8 +128,8 @@ export default function TreatmentCTA({
               <a href="#contacto" className="bv-btn bv-btn-ghost bv-btn-lg">
                 Ver contacto directo
               </a>
-              <Link href={serviceConfig.backLinkHref} className="bv-btn bv-btn-primary bv-btn-lg">
-                {serviceConfig.backLinkLabel}
+              <Link href={mergedServiceConfig.backLinkHref} className="bv-btn bv-btn-primary bv-btn-lg">
+                {mergedServiceConfig.backLinkLabel}
               </Link>
             </div>
           </div>
@@ -134,3 +138,4 @@ export default function TreatmentCTA({
     </section>
   );
 }
+

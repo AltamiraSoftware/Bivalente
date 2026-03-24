@@ -1,4 +1,4 @@
-import Footer from "@/components/layout/footer";
+﻿import Footer from "@/components/layout/footer";
 import { danielaProfile } from "../_data/tratamientos";
 import TreatmentApproach from "./TreatmentApproach";
 import TreatmentCTA from "./TreatmentCTA";
@@ -7,14 +7,10 @@ import TreatmentHero from "./TreatmentHero";
 import TreatmentIntro from "./TreatmentIntro";
 import TreatmentProfessionalCard from "./TreatmentProfessionalCard";
 
-const defaultServiceConfig = {
-  heroLabel: "Psicología Bivalente",
-};
-
 export default function TreatmentPage({
   treatment,
   professional = danielaProfile,
-  serviceConfig = defaultServiceConfig,
+  serviceConfig,
 }) {
   return (
     <main className="min-h-screen">
@@ -41,3 +37,4 @@ export default function TreatmentPage({
     </main>
   );
 }
+

@@ -5,13 +5,13 @@ import ServiceContactForm from "@/components/forms/ServiceContactForm";
 const defaultProcess = [
   {
     icon: ClipboardList,
-    title: "ValoraciÃ³n inicial",
+    title: "Valoración inicial",
     description:
       "Escuchamos tu motivo de consulta y revisamos el contexto para orientar bien el primer paso.",
   },
   {
     icon: CalendarDays,
-    title: "Plan terapÃ©utico",
+    title: "Plan terapéutico",
     description:
       "Definimos un enfoque de trabajo adaptado a tu momento vital, objetivos y ritmo.",
   },
@@ -19,23 +19,23 @@ const defaultProcess = [
     icon: MessageSquareHeart,
     title: "Seguimiento cercano",
     description:
-      "Ajustamos el proceso de forma progresiva para que la terapia sea Ãºtil, clara y sostenible.",
+      "Ajustamos el proceso de forma progresiva para que la terapia sea útil, clara y sostenible.",
   },
 ];
 
 const defaultServiceConfig = {
   contactEyebrow: "Contacto",
-  contactTitle: "Solicita informaciÃ³n o reserva tu primera sesiÃ³n",
+  contactTitle: "Solicita información o reserva tu primera sesión",
   contactDescription:
-    "CuÃ©ntanos tu situaciÃ³n y te orientamos sobre si este proceso puede encajar contigo.",
-  formServiceLabel: "PsicologÃ­a",
+    "Cuéntanos tu situación y te orientamos sobre si este proceso puede encajar contigo.",
+  formServiceLabel: "Psicología",
   sideEyebrow: "Primer paso",
   sideTitlePrefix: "Empieza a trabajar",
-  sideTitleSuffix: "con acompaÃ±amiento profesional",
+  sideTitleSuffix: "con acompañamiento profesional",
   sideDescription:
-    "Este formulario estÃ¡ pensado para que puedas explicar tu situaciÃ³n con calma y recibir una orientaciÃ³n inicial antes de reservar.",
+    "Este formulario está pensado para que puedas explicar tu situación con calma y recibir una orientación inicial antes de reservar.",
   backLinkHref: "/psicologia",
-  backLinkLabel: "Volver a psicologÃ­a",
+  backLinkLabel: "Volver a psicología",
   process: defaultProcess,
   relatedEyebrow: "Tratamientos relacionados",
 };
@@ -138,4 +138,5 @@ export default function TreatmentCTA({
     </section>
   );
 }
+
 

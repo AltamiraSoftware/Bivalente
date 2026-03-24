@@ -1,4 +1,4 @@
-export const danielaProfile = {
+﻿export const danielaProfile = {
   name: "Daniela López Meléndez",
   role: "Psicóloga General Sanitaria",
   image: "/Daniela.webp",
@@ -605,3 +605,5 @@ export function getTreatmentMetadata(slug) {
     description: treatment.metaDescription,
   };
 }
+
+

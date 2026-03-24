@@ -108,7 +108,7 @@ export default function ServiceContactForm({
         <FieldShell
           icon={UserRound}
           label="Nombre"
-          helper="Como prefieres que nos dirijamos a ti"
+          helper="Cómo prefieres que nos dirijamos a ti"
         >
           <input
             type="text"
@@ -125,7 +125,7 @@ export default function ServiceContactForm({
         <FieldShell
           icon={Mail}
           label="Email"
-          helper="Donde recibiras la respuesta"
+          helper="Dónde recibirás la respuesta"
         >
           <input
             type="email"
@@ -149,7 +149,7 @@ export default function ServiceContactForm({
             name="telefono"
             value={form.telefono}
             onChange={(event) => updateField("telefono", event.target.value)}
-            placeholder="Tu telefono"
+            placeholder="Tu teléfono"
             autoComplete="tel"
             className={inputClassName}
           />
@@ -165,7 +165,7 @@ export default function ServiceContactForm({
             name="mensaje"
             value={form.mensaje}
             onChange={(event) => updateField("mensaje", event.target.value)}
-            placeholder={`Cuentanos que necesitas para ${service.toLowerCase()}`}
+            placeholder={`Cuéntanos qué necesitas para ${service.toLowerCase()}`}
             rows={6}
             required
             className={`${inputClassName} min-h-[170px] resize-y`}
@@ -200,9 +200,10 @@ export default function ServiceContactForm({
         ) : null}
 
         <p className="sm:col-span-2 text-xs text-white/58">
-          Tu mensaje se enviara directamente a {recipientEmail}.
+          Tu mensaje se enviará directamente a {recipientEmail}.
         </p>
       </form>
     </div>
   );
 }
+

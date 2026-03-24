@@ -3,12 +3,12 @@ import { CheckCircle, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 
 const defaultServiceConfig = {
   professionalEyebrow: "Profesional",
-  professionalTitlePrefix: "AcompaÃ±amiento con",
-  professionalPerspectiveEyebrow: "Enfoque clÃ­nico",
-  professionalPerspectiveTitle: "Un espacio terapÃ©utico cercano y estructurado",
+  professionalTitlePrefix: "Acompañamiento con",
+  professionalPerspectiveEyebrow: "Enfoque clínico",
+  professionalPerspectiveTitle: "Un espacio terapéutico cercano y estructurado",
   professionalHighlights: [
-    "Daniela trabaja desde una mirada integradora, adaptando las herramientas clÃ­nicas a la historia, las necesidades y el momento vital de cada persona.",
-    "El proceso busca ofrecer un espacio seguro, respetuoso y Ãºtil para comprender lo que ocurre y construir nuevas formas de relaciÃ³n contigo y con los demÃ¡s.",
+    "Daniela trabaja desde una mirada integradora, adaptando las herramientas clínicas a la historia, las necesidades y el momento vital de cada persona.",
+    "El proceso busca ofrecer un espacio seguro, respetuoso y útil para comprender lo que ocurre y construir nuevas formas de relación contigo y con los demás.",
   ],
 };
 
@@ -142,4 +142,5 @@ export default function TreatmentProfessionalCard({
     </section>
   );
 }
+
 

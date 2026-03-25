@@ -20,6 +20,8 @@ import {
 } from "@/lib/blogUtils";
 import { buildMetadata, DEFAULT_OG_IMAGE } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const supabase = createSupabasePublicClient();

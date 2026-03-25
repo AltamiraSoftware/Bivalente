@@ -31,8 +31,8 @@ export default function Header() {
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/cliente" className="flex items-center gap-3">
         <Image
-            src="/ChatGPT6.png"
-            alt="Bivalente header"
+            src="/logo-bivalente-salud.png"
+            alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority

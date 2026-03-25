@@ -8,6 +8,8 @@ import { createSupabasePublicClient } from "@/lib/supabaseServer";
 import { getBlogCategories, getPublishedBlogPosts } from "@/lib/blogQueries";
 import { buildMetadata } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = buildMetadata({
   title: "Blog de Psicología y Fisioterapia en Madrid | Bivalente Salud",
   description:

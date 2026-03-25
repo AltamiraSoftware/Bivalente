@@ -10,8 +10,8 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
             <Image
-            src="/ChatGPT6.png"
-            alt="Bivalente"
+            src="/logo-bivalente-salud.png"
+            alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority

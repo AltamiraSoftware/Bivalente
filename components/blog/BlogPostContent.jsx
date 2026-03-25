@@ -21,13 +21,16 @@ function renderInline(text) {
     const linkMatch = fragment.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
 
     if (linkMatch) {
+      const href = linkMatch[2];
+      const isExternal = /^https?:\/\//.test(href);
+
       return (
         <a
           key={index}
-          href={linkMatch[2]}
+          href={href}
           className="font-semibold text-[#0A4D68] underline decoration-[#A4BE7B] underline-offset-4"
-          target="_blank"
-          rel="noreferrer"
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noreferrer" : undefined}
         >
           {linkMatch[1]}
         </a>

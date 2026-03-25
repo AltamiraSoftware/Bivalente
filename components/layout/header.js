@@ -75,8 +75,8 @@ export default function Header({ openLogin, openRegister }) {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/ChatGPT6.png"
-            alt="Bivalente header"
+            src="/logo-bivalente-salud.png"
+            alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority

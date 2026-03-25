@@ -4,6 +4,8 @@ import { absoluteUrl } from "@/lib/seo";
 import { tratamientosSeo as psicologiaTratamientos } from "@/app/psicologia/_data/tratamientos";
 import { tratamientosSeo as fisioterapiaTratamientos } from "@/app/fisioterapia/_data/tratamientos";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap() {
   const supabase = createSupabasePublicClient();
   const posts = await getPublishedBlogPosts(supabase);

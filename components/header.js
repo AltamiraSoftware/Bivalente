@@ -16,8 +16,8 @@ export default function Header({ onOpenServicios = () => {} }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-3 py-4 lg:px-4">
         <Link href="/dashboard" className="flex items-center gap-3">
         <Image
-            src="/ChatGPT6.png"
-            alt="Bivalente header"
+            src="/logo-bivalente-salud.png"
+            alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority

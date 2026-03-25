@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { resend } from "@/lib/resendClient";
+import { getResendClient } from "@/lib/resendClient";
 
 export async function POST(req) {
   try {
@@ -119,10 +119,18 @@ export async function POST(req) {
       .eq("id", id_profesional)
       .single();
 
+    let resend = null;
+
+    try {
+      resend = getResendClient();
+    } catch (emailError) {
+      console.error("Resend no disponible:", emailError.message);
+    }
+
     /* ==============================
        7. EMAIL CLIENTE
     =============================== */
-    if (cliente?.email) {
+    if (cliente?.email && resend) {
       resend.emails.send({
         from: process.env.EMAIL_FROM,
         to: cliente.email,
@@ -139,7 +147,7 @@ export async function POST(req) {
     /* ==============================
        8. EMAIL PROFESIONAL
     =============================== */
-    if (profesional?.email) {
+    if (profesional?.email && resend) {
       resend.emails.send({
         from: process.env.EMAIL_FROM,
         to: profesional.email,

@@ -1,23 +1,32 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   productionBrowserSourceMaps: true,
-  reactStrictMode: true, // Cambiar a true para mejor rendimiento
-  
-  // Optimizaciones de compilación
-  compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? {
-      exclude: ["error", "warn"], // Mantener errores y warnings
-    } : false,
+  reactStrictMode: true,
+  turbopack: {
+    root: __dirname,
   },
 
-  // Optimizaciones de imágenes (si usas next/image)
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error", "warn"],
+          }
+        : false,
+  },
+
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // Reducir tamaño del bundle
   experimental: {
     optimizePackageImports: [
       "@heroicons/react",
@@ -29,15 +38,14 @@ const nextConfig = {
     ],
   },
 
-  // Headers de seguridad y rendimiento
   async headers() {
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
-      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://api.daily.co https://altamirasoftware.eu",
+      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://api.daily.co https://altamirasoftware.eu https://bivalentesalud.es https://vitals.vercel-insights.com",
       "frame-src 'self' https://js.stripe.com https://*.daily.co",
     ].join("; ");
 

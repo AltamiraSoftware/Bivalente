@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { resend } from "@/lib/resendClient";
+import { getResendClient } from "@/lib/resendClient";
 
 export const runtime = "nodejs";     // Requerido por Stripe para validar firmas
 export const dynamic = "force-dynamic";
@@ -158,8 +158,16 @@ export async function POST(req) {
     minute: "2-digit",
   });
 
+  let resend = null;
+
+  try {
+    resend = getResendClient();
+  } catch (emailError) {
+    console.error("Resend no disponible:", emailError.message);
+  }
+
  // Email paciente
-if (cliente?.email) {
+if (cliente?.email && resend) {
   await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to: cliente.email,
@@ -174,7 +182,7 @@ if (cliente?.email) {
 }
 
 // Email profesional
-if (profesional?.email) {
+if (profesional?.email && resend) {
   await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to: profesional.email,
@@ -188,8 +196,6 @@ if (profesional?.email) {
     `,
   });
 }
-
-
   // 10. Responder a Stripe
   return NextResponse.json({ received: true });
 }

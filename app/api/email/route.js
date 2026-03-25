@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { resend } from "@/lib/resendClient";
+import { getResendClient } from "@/lib/resendClient";
 
 const FROM = process.env.EMAIL_FROM || "onboarding@resend.dev";
 
@@ -75,6 +75,7 @@ function templates(type, payload) {
 
 export async function POST(req) {
   try {
+    const resend = getResendClient();
     const { to, type, payload } = await req.json();
 
     const t = templates(type, payload);

@@ -5,6 +5,8 @@ import Header from "@/components/layout/header";
 import { useAuthModal } from "@/hooks/useAuthModal";
 import Fisioterapia from "@/components/layout/fisioterapia";
 import Footer from "@/components/layout/footer";
+import TrustSignals from "@/components/layout/trust-signals";
+import TestimonialsSection from "@/components/layout/TestimonialsSection";
 
 const Hero = dynamic(() => import("@/components/layout/hero"), {
   loading: () => <div className="min-h-screen" />,
@@ -25,8 +27,10 @@ export default function HomePageClient() {
     <main>
       <Header openLogin={openLogin} openRegister={openRegister} />
       <Hero openLogin={openLogin} openRegister={openRegister} />
-      <Psicologia openRegister={openRegister} />
+      <TrustSignals />
       <Fisioterapia />
+      <Psicologia openRegister={openRegister} />
+      <TestimonialsSection theme="hero" />
       <CTA openLogin={openLogin} openRegister={openRegister} />
       <Footer />
     </main>

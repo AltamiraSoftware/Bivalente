@@ -31,12 +31,13 @@ export default function Header() {
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/cliente" className="flex items-center gap-3">
         <Image
-            src="/logo-bivalente-salud.png"
+            src="/logo-bivalente-salud.webp"
             alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority
             className="h-auto w-[102px] sm:w-[116px]"
+            style={{ height: "auto" }}
           />
         </Link>
 

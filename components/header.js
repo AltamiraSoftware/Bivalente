@@ -16,12 +16,13 @@ export default function Header({ onOpenServicios = () => {} }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-3 py-4 lg:px-4">
         <Link href="/dashboard" className="flex items-center gap-3">
         <Image
-            src="/logo-bivalente-salud.png"
+            src="/logo-bivalente-salud.webp"
             alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority
             className="h-auto w-[102px] sm:w-[116px]"
+            style={{ height: "auto" }}
           />
           <span className="text-xl font-black leading-none !text-white">
             Panel del Profesional

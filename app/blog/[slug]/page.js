@@ -121,22 +121,28 @@ export default async function BlogPostPage({ params }) {
       </section>
 
       <section className="pb-20">
-        <div className="container mx-auto max-w-4xl px-6">
-          <article className="-mt-8 overflow-hidden rounded-[32px] border border-white/70 bg-white/92 shadow-[0_24px_60px_rgba(10,77,104,0.12)]">
+        <div className="container mx-auto max-w-5xl px-6">
+          <article className="-mt-6 overflow-hidden rounded-[28px] border border-[#dce8e2] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(249,251,250,0.96)_100%)] shadow-[0_20px_54px_rgba(10,77,104,0.10)]">
             {post.imagen_destacada_url ? (
-              <div className="relative aspect-[16/8] w-full overflow-hidden bg-[#dbeae5]">
-                <img
-                  src={post.imagen_destacada_url}
-                  alt={post.titulo}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <figure className="border-b border-[#dce8e2] bg-[linear-gradient(180deg,#eef4f1_0%,#f7faf8_100%)]">
+                <div className="mx-auto max-w-[980px] px-4 py-4 sm:px-6 sm:py-6">
+                  <div className="relative flex min-h-[260px] items-center justify-center overflow-hidden bg-[#edf4f0] sm:min-h-[360px]">
+                    <img
+                      src={post.imagen_destacada_url}
+                      alt={post.titulo}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                </div>
+              </figure>
             ) : null}
 
-            <div className="space-y-8 p-6 md:p-10">
-              <BlogPostContent content={post.contenido} />
+            <div className="px-6 py-8 md:px-12 md:py-10">
+              <div className="mx-auto max-w-3xl space-y-10">
+                <BlogPostContent content={post.contenido} />
               <BlogProfessionalCard categoryKind={categoryKind} />
               <BlogCTA />
+              </div>
             </div>
           </article>
         </div>

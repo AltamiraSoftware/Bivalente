@@ -75,12 +75,13 @@ export default function Header({ openLogin, openRegister }) {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/logo-bivalente-salud.png"
+            src="/logo-bivalente-salud.webp"
             alt="Logo Bivalente Salud"
             width={850}
             height={77}
             priority
             className="h-auto w-[92px] sm:w-[100px] lg:w-[116px]"
+            style={{ height: "auto" }}
           />
 
           {showBrandName && (
@@ -174,8 +175,8 @@ export default function Header({ openLogin, openRegister }) {
             </div>
           </div>
 
-          <Link href="#contacto" className="font-medium transition hover:opacity-90">
-            Contacto
+          <Link href="/sobre-nosotros" className="font-medium transition hover:opacity-90">
+            Sobre nosotros
           </Link>
 
           <Link href="/blog" className="font-medium transition hover:opacity-90">
@@ -315,11 +316,11 @@ export default function Header({ openLogin, openRegister }) {
           </div>
 
           <Link
-            href="#contacto"
+            href="/sobre-nosotros"
             className="block border-b border-white/10 py-4 text-base font-medium text-white/95"
             onClick={() => setOpen(false)}
           >
-            Contacto
+            Sobre nosotros
           </Link>
 
           <Link

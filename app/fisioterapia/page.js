@@ -178,8 +178,13 @@ export default function FisioterapiaPage() {
               <div className="absolute -z-10 h-[260px] w-[260px] sm:h-[320px] sm:w-[320px] rounded-full bg-[#088395]/25 blur-3xl" />
 
               <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px]">
-                <div className="rounded-[28px] border border-white/15 bg-white/10 p-2 sm:p-3 shadow-[0_24px_70px_rgba(10,77,104,0.24)] backdrop-blur-md">
-                  <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-white/30 to-white/10">
+                <div className="relative overflow-hidden rounded-[28px] border border-white/18 bg-[linear-gradient(165deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.08)_38%,rgba(4,32,45,0.22)_100%)] p-2 shadow-[0_26px_72px_rgba(10,77,104,0.28)] backdrop-blur-xl sm:p-3">
+                  <div className="absolute inset-[1px] rounded-[27px] bg-[linear-gradient(180deg,rgba(255,255,255,0.14)_0%,rgba(255,255,255,0.05)_18%,rgba(0,0,0,0.16)_100%)]" />
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+                  <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#A4BE7B]/16 blur-2xl" />
+                  <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-[#088395]/18 blur-2xl" />
+
+                  <div className="relative overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.05)_100%)]">
                     <Image
                       src="/borja.png"
                       alt="Borja Estarellas Botín, fisioterapeuta en Madrid"
@@ -190,22 +195,22 @@ export default function FisioterapiaPage() {
                       className="h-auto w-full object-cover object-top"
                     />
 
-                    <div className="absolute inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4 rounded-2xl border border-white/40 bg-white/88 p-3 sm:p-4 shadow-lg backdrop-blur">
-                      <p className="text-sm sm:text-base font-semibold text-[#0A4D68]">
+                    <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(7,48,68,0.68)_0%,rgba(7,48,68,0.52)_100%)] p-3 shadow-[0_18px_34px_rgba(2,6,23,0.26)] backdrop-blur-xl sm:inset-x-4 sm:bottom-4 sm:p-4">
+                      <p className="text-sm font-semibold text-white sm:text-base">
                         Borja Estarellas Botín
                       </p>
-                      <p className="mt-1 text-xs sm:text-sm text-[#61764B]">
+                      <p className="mt-1 text-xs text-white/72 sm:text-sm">
                         Fisioterapeuta
                       </p>
 
                       <div className="mt-3 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-[#A4BE7B]/20 px-3 py-1 text-[11px] sm:text-xs font-medium text-[#61764B]">
+                        <span className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-[11px] font-medium text-white/86 backdrop-blur-sm sm:text-xs">
                           Domicilio
                         </span>
-                        <span className="rounded-full bg-[#A4BE7B]/20 px-3 py-1 text-[11px] sm:text-xs font-medium text-[#61764B]">
+                        <span className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-[11px] font-medium text-white/86 backdrop-blur-sm sm:text-xs">
                           Deportiva
                         </span>
-                        <span className="rounded-full bg-[#A4BE7B]/20 px-3 py-1 text-[11px] sm:text-xs font-medium text-[#61764B]">
+                        <span className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-[11px] font-medium text-white/86 backdrop-blur-sm sm:text-xs">
                           Ecografía
                         </span>
                       </div>
@@ -273,13 +278,13 @@ export default function FisioterapiaPage() {
             {servicios.map((s, index) => (
               <div
                 key={index}
-                className="rounded-[28px] border border-white/65 bg-white/18 p-6 text-center shadow-[0_24px_60px_rgba(10,77,104,0.12)] backdrop-blur-md transition hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(10,77,104,0.16)]"
+                className="flex h-full flex-col rounded-[28px] border border-white/65 bg-white/18 p-6 text-center shadow-[0_24px_60px_rgba(10,77,104,0.12)] backdrop-blur-md transition hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(10,77,104,0.16)]"
               >
                 <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/28 shadow-[0_12px_24px_rgba(10,77,104,0.10)]">
                   <s.icon className="w-6 h-6 text-[#0A4D68]" />
                 </div>
                 <h3 className="font-semibold text-[#0A4D68]! mb-2">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-[#245953]">{s.description}</p>
+                <p className="flex-1 text-sm leading-relaxed text-[#245953]">{s.description}</p>
                 <div className="mt-5">
                   <Link href={s.href} className="bv-btn bv-btn-primary-dark bv-btn-lg w-full justify-center">
                     Ver tratamiento

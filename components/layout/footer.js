@@ -1,43 +1,44 @@
 "use client";
+
 import Image from "next/image";
-import Link from "next/link"
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A4D68]  py-12">
+    <footer className="bg-[#0A4D68] py-12">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="mb-8 grid gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-            <Image
-            src="/logo-bivalente-salud.png"
-            alt="Logo Bivalente Salud"
-            width={850}
-            height={77}
-            priority
-            className="w-[42px] sm:w-[56px] h-auto"
-          />
-              <span className="text-xl font-bold text-[#A4BE7B] pl-2">Bivalente Salud</span>
+              <Image
+                src="/logo-bivalente-salud.webp"
+                alt="Logo Bivalente Salud"
+                width={850}
+                height={77}
+                priority
+                className="h-auto w-[42px] sm:w-[56px]"
+                style={{ height: "auto" }}
+              />
+              <span className="pl-2 text-xl font-bold text-[#A4BE7B]">
+                Bivalente Salud
+              </span>
             </div>
-            <p className="text-sm text-white">Fisioterapia y psicología para tu bienestar integral</p>
+            <p className="text-sm text-white">
+              Fisioterapia y psicología para tu bienestar integral
+            </p>
           </div>
 
           <div className="space-y-4">
             <h4 className="font-semibold text-white!">Servicios</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <Link href="/psicologia" className="hover:text-white transition">
+                <Link href="/psicologia" className="transition hover:text-white">
                   Psicología
                 </Link>
               </li>
               <li>
-                <Link href="/fisioterapia" className="hover:text-white transition">
+                <Link href="/fisioterapia" className="transition hover:text-white">
                   Fisioterapia
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-white transition">
-                  Sesiones online
                 </Link>
               </li>
             </ul>
@@ -47,17 +48,20 @@ export default function Footer() {
             <h4 className="font-semibold text-white!">Empresa</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <Link href="#about" className="hover:text-white transition">
+                <Link href="/sobre-nosotros" className="transition hover:text-white">
                   Sobre nosotros
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition">
+                <Link href="/blog" className="transition hover:text-white">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="#contacto" className="hover:text-white transition">
+                <Link
+                  href="/sobre-nosotros#contacto"
+                  className="transition hover:text-white"
+                >
                   Contacto
                 </Link>
               </li>
@@ -65,20 +69,21 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-semibold text-white! hoo">Legal</h4>
+            <h4 className="font-semibold text-white!">Legal</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <Link href="#" className="hover:text-white transition">
+                <Link
+                  href="/legal/politica-privacidad"
+                  className="transition hover:text-white"
+                >
                   Privacidad
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition">
-                  Términos
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-white transition">
+                <Link
+                  href="/legal/politica-cookies"
+                  className="transition hover:text-white"
+                >
                   Cookies
                 </Link>
               </li>
@@ -93,5 +98,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

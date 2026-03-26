@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Poppins } from "next/font/google";
 import { AuthModalProvider } from "@/hooks/useAuthModal";
 import AuthModal from "@/components/Modal/AuthModal";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import { siteUrl } from "@/lib/siteUrl";
 import { buildMetadata, SITE_NAME } from "@/lib/seo";
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }) {
       >
         <AuthModalProvider>
           {children}
+          <FloatingWhatsAppButton />
           <AuthModal />
         </AuthModalProvider>
 

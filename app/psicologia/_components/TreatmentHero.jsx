@@ -31,8 +31,13 @@ export default function TreatmentHero({
             <div className="absolute -z-10 h-[260px] w-[260px] rounded-full bg-[#A4BE7B]/25 blur-3xl sm:h-[320px] sm:w-[320px]" />
 
             <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px]">
-              <div className="rounded-[28px] border border-white/15 bg-white/10 p-2 shadow-[0_24px_70px_rgba(10,77,104,0.24)] backdrop-blur-md sm:p-3">
-                <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-white/30 to-white/10">
+              <div className="relative overflow-hidden rounded-[28px] border border-white/18 bg-[linear-gradient(165deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.08)_38%,rgba(4,32,45,0.22)_100%)] p-2 shadow-[0_26px_72px_rgba(10,77,104,0.28)] backdrop-blur-xl sm:p-3">
+                <div className="absolute inset-[1px] rounded-[27px] bg-[linear-gradient(180deg,rgba(255,255,255,0.14)_0%,rgba(255,255,255,0.05)_18%,rgba(0,0,0,0.16)_100%)]" />
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+                <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#A4BE7B]/16 blur-2xl" />
+                <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-[#088395]/18 blur-2xl" />
+
+                <div className="relative overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.05)_100%)]">
                   <Image
                     src={professional.image}
                     alt={professional.heroImageAlt || `${professional.name}, profesional de Bivalente en Madrid`}
@@ -44,11 +49,11 @@ export default function TreatmentHero({
                     className="h-auto w-full object-cover object-top"
                   />
 
-                  <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/40 bg-white/88 p-3 shadow-lg backdrop-blur sm:inset-x-4 sm:bottom-4 sm:p-4">
-                    <p className="text-sm font-semibold text-[#0A4D68] sm:text-base">
+                  <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/18 bg-[linear-gradient(180deg,rgba(7,48,68,0.68)_0%,rgba(7,48,68,0.52)_100%)] p-3 shadow-[0_18px_34px_rgba(2,6,23,0.26)] backdrop-blur-xl sm:inset-x-4 sm:bottom-4 sm:p-4">
+                    <p className="text-sm font-semibold text-white sm:text-base">
                       {professional.name}
                     </p>
-                    <p className="mt-1 text-xs text-[#61764B] sm:text-sm">
+                    <p className="mt-1 text-xs text-white/72 sm:text-sm">
                       {professional.role}
                     </p>
 
@@ -56,7 +61,7 @@ export default function TreatmentHero({
                       {treatment.heroBadges.map((badge) => (
                         <span
                           key={badge}
-                          className="rounded-full bg-[#A4BE7B]/20 px-3 py-1 text-[11px] font-medium text-[#61764B] sm:text-xs"
+                          className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-[11px] font-medium text-white/86 backdrop-blur-sm sm:text-xs"
                         >
                           {badge}
                         </span>
@@ -75,7 +80,7 @@ export default function TreatmentHero({
             </div>
 
             <h1 className="text-balance text-4xl font-bold leading-tight text-white! md:text-5xl xl:text-6xl">
-              {treatment.heroTitle}
+              {renderHeroTitle(treatment.heroTitle)}
             </h1>
 
             <p className="mx-auto max-w-xl text-lg leading-relaxed text-white/80 lg:mx-0">
@@ -95,4 +100,28 @@ export default function TreatmentHero({
       </div>
     </section>
   );
+}
+
+function renderHeroTitle(title) {
+  const patterns = [
+    { regex: /^(.*?\bpara\b\s+)(.+?)(\s+en Madrid.*)$/i },
+    { regex: /^(.*?\bde\b\s+)(.+?)(\s+en Madrid.*)$/i },
+    { regex: /^(.*?\ben\b\s+)(.+?)(\s+en Madrid.*)$/i },
+  ];
+
+  for (const { regex } of patterns) {
+    const match = title.match(regex);
+
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <span className="!text-[#A4BE7B]">{match[2]}</span>
+          {match[3]}
+        </>
+      );
+    }
+  }
+
+  return title;
 }

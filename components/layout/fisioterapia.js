@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { CheckCircle, Dumbbell } from "lucide-react";
 import Link from "next/link";
@@ -26,9 +26,14 @@ export default function Fisioterapia() {
 
       <div className="container mx-auto max-w-6xl px-4">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] sm:rounded-3xl sm:p-7 md:p-8">
-            <div className="flex flex-col items-center space-y-6 text-center">
-              <div className="relative h-36 w-36 overflow-hidden rounded-full border-4 border-[#A4BE7B]/60 shadow-lg">
+          <div className="order-2 relative overflow-hidden rounded-2xl border border-white/18 bg-[linear-gradient(165deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.09)_38%,rgba(4,32,45,0.24)_100%)] p-6 shadow-[0_24px_56px_rgba(2,6,23,0.26)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_66px_rgba(2,6,23,0.34)] sm:rounded-3xl sm:p-7 md:p-8 lg:order-1">
+            <div className="absolute inset-[1px] rounded-[calc(1rem-1px)] bg-[linear-gradient(180deg,rgba(255,255,255,0.14)_0%,rgba(255,255,255,0.06)_20%,rgba(0,0,0,0.16)_100%)] sm:rounded-[calc(1.5rem-1px)]" />
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-[#A4BE7B]/14 blur-2xl" />
+            <div className="absolute -left-8 bottom-0 h-24 w-24 rounded-full bg-[#088395]/16 blur-2xl" />
+
+            <div className="relative flex flex-col items-center space-y-6 text-center">
+              <div className="relative h-36 w-36 overflow-hidden rounded-full border-4 border-white/28 shadow-[0_18px_34px_rgba(2,6,23,0.28)]">
                 <Image
                   src="/borja.png"
                   alt="Borja Estarellas, fisioterapeuta en Madrid"
@@ -40,18 +45,18 @@ export default function Fisioterapia() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-2xl font-bold text-[#A4BE7B]">Borja Estarellas</p>
-                <p className="font-medium text-[#A4BE7B]">Fisioterapeuta</p>
-                <p className="text-sm text-[#A4BE7B]">Col. 15388</p>
+                <p className="text-2xl font-bold text-[#eef6de]">Borja Estarellas</p>
+                <p className="font-medium text-white/82">Fisioterapeuta</p>
+                <p className="text-sm text-white/62">Col. 15388</p>
               </div>
 
-              <p className="leading-relaxed text-white">
+              <p className="leading-relaxed text-white/82">
                 Especialista en terapia manual y ejercicio terapéutico. Amplia experiencia en lesiones deportivas y rehabilitación. Atención a domicilio disponible en Madrid.
               </p>
 
               <div className="flex flex-wrap justify-center gap-2">
-                {["Terapia manual", "Deportivo", "Domicilio", "RehabilitaciÃ³n"].map((tag) => (
-                  <span key={tag} className="rounded-full bg-[#088395]/20 px-3 py-1 text-sm text-white">
+                {["Terapia manual", "Deportivo", "Domicilio", "Rehabilitación"].map((tag) => (
+                  <span key={tag} className="rounded-full border border-white/14 bg-white/8 px-3 py-1 text-sm text-white/88 backdrop-blur-sm">
                     {tag}
                   </span>
                 ))}
@@ -72,12 +77,12 @@ export default function Fisioterapia() {
                 <Dumbbell className="h-6 w-6 text-[#088395]" />
               </div>
               <h2 className="text-3xl font-bold text-[#A4BE7B] md:text-4xl">
-                Fisioterapia en Madrid - Bivalente
+                Fisioterapia en Madrid - Bivalente Salud
               </h2>
             </div>
 
             <p className="text-lg leading-relaxed text-white">
-              En Bivalente ofrecemos fisioterapia a domicilio especializada en Madrid para el tratamiento del dolor lumbar, cervical y lesiones deportivas. Trabajamos con terapia manual avanzada y ejercicio terapÃ©utico basado en la evidencia cientí­fica.
+              En Bivalente Salud ofrecemos fisioterapia a domicilio especializada en Madrid para el tratamiento del dolor lumbar, cervical y lesiones deportivas. Trabajamos con terapia manual avanzada y ejercicio terapéutico basado en la evidencia científica.
             </p>
 
             <div className="space-y-4">
@@ -92,13 +97,14 @@ export default function Fisioterapia() {
               </div>
             </div>
 
-            <Link href="/fisioterapia" className="bv-btn bv-btn-ghost bv-btn-lg mx-auto">
-              Ver más sobre Fisioterapia
-            </Link>
+            <div className="flex justify-center">
+              <Link href="/fisioterapia" className="bv-btn bv-btn-ghost bv-btn-lg">
+                Ver más sobre Fisioterapia
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

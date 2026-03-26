@@ -83,7 +83,8 @@ const formacion = [
   "Grado en Psicología - Universidad Nebrija",
   "Máster en Psicología General Sanitaria - Universidad Europea",
   "Formación en intervención en crisis - Fundación ANAR",
-];
+  "Máster en Psicología Infanto-Juvenil - Academia AMIR",
+]
 
 const experiencia = [
   {

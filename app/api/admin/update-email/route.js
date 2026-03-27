@@ -20,7 +20,7 @@ export async function POST(req) {
     if (error) {
       console.error("Error actualizando email:", error);
       return NextResponse.json(
-        { success: false, error: error.message },
+        { success: false, error: "No se pudo actualizar el email" },
         { status: 500 }
       );
     }
@@ -33,7 +33,7 @@ export async function POST(req) {
   } catch (err) {
     console.error(err);
     return NextResponse.json(
-      { success: false, error: err.message },
+      { success: false, error: "Error interno del servidor" },
       { status: 500 }
     );
   }

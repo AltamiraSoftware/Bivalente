@@ -164,9 +164,11 @@ export async function POST(req) {
 
     return NextResponse.json({ success: true, cita });
   } catch (err) {
-   
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error en crear cita:", err.message);
+    }
     return NextResponse.json(
-      { success: false, error: err.message ?? "Error desconocido" },
+      { success: false, error: "No se pudo crear la cita" },
       { status: 500 }
     );
   }

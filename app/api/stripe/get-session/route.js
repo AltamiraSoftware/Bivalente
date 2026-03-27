@@ -37,7 +37,7 @@ export async function GET(req) {
       console.error("Stripe get-session error:", err.message);
     }
     return NextResponse.json(
-      { error: err.message },
+      { error: "No se pudo recuperar la sesión" },
       { status: 500 }
     );
   }

@@ -53,13 +53,15 @@ export default function Psicologia() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="/psicologia" className="mx-auto bv-btn bv-btn-ghost bv-btn-lg text-center">
+            <div className="flex justify-center">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link href="/psicologia" className="bv-btn bv-btn-ghost bv-btn-lg text-center">
                 Ver servicio de psicología
               </Link>
-              <Link href="/blog" className="mx-auto bv-btn bv-btn-primary-dark bv-btn-lg text-center">
+                <Link href="/blog" className="bv-btn bv-btn-primary-dark bv-btn-lg text-center">
                 Ver artículos de psicología
-              </Link>
+                </Link>
+              </div>
             </div>
           </div>
 

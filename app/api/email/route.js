@@ -92,6 +92,9 @@ export async function POST(req) {
     if (process.env.NODE_ENV === "development") {
       console.error("Email send error:", err.message);
     }
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json(
+      { success: false, error: "No se pudo enviar el email" },
+      { status: 500 }
+    );
   }
 }

@@ -91,7 +91,7 @@ export async function POST(req) {
       console.error("❌ Error creando sesión Stripe:", err.message);
     }
     return NextResponse.json(
-      { error: err.message ?? "Error desconocido" },
+      { error: "No se pudo crear la sesión de pago" },
       { status: 500 }
     );
   }

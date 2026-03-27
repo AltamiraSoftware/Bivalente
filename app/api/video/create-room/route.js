@@ -22,7 +22,7 @@ export async function POST() {
     if (!response.ok) {
       console.error("Daily API error:", room);
       return NextResponse.json(
-        { error: "No se pudo crear la sala", details: room },
+        { error: "No se pudo crear la sala" },
         { status: 500 }
       );
     }

@@ -1,9 +1,0 @@
-(globalThis.TURBOPACK_CHUNK_LISTS || (globalThis.TURBOPACK_CHUNK_LISTS = [])).push({
-    script: typeof document === "object" ? document.currentScript : undefined,
-    chunks: [
-  "static/chunks/[root-of-the-server]__d0e63f83._.css",
-  "static/chunks/04e33_dbdbc7f0._.js",
-  "static/chunks/Desktop_Bivalente_Clínica Bivalente_gestor-clinica_4f83dc74._.js"
-],
-    source: "dynamic"
-});

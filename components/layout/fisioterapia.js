@@ -107,7 +107,7 @@ export default function Fisioterapia() {
                 <Link href="/fisioterapia" className="bv-btn bv-btn-ghost bv-btn-lg">
                   Ver servicio de fisioterapia
                 </Link>
-                <Link href="/blog" className="bv-btn bv-btn-primary-dark bv-btn-lg">
+                <Link href="/blog" className="bv-btn bv-btn-primary bv-btn-lg">
                   Ver artículos de fisioterapia
                 </Link>
               </div>

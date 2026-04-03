@@ -1,10 +1,3 @@
-# Gestor Clínico Bivalente
-
-Aplicación web full-stack para la gestión de una clínica de psicología y fisioterapia. El proyecto cubre la parte pública de captación, el área privada de cliente, el panel profesional y varios flujos de negocio reales: reservas, pagos, chat, videollamada, emails automáticos y publicación de contenidos.
-
-Está planteado como proyecto de portfolio profesional, con foco en demostrar criterio técnico, capacidad de producto y experiencia construyendo una aplicación conectada a servicios externos en un contexto cercano a producción.
-
-## Resumen ejecutivo para RRHH IT
 
 Este repositorio muestra un perfil capaz de trabajar en un producto web completo, no solo en pantallas aisladas. El proyecto combina frontend, backend, base de datos, autenticación, integraciones externas, seguridad básica y despliegue.
 

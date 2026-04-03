@@ -2,6 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import {
+  BRAND_NAME,
+  EMAIL_PRINCIPAL,
+  EMAIL_SECUNDARIO,
+  LOCATION,
+  MAILTO_PRIMARY,
+  MAILTO_SECONDARY,
+  TEL_PRIMARY,
+  TEL_SECONDARY,
+  TELEFONO_PRINCIPAL,
+  TELEFONO_SECUNDARIO,
+} from "@/lib/contact";
 
 export default function Footer() {
   return (
@@ -20,7 +32,7 @@ export default function Footer() {
                 style={{ height: "auto" }}
               />
               <span className="pl-2 text-xl font-bold text-[#A4BE7B]">
-                Bivalente Salud
+                {BRAND_NAME}
               </span>
             </div>
 
@@ -59,28 +71,28 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-white!">Contacto</h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>Madrid</li>
+              <li>{LOCATION}</li>
               <li>{"Psicolog\u00EDa presencial y online en Madrid"}</li>
               <li>Fisioterapia a domicilio en Madrid</li>
               <li>{"Atenci\u00F3n presencial, online y a domicilio"}</li>
               <li>
-                <a href="tel:+34674547577" className="transition hover:text-white">
-                  +34 674 547 577
+                <a href={TEL_PRIMARY} className="transition hover:text-white">
+                  {TELEFONO_PRINCIPAL}
                 </a>
               </li>
               <li>
-                <a href="tel:+34618417971" className="transition hover:text-white">
-                  +34 618 417 971
+                <a href={TEL_SECONDARY} className="transition hover:text-white">
+                  {TELEFONO_SECUNDARIO}
                 </a>
               </li>
               <li>
-                <a href="mailto:danilopezme1004@gmail.com" className="transition hover:text-white">
-                  danilopezme1004@gmail.com
+                <a href={MAILTO_PRIMARY} className="transition hover:text-white">
+                  {EMAIL_PRINCIPAL}
                 </a>
               </li>
               <li>
-                <a href="mailto:estarellas11088@gmail.com" className="transition hover:text-white">
-                  estarellas11088@gmail.com
+                <a href={MAILTO_SECONDARY} className="transition hover:text-white">
+                  {EMAIL_SECUNDARIO}
                 </a>
               </li>
             </ul>
@@ -110,7 +122,7 @@ export default function Footer() {
 
         <div className="border-t border-white/20 pt-8">
           <p className="text-center text-sm text-white/70">
-            {"2025 Bivalente Salud. Todos los derechos reservados. Madrid, Espa\u00F1a."}
+            {`2025 ${BRAND_NAME}. Todos los derechos reservados. ${LOCATION}, Espa\u00F1a.`}
           </p>
         </div>
       </div>

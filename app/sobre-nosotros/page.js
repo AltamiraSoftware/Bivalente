@@ -4,6 +4,7 @@ import HeaderClient from "@/components/layout/HeaderClient";
 import Footer from "@/components/layout/footer";
 import ServiceContactForm from "@/components/forms/ServiceContactForm";
 import { HeartHandshake, Sparkles, CheckCircle2, MapPin, PhoneCall, Clock3 } from "lucide-react";
+import { CONTACT_EMAILS } from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -274,10 +275,7 @@ export default function AboutPage() {
             <ServiceContactForm
               service="Bivalente Salud"
               professionalName="Daniela López Meléndez y Borja Estarellas Botín"
-              recipientEmail={[
-                "danilopezme1004@gmail.com",
-                "estarellas11088@gmail.com",
-              ]}
+              recipientEmail={CONTACT_EMAILS}
               heading="Cuéntanos qué necesitas"
               description="Te responderemos orientándote sobre el servicio más adecuado y el siguiente paso posible."
               showContactShortcut={false}

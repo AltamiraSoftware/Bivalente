@@ -1,5 +1,6 @@
 import HeaderClient from "@/components/layout/HeaderClient";
 import Footer from "@/components/layout/footer";
+import { EMAIL_PRINCIPAL } from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -15,7 +16,7 @@ const sections = [
     bullets: [
       "Nombre completo: María Daniela López Meléndez",
       "NIF: Y6542205F",
-      "Correo electrónico: Danilopezme1004@gmail.com",
+      `Correo electrónico: ${EMAIL_PRINCIPAL}`,
       "Colegiación profesional: M-41829",
       "Dirección profesional: [Pendiente de completar]",
     ],
@@ -78,7 +79,7 @@ const sections = [
       "Portabilidad",
     ],
     paragraphs: [
-      "El interesado podrá ejercer sus derechos mediante solicitud escrita dirigida a la profesional responsable a través del correo electrónico Danilopezme1004@gmail.com.",
+      `El interesado podrá ejercer sus derechos mediante solicitud escrita dirigida a la profesional responsable a través del correo electrónico ${EMAIL_PRINCIPAL}.`,
       "Asimismo, podrá presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es) si considera que el tratamiento no se ajusta a la normativa vigente.",
     ],
   },

@@ -1,12 +1,14 @@
-﻿export const borjaProfile = {
+﻿import { EMAIL_SECUNDARIO, LOCATION, TELEFONO_SECUNDARIO } from "@/lib/contact";
+
+export const borjaProfile = {
   name: "Borja Estarellas Botín",
   role: "Fisioterapeuta",
   image: "/borja.png",
   heroImageAlt: "Borja Estarellas Botín, fisioterapeuta en Madrid",
   cardImageAlt: "Borja Estarellas Botín, fisioterapeuta de Bivalente",
-  recipientEmail: "estarellas11088@gmail.com",
-  phone: "618 417 971",
-  location: "Madrid",
+  recipientEmail: EMAIL_SECUNDARIO,
+  phone: TELEFONO_SECUNDARIO,
+  location: LOCATION,
   credentials: [
     "Grado en Fisioterapia - Universidad Antonio de Nebrija (2020)",
     "Máster en Fisioterapia Manual Avanzada y Ejercicio Terapéutico - UCM",
@@ -678,3 +680,5 @@ export function getTreatmentMetadata(slug) {
     description: treatment.metaDescription,
   };
 }
+
+

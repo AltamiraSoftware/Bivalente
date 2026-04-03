@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { BRAND_NAME } from "@/lib/contact";
 import { formatBlogDate } from "@/lib/blogUtils";
 
 export default function BlogCard({ post }) {
@@ -14,7 +15,7 @@ export default function BlogCard({ post }) {
           />
         ) : (
           <div className="flex h-full items-center justify-center px-8 text-center text-sm font-semibold text-[#0A4D68]">
-            Clínica Bivalente
+            {BRAND_NAME}
           </div>
         )}
       </div>
@@ -37,7 +38,7 @@ export default function BlogCard({ post }) {
         </div>
 
         <Link href={`/blog/${post.slug}`} className="bv-btn bv-btn-primary-dark bv-btn-lg w-full justify-center">
-          Leer más
+          Leer mÃ¡s
         </Link>
       </div>
     </article>

@@ -1,10 +1,12 @@
-﻿export const danielaProfile = {
+﻿import { EMAIL_PRINCIPAL, LOCATION, TELEFONO_PRINCIPAL } from "@/lib/contact";
+
+export const danielaProfile = {
   name: "Daniela López Meléndez",
   role: "Psicóloga General Sanitaria",
   image: "/Daniela.webp",
-  recipientEmail: "danilopezme1004@gmail.com",
-  phone: "+34 674547577",
-  location: "Madrid",
+  recipientEmail: EMAIL_PRINCIPAL,
+  phone: TELEFONO_PRINCIPAL,
+  location: LOCATION,
   credentials: [
     "Grado en Psicología - Universidad Nebrija",
     "Máster en Psicología General Sanitaria - Universidad Europea",
@@ -636,5 +638,7 @@ export function getTreatmentMetadata(slug) {
     description: treatment.metaDescription,
   };
 }
+
+
 
 

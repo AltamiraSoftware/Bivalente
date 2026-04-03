@@ -83,12 +83,12 @@ export default function Psicologia() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-2xl font-bold !text-white">Daniela López</p>
-                <p className="font-medium text-white/86">Psicóloga General Sanitaria</p>
-                <p className="text-sm text-white/68">Col. M-41829</p>
+                <p className="text-2xl font-bold text-[#0A4D68]">Daniela López</p>
+                <p className="font-medium text-[#0A4D68]">Psicóloga General Sanitaria</p>
+                <p className="text-sm text-[#0A4D68]">Col. M-41829</p>
               </div>
 
-              <p className="leading-relaxed text-white/82">
+              <p className="leading-relaxed text-[#0A4D68]">
                 Soy psicóloga general sanitaria comprometida con el acompañamiento
                 a personas que buscan comprenderse mejor, sanar sus heridas
                 emocionales y construir relaciones más seguras consigo mismas y con

@@ -1,4 +1,10 @@
 import HomePageClient from "@/app/_components/HomePageClient";
+import {
+  EMAIL_PRINCIPAL,
+  EMAIL_SECUNDARIO,
+  PHONE_PRIMARY_RAW,
+  PHONE_SECONDARY_RAW,
+} from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 import { getBreadcrumbSchema, getServiceSchema } from "@/lib/schema";
 
@@ -16,16 +22,16 @@ export default function Home() {
       description:
         "Servicio de psicología presencial y online en Madrid con acompañamiento profesional para ansiedad, autoestima, duelo, trauma y terapia de pareja.",
       path: "/psicologia",
-      providerPhone: "+34674547577",
-      providerEmail: "danilopezme1004@gmail.com",
+      providerPhone: PHONE_PRIMARY_RAW,
+      providerEmail: EMAIL_PRINCIPAL,
     }),
     getServiceSchema({
       name: "Fisioterapia a domicilio en Madrid",
       description:
         "Servicio de fisioterapia a domicilio en Madrid para dolor, lesiones y recuperación funcional con tratamiento adaptado a cada caso.",
       path: "/fisioterapia",
-      providerPhone: "+34618417971",
-      providerEmail: "estarellas11088@gmail.com",
+      providerPhone: PHONE_SECONDARY_RAW,
+      providerEmail: EMAIL_SECUNDARIO,
     }),
     getBreadcrumbSchema([{ name: "Inicio", path: "/" }]),
   ];

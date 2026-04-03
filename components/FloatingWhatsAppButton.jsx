@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
-const WHATSAPP_URL =
-  "https://wa.me/34XXXXXXXXX?text=Hola%20quiero%20informaci%C3%B3n%20sobre%20Bivalente";
+import { BRAND_NAME, WHATSAPP_URL } from "@/lib/contact";
 
 function WhatsAppIcon(props) {
   return (
@@ -21,7 +19,7 @@ export default function FloatingWhatsAppButton() {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Contactar por WhatsApp con Bivalente Salud"
+        aria-label={`Contactar por WhatsApp con ${BRAND_NAME}`}
         className="pointer-events-auto group flex items-center justify-center gap-3 rounded-full border border-white/60 bg-[linear-gradient(135deg,#25D366_0%,#128C7E_100%)] px-4 py-3 text-white shadow-[0_16px_40px_rgba(18,140,126,0.28)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(18,140,126,0.34)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#A4BE7B]/40 motion-safe:animate-pulse"
       >
         <WhatsAppIcon className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />

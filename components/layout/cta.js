@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { EMAIL_PRINCIPAL, LOCATION } from "@/lib/contact";
 
 export default function CTA() {
   return (
@@ -52,7 +53,7 @@ export default function CTA() {
                 Email
               </p>
               <p className="break-all text-center text-sm text-gray-600 sm:text-base">
-                danilopezme1004@gmail.com
+                {EMAIL_PRINCIPAL}
               </p>
             </div>
             <div className="space-y-2 border-t border-gray-200/80 py-4 sm:border-t-0 sm:py-0">
@@ -61,7 +62,7 @@ export default function CTA() {
                 {"Ubicaci\u00F3n"}
               </p>
               <p className="text-center text-sm text-gray-600 sm:text-base">
-                {"Madrid, Espa\u00F1a"}
+                {`${LOCATION}, España`}
               </p>
             </div>
           </div>

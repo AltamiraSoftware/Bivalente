@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { BRAND_NAME } from "@/lib/contact";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function RegisterPage() {
@@ -36,7 +37,7 @@ export default function RegisterPage() {
         <div className="w-full max-w-md overflow-hidden rounded-[28px] border border-white/70 bg-white/90 shadow-[0_24px_70px_rgba(10,77,104,0.12)] backdrop-blur-sm">
           <div className="bg-[linear-gradient(90deg,#0A4D68_0%,#088395_52%,#61764B_100%)] px-8 py-7 text-white">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/78">
-              Clinica Bivalente
+              {BRAND_NAME}
             </p>
             <h1 className="mt-2 text-3xl font-bold text-white">Crear cuenta</h1>
             <p className="mt-2 text-sm text-white/80">

@@ -18,6 +18,12 @@ import {
 import Link from "next/link";
 import HeaderClient from "@/components/layout/HeaderClient";
 import ServiceContactForm from "@/components/forms/ServiceContactForm";
+import {
+  EMAIL_PRINCIPAL,
+  LOCATION,
+  PHONE_PRIMARY_RAW,
+  TELEFONO_PRINCIPAL,
+} from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 import { getBreadcrumbSchema, getFaqSchema, getServiceSchema } from "@/lib/schema";
 
@@ -192,8 +198,8 @@ export default function PsicologiaPage() {
       description:
         "Servicio de psicología presencial y online en Madrid para ansiedad, autoestima, duelo, trauma, crisis emocional y terapia de pareja.",
       path: "/psicologia",
-      providerPhone: "+34674547577",
-      providerEmail: "danilopezme1004@gmail.com",
+      providerPhone: PHONE_PRIMARY_RAW,
+      providerEmail: EMAIL_PRINCIPAL,
     }),
     getFaqSchema(
       faqs.map((item) => ({
@@ -411,15 +417,15 @@ export default function PsicologiaPage() {
                 <div id="contacto" className="w-full space-y-2 text-white/85 text-sm">
                   <div className="flex items-center justify-center gap-2">
                     <Phone className="w-4 h-4 text-[#A4BE7B]" />
-                    <span>+34 674547577</span>
+                    <span>{TELEFONO_PRINCIPAL}</span>
                   </div>
                   <div className="flex items-center justify-center gap-2">
                     <Mail className="w-4 h-4 text-[#A4BE7B]" />
-                    <span>danilopezme1004@gmail.com</span>
+                    <span>{EMAIL_PRINCIPAL}</span>
                   </div>
                   <div className="flex items-center justify-center gap-2">
                     <MapPin className="w-4 h-4 text-[#A4BE7B]" />
-                    <span>Madrid</span>
+                    <span>{LOCATION}</span>
                   </div>
                 </div>
               </div>
@@ -518,7 +524,7 @@ export default function PsicologiaPage() {
             <ServiceContactForm
               service="Psicología"
               professionalName="Daniela López Meléndez"
-              recipientEmail="danilopezme1004@gmail.com"
+              recipientEmail={EMAIL_PRINCIPAL}
             />
 
             <div className="bv-glass rounded-3xl p-8 text-white">
@@ -614,5 +620,6 @@ export default function PsicologiaPage() {
     </main>
   );
 }
+
 
 

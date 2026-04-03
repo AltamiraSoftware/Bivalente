@@ -17,6 +17,12 @@ import {
   MessageSquareHeart,
 } from "lucide-react";
 import Link from "next/link";
+import {
+  EMAIL_SECUNDARIO,
+  LOCATION,
+  PHONE_SECONDARY_RAW,
+  TELEFONO_SECUNDARIO,
+} from "@/lib/contact";
 import { buildMetadata } from "@/lib/seo";
 import { getBreadcrumbSchema, getFaqSchema, getServiceSchema } from "@/lib/schema";
 
@@ -171,8 +177,8 @@ export default function FisioterapiaPage() {
       description:
         "Servicio de fisioterapia a domicilio en Madrid para dolor cervical, lumbar, lesiones deportivas, tendinopatías y recuperación funcional.",
       path: "/fisioterapia",
-      providerPhone: "+34618417971",
-      providerEmail: "estarellas11088@gmail.com",
+      providerPhone: PHONE_SECONDARY_RAW,
+      providerEmail: EMAIL_SECUNDARIO,
     }),
     getFaqSchema(
       faqs.map((item) => ({
@@ -375,15 +381,15 @@ Experiencia en el tratamiento de dolor cervical y lumbar, lesiones deportivas, t
                 <div className="w-full space-y-2 text-white/85 text-sm">
                   <div className="flex items-center justify-center gap-2">
                     <Phone className="w-4 h-4 text-[#A4BE7B]" />
-                    <span>618 417 971</span>
+                    <span>{TELEFONO_SECUNDARIO}</span>
                   </div>
                   <div className="flex items-center justify-center gap-2">
                     <Mail className="w-4 h-4 text-[#A4BE7B]" />
-                    <span>estarellas11088@gmail.com</span>
+                    <span>{EMAIL_SECUNDARIO}</span>
                   </div>
                   <div className="flex items-center justify-center gap-2">
                     <MapPin className="w-4 h-4 text-[#A4BE7B]" />
-                    <span>Madrid</span>
+                    <span>{LOCATION}</span>
                   </div>
                 </div>
               </div>
@@ -494,7 +500,7 @@ Experiencia en el tratamiento de dolor cervical y lumbar, lesiones deportivas, t
             <ServiceContactForm
               service="Fisioterapia"
               professionalName="Borja Estarellas Botín"
-              recipientEmail="estarellas11088@gmail.com"
+              recipientEmail={EMAIL_SECUNDARIO}
             />
 
             <div className="bv-glass rounded-3xl p-8 text-white">
@@ -591,6 +597,7 @@ Experiencia en el tratamiento de dolor cervical y lumbar, lesiones deportivas, t
     </main>
   );
 }
+
 
 
 

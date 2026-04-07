@@ -12,6 +12,7 @@ import TimeSlots from "@/components/ClienteDash/time-slots";
 import BookingConfirmation from "@/components/ClienteDash/booking-confirmation";
 import AccountSettingsModal from "@/components/ClienteDash/AccountSettingsModal";
 import ChatModal from "@/components/chat/ChatModal";
+import LogoutButtom from "@/components/LogoutButtom";
 
 /* =============================
    ICONOS
@@ -67,6 +68,7 @@ function ClienteDashboardContent() {
   ============================*/
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showComingSoonModal] = useState(true);
 
   const [bookingStep, setBookingStep] = useState("calendar");
   
@@ -464,6 +466,32 @@ function ClienteDashboardContent() {
         user={user}
         profile={profileData}
       />
+
+      {showComingSoonModal && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-[#062f40]/70 backdrop-blur-sm" />
+
+          <div className="relative w-full max-w-lg overflow-hidden rounded-[28px] border border-white/50 bg-white p-8 text-center shadow-[0_24px_70px_rgba(10,77,104,0.24)] sm:p-10">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0A4D68_0%,#088395_100%)] text-white shadow-[0_16px_32px_rgba(10,77,104,0.20)]">
+              <IconCalendar />
+            </div>
+
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#4E6238]">
+              Área cliente
+            </p>
+            <h2 className="mt-3 text-3xl font-bold !text-[#08384D]">
+              Sección no disponible
+            </h2>
+            <p className="mt-4 text-base leading-7 text-[#184A5B]">
+              Próximamente estará habilitada esta sección para gestionar tus citas de Bivalente.
+            </p>
+
+            <div className="mt-8 flex justify-center">
+              <LogoutButtom className="bv-btn bv-btn-primary bv-btn-lg" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -28,9 +28,9 @@ import { buildMetadata } from "@/lib/seo";
 import { getBreadcrumbSchema, getFaqSchema, getServiceSchema } from "@/lib/schema";
 
 export const metadata = buildMetadata({
-  title: "Psicóloga en Madrid | Terapia presencial y online | Bivalente Salud",
+  title: "Psicología en Madrid | Psicóloga sanitaria presencial y online | Bivalente Salud",
   description:
-    "Psicóloga en Madrid especializada en ansiedad, pareja y bienestar emocional. Terapia presencial y online en Bivalente Salud.",
+    "Servicio de psicología en Madrid con Daniela López, psicóloga general sanitaria. Terapia presencial y online para ansiedad, pareja, duelo y bienestar emocional.",
   path: "/psicologia",
 });
 
@@ -196,7 +196,7 @@ export default function PsicologiaPage() {
     getServiceSchema({
       name: "Psicología en Madrid",
       description:
-        "Servicio de psicología presencial y online en Madrid para ansiedad, autoestima, duelo, trauma, crisis emocional y terapia de pareja.",
+        "Servicio de psicología en Madrid con Daniela López, psicóloga general sanitaria. Terapia presencial y online para ansiedad, autoestima, duelo, trauma, crisis emocional y terapia de pareja.",
       path: "/psicologia",
       providerPhone: PHONE_PRIMARY_RAW,
       providerEmail: EMAIL_PRINCIPAL,
@@ -284,17 +284,18 @@ export default function PsicologiaPage() {
       <div className="order-2 lg:order-1 space-y-6 text-center lg:text-left">
         <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-white">
           <Brain className="h-4 w-4 text-[#A4BE7B]" />
-          Psicología Bivalente Salud
+          Psicología en Madrid · Bivalente Salud
         </div>
 
         <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight text-white! text-balance">
-          Tu bienestar <span className="text-[#A4BE7B]">emocional</span> es nuestra{" "}
-          <span className="text-[#A4BE7B]">prioridad</span>
+          Psicología en <span className="text-[#A4BE7B]">Madrid</span> con atención{" "}
+          <span className="text-[#A4BE7B]">cercana</span>, presencial y online
         </h1>
 
         <p className="mx-auto max-w-xl text-lg leading-relaxed text-white/80! lg:mx-0">
-          Evaluación e intervención psicológica para población infanto-juvenil y adultos.
-          Sesiones presenciales en Madrid y online.
+          Servicio de psicología en Madrid para adolescentes y adultos, con terapia presencial y online.
+          Daniela López, psicóloga general sanitaria, te acompaña con un enfoque cercano,
+          claro y adaptado a tu caso.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 lg:justify-start">

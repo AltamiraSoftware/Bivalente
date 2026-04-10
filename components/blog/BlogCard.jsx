@@ -38,7 +38,7 @@ export default function BlogCard({ post }) {
         </div>
 
         <Link href={`/blog/${post.slug}`} className="bv-btn bv-btn-primary-dark bv-btn-lg w-full justify-center">
-          Leer mÃ¡s
+          Leer más
         </Link>
       </div>
     </article>

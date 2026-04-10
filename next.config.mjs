@@ -41,12 +41,12 @@ const nextConfig = {
   async headers() {
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
-      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://api.daily.co https://altamirasoftware.eu https://bivalentesalud.es https://vitals.vercel-insights.com",
-      "frame-src 'self' https://js.stripe.com https://*.daily.co",
+      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://api.daily.co https://altamirasoftware.eu https://bivalentesalud.es https://vitals.vercel-insights.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
+      "frame-src 'self' https://js.stripe.com https://*.daily.co https://www.googletagmanager.com",
     ].join("; ");
 
     return [

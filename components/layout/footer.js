@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import Link from "next/link";
 import {
   BRAND_NAME,
@@ -16,6 +17,10 @@ import {
 } from "@/lib/contact";
 
 export default function Footer() {
+  const openCookieSettings = () => {
+    window.dispatchEvent(new Event("bivalente:open-cookie-settings"));
+  };
+
   return (
     <footer className="bg-[#0A4D68] py-14">
       <div className="container mx-auto max-w-6xl px-4">
@@ -37,7 +42,7 @@ export default function Footer() {
             </div>
 
             <p className="max-w-sm text-sm leading-relaxed text-white/82">
-              {"Psicolog\u00EDa presencial y online, y fisioterapia a domicilio en Madrid. "}
+              {"Psicología presencial y online, y fisioterapia a domicilio en Madrid. "}
               {"Un proyecto sanitario pensado para orientar con claridad y facilitar "}
               {"un primer paso profesional y cercano."}
             </p>
@@ -52,7 +57,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-white/70">
               <li>
                 <Link href="/psicologia" className="transition hover:text-white">
-                  {"Psicolog\u00EDa"}
+                  {"Psicología"}
                 </Link>
               </li>
               <li>
@@ -72,9 +77,9 @@ export default function Footer() {
             <h4 className="font-semibold text-white!">Contacto</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>{LOCATION}</li>
-              <li>{"Psicolog\u00EDa presencial y online en Madrid"}</li>
+              <li>{"Psicología presencial y online en Madrid"}</li>
               <li>Fisioterapia a domicilio en Madrid</li>
-              <li>{"Atenci\u00F3n presencial, online y a domicilio"}</li>
+              <li>{"Atención presencial, online y a domicilio"}</li>
               <li>
                 <a href={TEL_PRIMARY} className="transition hover:text-white">
                   {TELEFONO_PRINCIPAL}
@@ -116,13 +121,22 @@ export default function Footer() {
                   Cookies
                 </Link>
               </li>
+              <li>
+                <button
+                  type="button"
+                  className="text-left transition hover:text-white"
+                  onClick={openCookieSettings}
+                >
+                  Configurar cookies
+                </button>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/20 pt-8">
           <p className="text-center text-sm text-white/70">
-            {`2025 ${BRAND_NAME}. Todos los derechos reservados. ${LOCATION}, Espa\u00F1a.`}
+            {`2025 ${BRAND_NAME}. Todos los derechos reservados. ${LOCATION}, España.`}
           </p>
         </div>
       </div>

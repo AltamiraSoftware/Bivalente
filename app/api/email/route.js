@@ -1,7 +1,42 @@
 import { NextResponse } from "next/server";
 import { getResendClient } from "@/lib/resendClient";
+import { BRAND_NAME, WHATSAPP_URL } from "@/lib/contact";
 
 const FROM = process.env.EMAIL_FROM || "onboarding@resend.dev";
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function leadConfirmationTemplate(payload) {
+  const patientName = escapeHtml(payload.nombre?.trim() || "paciente");
+
+  return {
+    subject: "[Bivalente Salud] Hemos recibido tu mensaje. Estás un paso más cerca.",
+    html: `
+      <div style="font-family: Arial, sans-serif; color: #245953; line-height: 1.65; max-width: 640px; margin: 0 auto;">
+        <h1 style="color: #0A4D68; font-size: 24px; margin-bottom: 18px;">Hemos recibido tu mensaje</h1>
+        <p>Hola, ${patientName}:</p>
+        <p>Gracias por confiar en ${BRAND_NAME}. Hemos recibido tu solicitud y ya está en manos de nuestro equipo médico.</p>
+        <p>Sabemos que tu bienestar no puede esperar, por eso te llamaremos personalmente en las próximas 24 horas laborables para resolver tus dudas o agendar tu cita. Nuestro objetivo es que te sientas cómodo/a y escuchado/a desde el primer minuto.</p>
+        <p><strong>¿Tienes una urgencia o prefieres no esperar?</strong></p>
+        <p>Si necesitas hablar con nosotros ahora mismo, puedes pulsar el siguiente botón para escribirnos por WhatsApp directo:</p>
+        <p style="margin: 28px 0;">
+          <a href="${WHATSAPP_URL}" style="display: inline-block; background: #0A4D68; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 22px; border-radius: 999px;">
+            Escribir por WhatsApp ahora
+          </a>
+        </p>
+        <p>Mientras tanto, te invitamos a conocernos un poco más en nuestra web o a seguir nuestros consejos de salud en nuestras redes sociales.</p>
+        <p style="margin-top: 28px;">Un abrazo,<br />El equipo de ${BRAND_NAME}.<br /><strong>Tu salud, nuestra prioridad.</strong></p>
+      </div>
+    `,
+  };
+}
 
 function templates(type, payload) {
   switch (type) {
@@ -87,7 +122,20 @@ export async function POST(req) {
       html: t.html,
     });
 
-    return NextResponse.json({ success: true, data });
+    let confirmationData = null;
+
+    if (type === "lead_contacto" && payload?.email) {
+      const confirmation = leadConfirmationTemplate(payload);
+
+      confirmationData = await resend.emails.send({
+        from: FROM,
+        to: payload.email,
+        subject: confirmation.subject,
+        html: confirmation.html,
+      });
+    }
+
+    return NextResponse.json({ success: true, data, confirmationData });
   } catch (err) {
     if (process.env.NODE_ENV === "development") {
       console.error("Email send error:", err.message);

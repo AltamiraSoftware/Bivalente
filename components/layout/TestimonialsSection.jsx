@@ -87,7 +87,7 @@ export default function TestimonialsSection({
               </div>
 
               <p className={`relative mt-5 text-center text-[15px] leading-7 ${isHeroTheme ? "text-white/90" : "text-slate-700"}`}>
-                "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&rdquo;
               </p>
 
               <div className={`relative mt-6 pt-5 text-center ${isHeroTheme ? "border-t border-white/12" : "border-t border-[#0A4D68]/8"}`}>

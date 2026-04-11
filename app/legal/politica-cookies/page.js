@@ -3,68 +3,74 @@ import Footer from "@/components/layout/footer";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Política de cookies | Bivalente Salud",
+  title: "Politica de cookies | Bivalente Salud",
   description:
-    "Información sobre el uso de cookies y tecnologías similares en la web de Bivalente Salud.",
+    "Informacion sobre el uso de cookies y tecnologias similares en la web de Bivalente Salud.",
   path: "/legal/politica-cookies",
 });
 
 const sections = [
   {
-    title: "1. ¿Qué son las cookies?",
+    title: "1. Que son las cookies",
     paragraphs: [
-      "Las cookies son pequeños archivos de texto que se almacenan en el dispositivo del usuario cuando visita una página web. Su finalidad puede ser técnica, analítica o publicitaria, dependiendo de su función.",
+      "Las cookies son pequenos archivos de texto que se almacenan en el dispositivo del usuario cuando visita una pagina web. Su finalidad puede ser tecnica, analitica, publicitaria o de personalizacion, dependiendo de su funcion.",
     ],
   },
   {
-    title: "2. Cookies utilizadas en esta web",
+    title: "2. Cookies tecnicas necesarias",
     paragraphs: [
-      "Esta página web utiliza exclusivamente cookies técnicas necesarias para su correcto funcionamiento.",
-      "Cookies técnicas: son aquellas que permiten al usuario la navegación a través de la web y la utilización de las diferentes opciones o servicios que en ella existen, como la gestión de la sesión, la autenticación o la seguridad del sistema. Estas cookies no requieren el consentimiento del usuario.",
-      "En concreto, la web utiliza cookies técnicas generadas por Supabase, proveedor de servicios de backend, autenticación y base de datos.",
+      "Esta web utiliza cookies tecnicas necesarias para permitir la navegacion, mantener la seguridad, recordar preferencias imprescindibles y facilitar el correcto funcionamiento de los servicios.",
+      "Estas cookies no requieren consentimiento previo, ya que son necesarias para prestar el servicio solicitado por el usuario.",
     ],
     bullets: [
-      "Mantener la sesión del usuario",
-      "Garantizar la autenticación",
-      "Proteger la seguridad de la plataforma",
+      "Mantener la sesion del usuario cuando corresponda",
+      "Garantizar la autenticacion y seguridad de la plataforma",
+      "Recordar la preferencia de consentimiento de cookies",
+      "Permitir el funcionamiento tecnico de formularios, navegacion y servicios integrados",
     ],
   },
   {
-    title: "3. Analítica sin uso de cookies",
+    title: "3. Cookies analiticas",
     paragraphs: [
-      "Esta web puede utilizar Vercel Analytics, una herramienta de analítica con fines exclusivamente estadísticos que no utiliza cookies, no realiza seguimiento individual de usuarios, no realiza seguimiento entre sitios web y trabaja únicamente con datos agregados y anonimizados.",
-      "Por este motivo, su uso no requiere consentimiento, de acuerdo con la normativa vigente.",
+      "Con el consentimiento del usuario, esta web puede utilizar Google Analytics 4 a traves de Google Tag Manager y Vercel Analytics para medir visitas, paginas consultadas, interacciones generales y rendimiento de contenidos.",
+      "Estas cookies y tecnologias similares se utilizan con finalidad estadistica y de mejora del sitio web. No se cargan hasta que el usuario acepta las cookies analiticas o acepta todas las cookies opcionales.",
     ],
-  },
-  {
-    title: "4. Servicios de terceros",
-    paragraphs: [
-      "La web integra determinados servicios de terceros que no instalan cookies durante la navegación ordinaria del usuario.",
-      "Stripe: plataforma de pago online. Durante el proceso de pago, el usuario es redirigido a la web de Stripe, que puede instalar cookies propias en su dominio, actuando Stripe como responsable independiente del tratamiento. Política de cookies de Stripe: https://stripe.com/cookies",
-      "Resend: servicio de envío de correos electrónicos transaccionales. No utiliza cookies en la navegación web.",
-      "Daily: servicio de videollamadas. No instala cookies durante la navegación ordinaria de la web, sino únicamente dentro del entorno de la videollamada cuando el usuario accede a dicha funcionalidad.",
-    ],
-  },
-  {
-    title: "5. Cookies no utilizadas",
     bullets: [
-      "Cookies analíticas basadas en cookies",
-      "Cookies publicitarias",
-      "Cookies de marketing o seguimiento",
-      "Cookies de personalización",
+      "Proveedor: Google LLC",
+      "Servicios: Google Tag Manager, Google Analytics 4 y Vercel Analytics",
+      "ID de contenedor: GTM-MJPZ3G9X",
+      "ID de medicion: G-ZXKVGBSGX8",
+      "Finalidad: analitica web y medicion de rendimiento",
     ],
   },
   {
-    title: "6. Gestor de consentimiento",
+    title: "4. Cookies de marketing",
     paragraphs: [
-      "Dado que esta web utiliza exclusivamente cookies técnicas y herramientas de analítica sin cookies, no es obligatorio implementar un sistema de consentimiento previo.",
-      "No obstante, en caso de que en el futuro se incorporen cookies analíticas basadas en cookies o cookies de marketing, se implementará un gestor de consentimiento que permita al usuario aceptar, rechazar o configurar dichas cookies antes de su instalación.",
+      "El gestor de consentimiento incluye una categoria de marketing preparada para futuras campanas publicitarias, medicion de conversiones o integraciones con Google Ads.",
+      "Estas cookies no se activan salvo que el usuario acepte expresamente la categoria de marketing o acepte todas las cookies opcionales.",
     ],
   },
   {
-    title: "7. Actualizaciones de la política de cookies",
+    title: "5. Servicios de terceros",
     paragraphs: [
-      "Esta política puede actualizarse en función de cambios normativos o técnicos. Se recomienda al usuario revisarla periódicamente.",
+      "La web puede integrar servicios de terceros necesarios para su operativa.",
+      "Stripe: plataforma de pago online. Durante el proceso de pago, el usuario puede ser redirigido a Stripe, que puede instalar cookies propias en su dominio, actuando como responsable independiente. Politica de cookies de Stripe: https://stripe.com/cookies",
+      "Daily: servicio de videollamadas. Puede utilizar tecnologias propias dentro del entorno de videollamada cuando el usuario accede a dicha funcionalidad.",
+      "Resend: servicio de envio de correos electronicos transaccionales. No se utiliza para instalar cookies de navegacion ordinaria.",
+    ],
+  },
+  {
+    title: "6. Gestion del consentimiento",
+    paragraphs: [
+      "Al acceder a la web, el usuario puede aceptar, rechazar o configurar las cookies opcionales desde el banner de consentimiento.",
+      "El usuario puede modificar su decision en cualquier momento desde el enlace Configurar cookies disponible en el pie de pagina.",
+      "Si el usuario rechaza las cookies opcionales, Google Tag Manager, Google Analytics 4 y Vercel Analytics no se cargan para la medicion ordinaria de la navegacion.",
+    ],
+  },
+  {
+    title: "7. Actualizaciones de la politica",
+    paragraphs: [
+      "Esta politica puede actualizarse en funcion de cambios normativos, tecnicos o de los servicios utilizados. Se recomienda revisarla periodicamente.",
     ],
   },
 ];
@@ -77,13 +83,13 @@ export default function CookiesPolicyPage() {
       <section className="relative overflow-hidden bv-hero pb-14 pt-28 sm:pt-32">
         <div className="container mx-auto max-w-4xl px-6">
           <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white">
-            Política de cookies
+            Politica de cookies
           </span>
           <h1 className="mt-6 text-4xl font-bold text-white! md:text-5xl">
-            Política de cookies
+            Politica de cookies
           </h1>
           <p className="mt-4 text-lg text-white/78">
-            Última actualización: 26 de marzo de 2026
+            Ultima actualización: 10 de abril de 2026
           </p>
         </div>
       </section>
@@ -92,10 +98,10 @@ export default function CookiesPolicyPage() {
         <div className="container mx-auto max-w-4xl px-6">
           <article className="-mt-8 rounded-[32px] border border-white/70 bg-white/94 p-6 shadow-[0_24px_60px_rgba(10,77,104,0.12)] md:p-10">
             <p className="text-base leading-8 text-[#245953]">
-              La presente Política de Cookies explica qué son las cookies, qué tipo
-              de cookies utiliza esta página web y cómo pueden gestionarse, de
-              conformidad con el artículo 22.2 de la Ley 34/2002, de Servicios de la
-              Sociedad de la Información y Comercio Electrónico (LSSI-CE).
+              La presente Politica de Cookies explica que son las cookies, que tipo
+              de cookies utiliza esta pagina web y como pueden gestionarse, de
+              conformidad con el articulo 22.2 de la Ley 34/2002, de Servicios de la
+              Sociedad de la Informacion y Comercio Electronico (LSSI-CE).
             </p>
 
             <div className="mt-10 space-y-10">

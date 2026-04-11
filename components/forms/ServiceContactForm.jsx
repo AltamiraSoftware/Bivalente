@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Mail, MessageSquareText, Phone, UserRound } from "lucide-react";
 import { useState } from "react";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 const initialForm = {
   nombre: "",
@@ -69,7 +70,6 @@ export default function ServiceContactForm({
   heading,
   description,
   showContactShortcut = true,
-  contactHref = "#contacto",
   theme = "dark",
 }) {
   const [form, setForm] = useState(initialForm);
@@ -280,13 +280,36 @@ export default function ServiceContactForm({
 
           {showContactShortcut ? (
             <a
-              href={contactHref}
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`bv-btn bv-btn-lg ${isLight ? "bv-btn-outline" : "bv-btn-ghost"}`}
             >
-              Ver contacto directo
+               WhatsApp
             </a>
           ) : null}
         </div>
+
+        <p
+          className={[
+            "sm:col-span-2 text-sm",
+            isLight ? "text-[#61764B]" : "text-white/68",
+          ].join(" ")}
+        >
+          O si lo prefieres,{" "}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={[
+              "font-semibold underline underline-offset-4",
+              isLight ? "text-[#0A4D68]" : "text-white",
+            ].join(" ")}
+          >
+            escríbenos directamente por WhatsApp
+          </a>
+          .
+        </p>
 
         {feedback ? (
           <p

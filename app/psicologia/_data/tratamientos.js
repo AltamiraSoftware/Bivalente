@@ -348,16 +348,16 @@ export const tratamientosSeo = {
     cardTitle: "Procesos de duelo",
     cardDescription:
       "Acompañamiento psicológico para transitar pérdidas, despedidas y cambios vitales con sostén emocional.",
-    metaTitle: "Terapia para duelo en Madrid | Bivalente Salud",
-    metaDescription:
-      "Psicología para duelo en Madrid con Daniela López Meléndez. Acompañamiento emocional en pérdidas, despedidas y cambios vitales significativos.",
-    heroTitle: "Terapia para duelo y pérdida en Madrid",
-    heroSubtitle:
-      "Un acompañamiento psicológico para transitar pérdidas, despedidas y cambios importantes con más sostén, comprensión y espacio emocional.",
+      metaTitle: "Terapia de duelo en Madrid | Psicóloga en Madrid",
+      metaDescription:
+      "Terapia de duelo en Madrid con Daniela López Meléndez. Acompañamiento psicológico para pérdidas, rupturas y cambios vitales con atención presencial y online.",
+      heroTitle: "Terapia de duelo en Madrid",
+      heroSubtitle:
+      "Acompañamiento psicológico para transitar una pérdida, entender lo que estás viviendo y contar con apoyo profesional en tu proceso de duelo en Madrid.",  
     heroBadges: ["Presencial en Madrid", "Online", "Adultos y adolescentes"],
     introTitle: "Cuándo puede ayudarte la terapia en un proceso de duelo",
     introBody:
-      "El duelo no aparece solo ante una muerte. También puede activarse con rupturas, cambios de etapa, enfermedad o pérdidas simbólicas. La terapia ofrece un espacio para sostener lo que duele, entender cómo lo estás viviendo y acompañar el proceso sin invalidarlo.",
+    "La terapia de duelo en Madrid puede ayudarte cuando una pérdida, una ruptura, una enfermedad o un cambio vital importante está generando un malestar difícil de sostener. El objetivo es ofrecerte un espacio psicológico donde entender lo que estás viviendo, acompañar el proceso y ayudarte a recolocar la experiencia sin forzar tiempos ni emociones.",
     introPoints: [
       "Cuando sientes que la pérdida te está desbordando.",
       "Cuando el duelo se mezcla con culpa, enfado o bloqueo.",

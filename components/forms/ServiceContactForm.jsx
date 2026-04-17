@@ -1,10 +1,11 @@
 "use client";
 
+
 import Link from "next/link";
 import { Mail, MessageSquareText, Phone, UserRound } from "lucide-react";
 import { useState } from "react";
 import { WHATSAPP_URL } from "@/lib/contact";
-
+import { getServiceFromPath, pushDataLayerEvent } from "@/lib/analytics";
 const initialForm = {
   nombre: "",
   email: "",
@@ -117,10 +118,21 @@ export default function ServiceContactForm({
       if (!response.ok || !data.success) {
         throw new Error(data.error || "No se pudo enviar el formulario.");
       }
-
+      
+      const serviceKey = getServiceFromPath();
+      
+      pushDataLayerEvent(`form_submit_${serviceKey}`, {
+        form_name: `form_${serviceKey}_contacto`,
+        service: serviceKey,
+        service_label: service,
+        professional_name: professionalName,
+        lead_type: "contact_form",
+      });
+      
       setStatus("success");
       setFeedback("Hemos recibido tu solicitud. Te responderemos lo antes posible.");
       setForm(initialForm);
+      
     } catch (error) {
       setStatus("error");
       setFeedback(error.message || "Ha ocurrido un error al enviar el formulario.");

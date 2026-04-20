@@ -295,33 +295,24 @@ export default function ServiceContactForm({
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                const serviceKey = getServiceFromPath();
+
+                pushDataLayerEvent(`click_whatsapp_${serviceKey}`, {
+                  service: serviceKey,
+                  service_label: service,
+                  professional_name: professionalName,
+                  link_url: WHATSAPP_URL,
+                  click_text: "WhatsApp",
+                  placement: "contact_form_button",
+                });
+              }}
               className={`bv-btn bv-btn-lg ${isLight ? "bv-btn-outline" : "bv-btn-ghost"}`}
             >
-               WhatsApp
+              WhatsApp
             </a>
           ) : null}
         </div>
-
-        <p
-          className={[
-            "sm:col-span-2 text-sm",
-            isLight ? "text-[#61764B]" : "text-white/68",
-          ].join(" ")}
-        >
-          O si lo prefieres,{" "}
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={[
-              "font-semibold underline underline-offset-4",
-              isLight ? "text-[#0A4D68]" : "text-white",
-            ].join(" ")}
-          >
-            escríbenos directamente por WhatsApp
-          </a>
-          .
-        </p>
 
         {feedback ? (
           <p

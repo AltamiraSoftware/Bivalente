@@ -17,6 +17,7 @@ import {
   MessageSquareHeart,
 } from "lucide-react";
 import Link from "next/link";
+import TrackedAnchor from "@/components/analytics/TrackedAnchor";
 import {
   EMAIL_SECUNDARIO,
   LOCATION,
@@ -271,9 +272,15 @@ export default function FisioterapiaPage() {
               </p>
 
               <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-                <a href="#formulario" className="bv-btn bv-btn-primary bv-btn-lg">
+                <TrackedAnchor
+                  href="#formulario"
+                  className="bv-btn bv-btn-primary bv-btn-lg"
+                  ctaName="hero_formulario"
+                  clickText="Reserva o consulta"
+                  placement="hero"
+                >
                   Reserva o consulta
-                </a>
+                </TrackedAnchor>
                 <a href="#servicios" className="bv-btn bv-btn-ghost bv-btn-lg">
                   Ver servicios
                 </a>
@@ -583,9 +590,15 @@ Experiencia en el tratamiento de dolor cervical y lumbar, lesiones deportivas, t
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="#formulario" className="bv-btn bv-btn-primary bv-btn-lg">
+            <TrackedAnchor
+              href="#formulario"
+              className="bv-btn bv-btn-primary bv-btn-lg"
+              ctaName="final_formulario"
+              clickText="Reserva o consulta"
+              placement="final_cta"
+            >
               Reserva o consulta
-            </a>
+            </TrackedAnchor>
             <Link href="/" className="bv-btn bv-btn-ghost bv-btn-lg">
               Volver a inicio
             </Link>

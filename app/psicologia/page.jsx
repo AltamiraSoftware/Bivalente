@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import HeaderClient from "@/components/layout/HeaderClient";
 import ServiceContactForm from "@/components/forms/ServiceContactForm";
+import TrackedAnchor from "@/components/analytics/TrackedAnchor";
 import {
   EMAIL_PRINCIPAL,
   LOCATION,
@@ -299,9 +300,15 @@ export default function PsicologiaPage() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
-          <a href="#formulario" className="bv-btn bv-btn-primary bv-btn-lg">
+          <TrackedAnchor
+            href="#formulario"
+            className="bv-btn bv-btn-primary bv-btn-lg"
+            ctaName="hero_formulario"
+            clickText="Reservar primera sesión"
+            placement="hero"
+          >
             Reservar primera sesión
-          </a>
+          </TrackedAnchor>
           <a href="#tratamientos" className="bv-btn bv-btn-ghost bv-btn-lg">
             Conocer más
           </a>
@@ -607,9 +614,15 @@ export default function PsicologiaPage() {
             Da el primer paso. Reserva tu primera consulta con Daniela y empieza a cuidar tu salud mental.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="#formulario" className="bv-btn bv-btn-primary-dark bv-btn-lg">
+            <TrackedAnchor
+              href="#formulario"
+              className="bv-btn bv-btn-primary-dark bv-btn-lg"
+              ctaName="final_formulario"
+              clickText="Reservar primera sesión"
+              placement="final_cta"
+            >
               Reservar primera sesión
-            </a>
+            </TrackedAnchor>
             <Link href="/" className="bv-btn bv-btn-ghost bv-btn-lg">
               Volver a inicio
             </Link>

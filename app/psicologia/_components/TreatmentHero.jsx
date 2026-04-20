@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Brain } from "lucide-react";
 import HeaderClient from "@/components/layout/HeaderClient";
+import TrackedAnchor from "@/components/analytics/TrackedAnchor";
 
 const defaultServiceConfig = {
   heroIcon: Brain,
@@ -92,9 +93,15 @@ export default function TreatmentHero({
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
-              <a href="#formulario" className="bv-btn bv-btn-primary bv-btn-lg">
+              <TrackedAnchor
+                href="#formulario"
+                className="bv-btn bv-btn-primary bv-btn-lg"
+                ctaName="hero_formulario"
+                clickText={mergedServiceConfig.primaryCtaLabel}
+                placement="treatment_hero"
+              >
                 {mergedServiceConfig.primaryCtaLabel}
-              </a>
+              </TrackedAnchor>
               <Link href={mergedServiceConfig.backLinkHref} className="bv-btn bv-btn-ghost bv-btn-lg">
                 {mergedServiceConfig.backLinkLabel}
               </Link>

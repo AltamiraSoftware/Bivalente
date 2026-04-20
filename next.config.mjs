@@ -42,7 +42,7 @@ const nextConfig = {
     const csp = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://www.googletagmanager.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.googletagmanager.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
       "connect-src 'self' https://*.supabase.co https://api.stripe.com https://api.daily.co https://altamirasoftware.eu https://bivalentesalud.es https://vitals.vercel-insights.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",

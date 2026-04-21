@@ -21,8 +21,8 @@ export default function Header({ onOpenServicios = () => {} }) {
             width={850}
             height={77}
             priority
-            className="h-auto w-[102px] sm:w-[116px]"
-            style={{ height: "auto" }}
+            className="h-auto"
+            style={{ width: "clamp(102px, 8vw, 116px)", height: "auto" }}
           />
           <span className="text-xl font-black leading-none !text-white">
             Panel del Profesional

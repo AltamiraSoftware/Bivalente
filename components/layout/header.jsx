@@ -84,8 +84,8 @@ export default function Header({ openLogin, openRegister }) {
             width={850}
             height={77}
             priority
-            className="h-auto w-[92px] sm:w-[100px] lg:w-[116px]"
-            style={{ height: "auto" }}
+            className="h-auto"
+            style={{ width: "clamp(92px, 8vw, 116px)", height: "auto" }}
           />
 
           {showBrandName && (

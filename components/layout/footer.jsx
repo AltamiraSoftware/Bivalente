@@ -33,8 +33,8 @@ export default function Footer() {
                 width={850}
                 height={77}
                 priority
-                className="h-auto w-[42px] sm:w-[56px]"
-                style={{ height: "auto" }}
+                className="h-auto"
+                style={{ width: "clamp(42px, 5vw, 56px)", height: "auto" }}
               />
               <span className="pl-2 text-xl font-bold text-[#A4BE7B]">
                 {BRAND_NAME}

@@ -78,15 +78,16 @@ export default function Header({ openLogin, openRegister }) {
           className="flex shrink-0 items-center gap-1.5 sm:gap-2"
           onClick={() => setOpen(false)}
         >
-          <Image
-            src="/logo-bivalente-salud.webp"
-            alt="Logo Bivalente Salud"
-            width={850}
-            height={77}
-            priority
-            className="h-auto"
-            style={{ width: "clamp(92px, 8vw, 116px)", height: "auto" }}
-          />
+          <span className="relative block aspect-[850/77] w-[92px] sm:w-[100px] lg:w-[116px]">
+            <Image
+              src="/logo-bivalente-salud.webp"
+              alt="Logo Bivalente Salud"
+              fill
+              priority
+              sizes="(min-width: 1024px) 116px, (min-width: 640px) 100px, 92px"
+              className="object-contain"
+            />
+          </span>
 
           {showBrandName && (
             <span className="-ml-3 text-[1.05rem] font-extrabold leading-none text-white transition-colors sm:text-[1.2rem] lg:-ml-5 lg:-mt-2 lg:text-2xl">

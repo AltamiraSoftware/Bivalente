@@ -27,15 +27,16 @@ export default function Footer() {
         <div className="mb-10 grid gap-8 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <Image
-                src="/logo-bivalente-salud.webp"
-                alt="Logo Bivalente Salud"
-                width={850}
-                height={77}
-                priority
-                className="h-auto"
-                style={{ width: "clamp(42px, 5vw, 56px)", height: "auto" }}
-              />
+              <span className="relative block aspect-[850/77] w-[42px] sm:w-[56px]">
+                <Image
+                  src="/logo-bivalente-salud.webp"
+                  alt="Logo Bivalente Salud"
+                  fill
+                  priority
+                  sizes="(min-width: 640px) 56px, 42px"
+                  className="object-contain"
+                />
+              </span>
               <span className="pl-2 text-xl font-bold text-[#A4BE7B]">
                 {BRAND_NAME}
               </span>
